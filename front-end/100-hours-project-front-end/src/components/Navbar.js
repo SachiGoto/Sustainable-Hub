@@ -6,10 +6,10 @@ const Navbar = () =>{
 
             <ul className="navbar">
                 <li className="navItem"><Link to ="/"> Sustainable Hub </Link></li>
-                <li className="navItem navItem-login-signup">
+                <div className="navItem navItem-login-signup">
                     <li className="navItem"><Link to ="/"> Log In </Link></li>
                     <li className="navItem"><Link to ="/">  Sign Up </Link></li>
-                </li>
+                </div>
                 
                
             </ul>

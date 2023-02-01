@@ -115,13 +115,14 @@ header{
 
 .itemImage{
    width: 40%;
-   height:50%;
+   height:100%;
 
 }
 
 .itemImage img{
      width:100%;
      height:100%;
+     object-fit:cover;
 }
 
 .item .itemContent{
