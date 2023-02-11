@@ -5,6 +5,7 @@ import {nanoid} from "nanoid"
 import Home from './pages/Home'
 import Main from './pages/Main'
 import Navbar from './components/Navbar'
+import Admin from './pages/Admin'
 
 function App() {
 
@@ -46,7 +47,11 @@ function App() {
                  <Route
                     path="main"
                     element={<Main clickHandler = {category} categoryData={categoryData} />}
-              />   
+              />
+                       <Route
+                    path="admin"
+                    element={<Admin />}
+              />      
         </Routes>
        </div>
    

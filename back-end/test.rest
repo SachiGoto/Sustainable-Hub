@@ -2,4 +2,4 @@
 
 
 ###
-GET {{url}}
+GET {{url}}/list
