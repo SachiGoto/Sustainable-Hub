@@ -3,3 +3,31 @@
 
 ###
 GET {{url}}/list
+
+###
+POST {{url}}/addList
+
+
+content-type: application/json
+
+{
+    "Title": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "Category":"Companies",
+    "Image":"image",
+    "BriefSummary":"Brief Summary",
+    "Summary":"Summary"
+
+}
+
+###
+
+
+POST {{url}}/recipe/createRecipe
+
+
+content-type: application/json
+
+{
+    "name": "Wed, 21 Oct 2015 18:27:50 GMT",
+   
+}

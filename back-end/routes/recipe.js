@@ -11,7 +11,6 @@ router.get("/:id", ensureAuth, recipesController.getRecipe);
 
 router.post("/createRecipe", upload.single("file"), recipesController.createRecipe);
 
-router.put("/likeRecipe/:id", recipesController.likeRecipe);
 router.post("/favoriteRecipe/:id", recipesController.favoriteRecipe);
 router.put("/favoriteRecipe/:id", recipesController.favoriteRecipe);
 

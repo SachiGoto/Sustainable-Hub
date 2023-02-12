@@ -1,26 +1,35 @@
 const mongoose = require("mongoose");
 
 const ListSchema = new mongoose.Schema({
+  Title: {
+    type: String,
+    // required: true,
+  
+  },
+  Category: {
+    type: String,
+    // required: true,
+   
+  },
+  Image: {
+    type: String,
+    // required: true,
+ 
+  },
     BriefSummary:{
         type: String,
+        // required: true,
       
-      },
-      Category: {
+  },Summary: {
         type: String,
-       
-      },
-      Image: {
-        type: String,
-     
-      },
-      Summary: {
-        type: String,
+        // required: true,
       
-      }, 
-        Title: {
-        type: String,
-      
-      }
+  }, 
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
+        
 });
 
 

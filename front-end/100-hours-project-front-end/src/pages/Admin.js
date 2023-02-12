@@ -1,19 +1,39 @@
 
 import {useState} from 'react' 
 
+
 // import { nanoid } from 'nanoid'
 
 
 const Admin = () =>{
 
-const [formdata, setFormdata] = useState({BriefSummary:'',Category:'', Image:'', Summary:'', Title:'' });
+const [formdata, setFormdata] = useState({ Title:'' ,Category:'', Image:'', BriefSummary:'',  Summary:''});
+const[error, setError] = useState(null);
+const handleSubmit = async(e)=>{
+    e.preventDefault();
+    const formData = {formdata}
 
-// const handleSubmit = async(e)=>{
-//     e.preventDefault();
-//     const formData = {formdata}
+    const response = await fetch('/addList', {
+      method:'POST',
+      body:JSON.stringify(formData),
+      headers:{
+        'Content-Type' : 'application/json'
+      }
+    })
 
-//     const response = await('')
-// }
+    const json = await response.json();
+
+    if(!response.ok){
+      setError(json.error )
+      console.log(error)
+    }
+
+    if(response.ok){
+      setFormdata({ Title:'' ,Category:'', Image:'', BriefSummary:'',  Summary:''})
+      setError(null)
+      console.log('new list is added', json)
+    }
+}
 
 function hundleChange(event){
     console.log(event.target.name)
@@ -26,11 +46,11 @@ function hundleChange(event){
 
 }
 
-console.log(formdata)
+console.log('formdata is ' , formdata)
 
     return(
         // <form className='form' onSubmit={handleSubmit}>
-        <form className='form bg-white p-6 rounded-lg shadow-md w-5/6'>
+        <form className='form bg-white p-6 rounded-lg shadow-md w-5/6' onSubmit={handleSubmit}>
         <div>
           <label className='block text-gray-700 font-medium mb-2' htmlFor="title">Title:</label>
           <input

@@ -1,4 +1,5 @@
 const Lists = require("../models/List");
+const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
   getIndex: (req, res) => {
@@ -13,6 +14,36 @@ module.exports = {
     } catch (err) {
       console.log(err);
     } 
+  },
+
+  createList: async(req,res)=>{
+    try{
+
+      // const result = await cloudinary.uploader.upload(req.file.path);
+
+      const result = await Lists.create({
+          Title:req.body.Title,
+          Category:req.body.Category,
+          Image:req.body.Image,
+          BriefSummary:req.body.BriefSummary,
+          Summary:req.body.Summary
+           
+
+      });
+
+      res.status(200).json(result)
+      console.log('list has been added', result);
+
+
+
+
+    }catch(err){
+      console.log(err)
+    }
+     
+      
+
+
   }
   // list: async (req, res) => {
   //   try {
