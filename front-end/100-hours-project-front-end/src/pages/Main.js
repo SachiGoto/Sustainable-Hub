@@ -4,24 +4,38 @@
 
 const Main = (props)=>{
 
-
-    
-     const categoryData = props.categoryData.map((item) => {
+   const allData = props.categoryData.map((item)=>{
       return(
-       <div className="item"  key={item.id}>
-         <div className="itemImage">
-         <img src={item.Image} />
-         </div>
-         <div className="itemContent">
-         <h1 className="itemTitle">{item.Title}</h1>
-         <p className="itemBriefSummary">{item.BriefSummary}</p>
-         </div>
-        
-         </div>
-      )
+         <div className="item"  key={item._id}>
+           <div className="itemImage">
+           {/* <img src={item.Image} /> */}
+           </div>
+           <div className="itemContent">
+           <h1 className="itemTitle">{item.Title}</h1>
+           <p className="itemBriefSummary">{item.BriefSummary}</p>
+           </div>
+          
+           </div>
+        )
+
    })
+    
+   //   const categoryData = props.categoryData.map((item) => {
+   //    return(
+   //     <div className="item"  key={item.id}>
+   //       <div className="itemImage">
+   //       <img src={item.Image} />
+   //       </div>
+   //       <div className="itemContent">
+   //       <h1 className="itemTitle">{item.Title}</h1>
+   //       <p className="itemBriefSummary">{item.BriefSummary}</p>
+   //       </div>
+        
+   //       </div>
+   //    )
+   // })
 
-
+//   let data = categoryData?categoryData: allData
 
     return (
     <>
@@ -42,8 +56,9 @@ const Main = (props)=>{
 
     <div className = "itemsList">
 
-    {categoryData}
-
+   
+{/* {data} */}
+{allData}
    
 
     </div>

@@ -1,5 +1,7 @@
-const Lists = require("../models/List");
+
 const cloudinary = require("../middleware/cloudinary");
+const Lists = require("../models/List");
+
 
 module.exports = {
   getIndex: (req, res) => {
@@ -8,7 +10,8 @@ module.exports = {
 
   list: async (req, res) => {
     try {
-      const allLists = await Lists.find({Category:'Companies'});
+      
+      const allLists = await Lists.find().sort({ createdAt: "desc" }).lean();
       res.status(200).json(allLists)
 
     } catch (err) {
@@ -18,27 +21,30 @@ module.exports = {
 
   createList: async(req,res)=>{
     try{
-
-      // const result = await cloudinary.uploader.upload(req.file.path);
-
-      const result = await Lists.create({
+    
+      const result = await cloudinary.uploader.upload(req.file.path);
+      // console.log(result)
+     const list =  await Lists.create({
           Title:req.body.Title,
+          // Image:req.body.Image,
+          Image:result.secure_url,
+          cloudinaryId:result.public_id,
           Category:req.body.Category,
-          Image:req.body.Image,
           BriefSummary:req.body.BriefSummary,
-          Summary:req.body.Summary
+          Summary:req.body.Summary 
            
 
       });
 
-      res.status(200).json(result)
-      console.log('list has been added', result);
+      res.status(200).json(list)
+      console.log('list has been added', list);
 
 
 
 
     }catch(err){
       console.log(err)
+      res.status(500).json({ error: 'Failed to add list' });
     }
      
       

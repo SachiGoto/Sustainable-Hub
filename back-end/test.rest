@@ -6,9 +6,8 @@ GET {{url}}/list
 
 ###
 POST {{url}}/addList
-
-
 content-type: application/json
+
 
 {
     "Title": "Wed, 21 Oct 2015 18:27:50 GMT",
@@ -20,14 +19,14 @@ content-type: application/json
 }
 
 ###
+Ω
+
+# POST {{url}}/recipe/createRecipe
 
 
-POST {{url}}/recipe/createRecipe
+# content-type: application/json
 
-
-content-type: application/json
-
-{
-    "name": "Wed, 21 Oct 2015 18:27:50 GMT",
+# {
+#     "name": "Wed, 21 Oct 2015 18:27:50 GMT",
    
-}
+# }

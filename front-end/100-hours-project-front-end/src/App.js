@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { useEffect } from 'react';
 import {useState} from 'react' 
-import {nanoid} from "nanoid"
-// import {useEffect} from 'react' 
+// import {nanoid} from "nanoid"
 import Home from './pages/Home'
 import Main from './pages/Main'
 import Navbar from './components/Navbar'
@@ -9,28 +9,56 @@ import Admin from './pages/Admin'
 
 function App() {
 
-  const [categoryData, setCategoryData] = useState([]);
+  const [categoryData, setCategoryData] = useState(null);
 
 
-  function category(e){
+useEffect(()=>{
 
-     const fetchData = async ()=>{
+  const fetchAllData = async()=>{
     const response = await fetch('/list')
-    const json = await response.json();
+    const json = await response.json()
 
     if(response.ok){
+
+      setCategoryData(json)
+
+    }
+  }
+fetchAllData()
+},[])
+    
+  
+      console.log('data is  ', categoryData)
      
-      setCategoryData(
-        json.filter( (item) =>  item.Category === e.target.dataset.category, {id:nanoid()})
-        )
-       
-        }
 
     
-    }
+
+
+
+
+
+
+  // function category(e){
+
+  //    const fetchData = async ()=>{
+  //   const response = await fetch('/list')
+  //   const json = await response.json();
+
+  //   if(response.ok){
+      
+
+     
+  //     setCategoryData(
+  //       json.filter( (item) =>  item.Category === e.target.dataset.category)
+  //       )
+       
+  //       }
+
+    
+  //   }
    
-    fetchData()
-  }
+  //   fetchData()
+  // }
 
 
 
@@ -46,7 +74,7 @@ function App() {
               />  
                  <Route
                     path="main"
-                    element={<Main clickHandler = {category} categoryData={categoryData} />}
+                    element={<Main categoryData={categoryData}  />}
               />
                        <Route
                     path="admin"

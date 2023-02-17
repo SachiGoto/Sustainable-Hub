@@ -6,47 +6,92 @@ import {useState} from 'react'
 
 
 const Admin = () =>{
+const [image, setImage] = useState(null);
+const [title, setTitle] = useState();
+const [category, setCategory] = useState();
+const [briefSummary, setBriefSummary] = useState();
+const [summary, setSummary] = useState();
+// const[error, setError] = useState(null);
 
-const [formdata, setFormdata] = useState({ Title:'' ,Category:'', Image:'', BriefSummary:'',  Summary:''});
-const[error, setError] = useState(null);
-const handleSubmit = async(e)=>{
-    e.preventDefault();
-    const formData = {formdata}
 
-    const response = await fetch('/addList', {
-      method:'POST',
-      body:JSON.stringify(formData),
-      headers:{
-        'Content-Type' : 'application/json'
-      }
-    })
+const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    const json = await response.json();
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('Title', title)
+  formData.append('Category', category);
+  formData.append('BriefSummary', briefSummary);
+  formData.append('Summary', summary)
 
-    if(!response.ok){
-      setError(json.error )
-      console.log(error)
-    }
+  try {
+    const response = await fetch('http://localhost:2121/addList', {
+      method: 'POST',
+      body: formData,
+    });
 
-    if(response.ok){
-      setFormdata({ Title:'' ,Category:'', Image:'', BriefSummary:'',  Summary:''})
-      setError(null)
-      console.log('new list is added', json)
-    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// const handleSubmit = async(e)=>{
+//     e.preventDefault();
+//     const data = new FormData();
+//     // data.append('data', formdata)
+//     data.append('image', image)
+//   // console.log('formdata after hitting the submit button')
+//     const response = await fetch('http://localhost:2121/addList', {
+//       method:'POST',
+//       body:data,
+
+//     })
+
+//     const json = await response.json();
+
+   
+//     if (!response.ok) {
+//       if (json && json.error) {
+//         setError(json.error);
+//         console.log('json error', error);
+//       } else {
+//         setError('An error occurred.');
+//         console.log('didnt work');
+//       }
+//     }
+
+//     if(response.ok){
+//       setFormdata({ Title:'' ,Category:'', Image:'', BriefSummary:'',  Summary:''})
+//       setError(null)
+//       console.log('new list is added', json)
+//     }
+// }
+
+function imageHundlechange(event){
+  console.log('file info' , event.target.files[0])
+  setImage(event.target.files[0])
 }
 
-function hundleChange(event){
-    console.log(event.target.name)
-    setFormdata(prevForm =>{
-          return{
-            ...prevForm, 
-            [event.target.name] : event.target.value
-          } 
-    })
+// function handleChange(event) {
+//   setTitle(event.target.value);
+// }
 
-}
+// function hundleChange(event){
+//     console.log(event.target.name)
+    
+//     setFormdata(prevForm =>{
+//       if(prevForm)
+//           return{
+//             ...prevForm, 
+//             [event.target.name] : event.target.value
+//           } 
+//     })
 
-console.log('formdata is ' , formdata)
+// }
+
+console.log(title)
 
     return(
         // <form className='form' onSubmit={handleSubmit}>
@@ -57,8 +102,9 @@ console.log('formdata is ' , formdata)
             type="text"
             id="title"
             name='Title'
+            value={title}
             className='border border-gray-400 p-2 w-full mt-2'
-            onChange={hundleChange}
+            onChange={e => setTitle(e.target.value)}
           />
         </div>
         
@@ -69,7 +115,8 @@ console.log('formdata is ' , formdata)
             id="category"
             name='Category'
             className='border border-gray-400 p-2 w-full'
-            onChange={hundleChange}
+            // onChange={hundleChange}
+            onChange={e => setCategory(e.target.value)}
           />
         </div>
         <div>
@@ -78,7 +125,7 @@ console.log('formdata is ' , formdata)
             type="file"
             id="image"
             name='Image'
-            onChange={hundleChange}
+            onChange={imageHundlechange}
             className=' mb-5'
           />
         </div>
@@ -89,16 +136,18 @@ console.log('formdata is ' , formdata)
             id="briefSummary"
             name='BriefSummary'
             className='border border-gray-400 p-2 w-full'
-            onChange={hundleChange}
+            // onChange={hundleChange}
+            onChange={e => setBriefSummary(e.target.value)}
           />
-        </div>
-        <div>
+        </div> 
+         <div>
           <label className='block text-gray-700 font-medium mb-2 mt-2' htmlFor="summary">Summary:</label>
           <textarea
             id="summary"
             name='Summary'
             className='border border-gray-400 p-2 w-full'
-            onChange={hundleChange}
+            // onChange={hundleChange}
+            onChange={e => setSummary(e.target.value)}
           />
         </div>
         

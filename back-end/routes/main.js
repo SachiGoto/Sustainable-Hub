@@ -17,7 +17,7 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.get("/list", homeController.list);
-
-router.post("/addList", homeController.createList);
+router.post("/addList", upload.single("image"), homeController.createList);
+// router.post("/addList", homeController.createList);
 
 module.exports = router;

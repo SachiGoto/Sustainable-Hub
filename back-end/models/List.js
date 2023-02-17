@@ -6,15 +6,19 @@ const ListSchema = new mongoose.Schema({
     // required: true,
   
   },
-  Category: {
-    type: String,
-    // required: true,
-   
-  },
+ 
   Image: {
     type: String,
     // required: true,
  
+  },
+  cloudinaryId:{
+    type:String
+  },
+  Category: {
+    type: String,
+    // required: true,
+   
   },
     BriefSummary:{
         type: String,
