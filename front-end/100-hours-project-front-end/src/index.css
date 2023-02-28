@@ -110,12 +110,27 @@ header{
     display:flex;
     margin-top:5%;
     justify-content:space-around;
+    /* height:200px; */
+    flex-direction:column;
+    align-items:center;
    
 }
 
+
+
+.item h1{
+    font-size:20px;
+    font-weight:bold;
+
+}
+
+.item p{
+    padding-top:10%;
+}
+
 .itemImage{
-   width: 40%;
-   height:100%;
+   width: 70%;
+   height:70%;
 
 }
 
@@ -123,10 +138,18 @@ header{
      width:100%;
      height:100%;
      object-fit:cover;
+     border-radius: 15px;
+
 }
 
 .item .itemContent{
-    width:40%;
+    width:70%;
+
+}
+
+.itemBriefSummary{
+    margin-top:2%;
+    text-decoration:underline;
 
 }
 
@@ -134,3 +157,22 @@ header{
 .form{
     margin:0 auto;
 }
+
+.fa-heart{
+    padding-left:5%;
+}
+@media only screen and (min-width: 689px) {
+    .item {
+        flex-direction:row;
+    }
+
+    .item .itemContent{
+        width:40%;
+    
+    }
+
+    .itemImage{
+        width:40%;
+       
+    }
+  }

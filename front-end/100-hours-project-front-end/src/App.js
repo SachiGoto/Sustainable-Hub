@@ -7,9 +7,11 @@ import Main from './pages/Main'
 import Navbar from './components/Navbar'
 import Admin from './pages/Admin'
 
+
 function App() {
 
-  const [categoryData, setCategoryData] = useState(null);
+  const [allData, setAllData] = useState(null);
+  //const [categoryData, setCategoryData] = useState(null);
 
 
 useEffect(()=>{
@@ -20,7 +22,7 @@ useEffect(()=>{
 
     if(response.ok){
 
-      setCategoryData(json)
+      setAllData(json)
 
     }
   }
@@ -28,10 +30,23 @@ fetchAllData()
 },[])
     
   
-      console.log('data is  ', categoryData)
+      console.log('data is  ', allData)
      
 
-    
+      // useEffect(()=>{
+
+      //   const fetchAllData = async()=>{
+      //     const response = await fetch('/list')
+      //     const json = await response.json()
+      
+      //     if(response.ok){
+      
+      //       setAllData(json)
+      
+      //     }
+      //   }
+      // fetchAllData()
+      // },[categoryData])
 
 
 
@@ -64,6 +79,7 @@ fetchAllData()
 
   return (
     <div className="App">
+
      <BrowserRouter>
      <Navbar />
        <div className="pages">
@@ -74,7 +90,7 @@ fetchAllData()
               />  
                  <Route
                     path="main"
-                    element={<Main categoryData={categoryData}  />}
+                    element={<Main categoryData={allData}   />}
               />
                        <Route
                     path="admin"
@@ -84,6 +100,8 @@ fetchAllData()
        </div>
    
      </BrowserRouter>
+
+     
     </div>
   );
 }

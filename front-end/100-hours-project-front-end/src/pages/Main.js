@@ -1,64 +1,65 @@
+import React from 'react'
+
+//  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+ import { useState } from 'react'
+
+
 
 
 
 
 const Main = (props)=>{
 
-   const allData = props.categoryData.map((item)=>{
+  const [category, setCategory] = useState(props.categoryData)
+
+   const allData = category.map((item)=>{
       return(
          <div className="item"  key={item._id}>
-           <div className="itemImage">
-           {/* <img src={item.Image} /> */}
-           </div>
-           <div className="itemContent">
-           <h1 className="itemTitle">{item.Title}</h1>
-           <p className="itemBriefSummary">{item.BriefSummary}</p>
-           </div>
-          
-           </div>
+               <div className="itemImage">
+                <img src={item.Image} />
+                </div>
+               <div className="itemContent">
+               <h1 className="itemTitle">{item.Title}</h1>
+               <p>{item.Summary}</p>
+               <a href={item.BriefSummary} className="itemBriefSummary">Website</a>
+               {/* <FontAwesomeIcon icon="fa-regular fa-heart" /> */}
+               <i className="fa-regular fa-heart"></i>
+                </div>
+              
+                </div>
         )
 
    })
-    
-   //   const categoryData = props.categoryData.map((item) => {
-   //    return(
-   //     <div className="item"  key={item.id}>
-   //       <div className="itemImage">
-   //       <img src={item.Image} />
-   //       </div>
-   //       <div className="itemContent">
-   //       <h1 className="itemTitle">{item.Title}</h1>
-   //       <p className="itemBriefSummary">{item.BriefSummary}</p>
-   //       </div>
-        
-   //       </div>
-   //    )
-   // })
 
-//   let data = categoryData?categoryData: allData
+
+   function onclickCategory(e){
+  let categoryData = props.categoryData.filter(item=> item.Category === e.target.dataset.category)
+  setCategory(categoryData)  
+   }
+
 
     return (
     <>
     <div className='categoryContainer'>
-    Category
 
 
-    <ul  onClick={props.clickHandler}  className="category-ul">
+    {/* <ul  onClick={props.clickHandler}  className="category-ul"> */}
+    <ul  onClick={onclickCategory}  className="category-ul">
 
     <li data-category="Households">Households</li>
-    <li data-category="Grocerries">Grocerries/Food</li>
-    <li data-category="Commuting">Commuting</li>
-    <li data-category="Companies">Companies</li>
-    <li data-category="Communities">Communities</li>
+    <li data-category="Groceries">Grocerries</li>
+    <li data-category="Restaurants">Restaurants</li>
+    <li data-category="Other">Other</li>
+    <li data-category="Resources">Resources</li>
 
     </ul>
     </div>
 
     <div className = "itemsList">
 
-   
-{/* {data} */}
 {allData}
+
    
 
     </div>
