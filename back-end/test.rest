@@ -5,21 +5,18 @@
 GET {{url}}/list
 
 ###
-POST {{url}}/addList
+POST {{url}}/signup
 content-type: application/json
 
 
 {
     "Title": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "Category":"Companies",
-    "Image":"image",
-    "BriefSummary":"Brief Summary",
-    "Summary":"Summary"
+   
 
 }
 
 ###
-Ω
+
 
 # POST {{url}}/recipe/createRecipe
 

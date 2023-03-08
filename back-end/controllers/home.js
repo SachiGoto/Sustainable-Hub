@@ -50,6 +50,15 @@ module.exports = {
       
 
 
+  },
+
+  test: async(req, res)=>{
+    try{
+      console.log(req)
+    }catch(err){
+      console.log(err)
+    }
+    
   }
   // list: async (req, res) => {
   //   try {

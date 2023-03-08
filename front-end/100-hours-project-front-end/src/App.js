@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Main from './pages/Main'
 import Navbar from './components/Navbar'
 import Admin from './pages/Admin'
+import SignUp from './pages/SignUp'
 
 
 function App() {
@@ -95,6 +96,10 @@ fetchAllData()
                        <Route
                     path="admin"
                     element={<Admin />}
+              />      
+                 <Route
+                    path="signup"
+                    element={<SignUp />}
               />      
         </Routes>
        </div>

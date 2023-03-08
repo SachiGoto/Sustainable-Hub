@@ -22,7 +22,7 @@ const Main = (props)=>{
                <div className="itemContent">
                <h1 className="itemTitle">{item.Title}</h1>
                <p>{item.Summary}</p>
-               <a href={item.BriefSummary} className="itemBriefSummary">Website</a>
+               <a href={item.BriefSummary} rel='noreferrer' target="_blank" className="itemBriefSummary">Website</a>
                {/* <FontAwesomeIcon icon="fa-regular fa-heart" /> */}
                <i className="fa-regular fa-heart"></i>
                 </div>
