@@ -120,7 +120,7 @@ exports.postSignup = (req, res, next) => {
           }
           // res.redirect("/profile");
           res.json('success')
-          navigate("/main");
+          // navigate("/main");
         });
       });
     }
