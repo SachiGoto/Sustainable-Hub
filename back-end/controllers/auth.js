@@ -68,17 +68,22 @@ exports.getSignup = (req, res) => {
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+    // validationErrors.push({ msg: "Please enter a valid email address." });
+    validationErrors.push("Please enter a valid email address.");
   if (!validator.isLength(req.body.password, { min: 8 }))
-    validationErrors.push({
-      msg: "Password must be at least 8 characters long",
-    });
+    // validationErrors.push({
+    //   msg: "Password must be at least 8 characters long",
+    // });
+    validationErrors.push("Password must be at least 8 characters long",
+    );
   if (req.body.password !== req.body.confirmPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
+    // validationErrors.push({ msg: "Passwords do not match" });
+    validationErrors.push("Passwords do not match");
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    // return res.redirect("../signup");
+    return res.json(validationErrors[0]);
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -100,7 +105,10 @@ exports.postSignup = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../signup");
+        return res.json('success')
+        // return res.redirect("../signup");
+        // return res.redirect("../main");
+        // return res.json("Account with that email address or username already exists.");
       }
       user.save((err) => {
         if (err) {
@@ -110,7 +118,9 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/profile");
+          // res.redirect("/profile");
+          res.json('success')
+          navigate("/main");
         });
       });
     }

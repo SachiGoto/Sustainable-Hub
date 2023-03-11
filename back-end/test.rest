@@ -5,15 +5,29 @@
 GET {{url}}/list
 
 ###
+# POST {{url}}/signup
+# content-type: application/json
+
+
+# {
+#     "Title": "Wed, 21 Oct 2015 18:27:50 GMT",
+   
+
+# }
+
+###
+
 POST {{url}}/signup
-content-type: application/json
+
 
 
 {
-    "Title": "Wed, 21 Oct 2015 18:27:50 GMT",
+   
+  "user": "user"
    
 
 }
+
 
 ###
 
