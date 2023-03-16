@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,  useState } from "react";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
@@ -8,7 +7,6 @@ import Admin from "./pages/Admin";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
-import { NotEqualStencilFunc } from "three";
 //import { useNavigate } from "react-router-dom";
 
 function App() {
@@ -30,24 +28,10 @@ function App() {
     fetchAllData();
   }, []);
 
-  // useEffect(()=>{
-  //   async function getData() {
-  //     const getData = await fetch("/login");
-  //     const response = await getData;
-  //     const resJson = await response.json();
-  //     if (!resJson.login) navigate("/");
-  //     setUser({userName : resJson.user.userName})
-  //   }
-
-  //   getData();
-  // },[setUser,  navigate])
-
-
-
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar user={user.userName} />
         <div className="pages">
           <Routes>
             <Route path="/" element={<Home />} />

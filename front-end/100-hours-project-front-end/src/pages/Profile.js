@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Profile = ({userInfo, setUser, setUserId}) => {
+const Profile = ({ userInfo, setUser, setUserId }) => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [briefSummary, setBriefSummary] = useState();
   const [summary, setSummary] = useState();
- 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,15 +17,13 @@ const Profile = ({userInfo, setUser, setUserId}) => {
       const response = await getData;
       const resJson = await response.json();
 
-     
       if (!resJson.login) navigate("/");
-      setUser({userName : resJson.user.userName})
-      setUserId({userId: resJson.user._id})
-      // console.log('resJson is ', resJson.user._id)
+      setUser({ userName: resJson.user.userName });
+      setUserId({ userId: resJson.user._id });
     }
 
     getData();
-  }, [setUser, setUserId, setCategory]);
+  }, [setUser, setUserId, setCategory, navigate]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -45,16 +42,12 @@ const Profile = ({userInfo, setUser, setUserId}) => {
 
   async function logOut() {
     const response = await fetch("/logout");
-    console.log("logout response ", response);
-   
+
     if (response.ok) {
       setUser({ userName: null });
       navigate("/");
-    } else {
-      console.log("failed to log out");
-    }
+    } 
   }
-
 
   return (
     <>
@@ -62,7 +55,7 @@ const Profile = ({userInfo, setUser, setUserId}) => {
         <div className="flex">
           <div className=" basis-1/2">
             <div>
-              <p> Hello {userInfo.userName} </p>
+              <p> Hello, {userInfo.userName} ! </p>
 
               <button
                 className="h-10 px-6 font-semibold rounded-md bg-black text-white"
@@ -160,7 +153,10 @@ const Profile = ({userInfo, setUser, setUserId}) => {
               <div className="w-2/3">
                 <p>Image</p>
                 {/* <img src={item.Image} /> */}
-                <img alt="fav company" src="https://res.cloudinary.com/vanarts-webdev/image/upload/v1677619034/qlkecwkpkywumdcgqktq.png"/>
+                <img
+                  alt="fav company"
+                  src="https://res.cloudinary.com/vanarts-webdev/image/upload/v1677619034/qlkecwkpkywumdcgqktq.png"
+                />
               </div>
               <div className="itemContent">
                 {/* <h1 className="itemTitle">{item.Title}</h1> */}
@@ -168,7 +164,6 @@ const Profile = ({userInfo, setUser, setUserId}) => {
                 {/* <p>{item.Summary}</p> */}
                 <p>summary</p>
                 {/* <a href={item.BriefSummary} rel='noreferrer' target="_blank" className="itemBriefSummary">Website</a> */}
-                {/* <FontAwesomeIcon icon="fa-regular fa-heart" /> */}
                 <i className="fa-solid fa-trash"></i>
               </div>
             </div>

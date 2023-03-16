@@ -1,80 +1,68 @@
 import React from "react";
-import { useEffect } from "react";
-//  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Main = (props) => {
   const [category, setCategory] = useState(props.categoryData);
-  
-  let listIds;
-  const [likes, setLikes] = useState()
+  const [favOrgIds, setFavOrgIds] = useState();
 
-  useEffect(()=>{
-
-
+  useEffect(() => {
     async function getData() {
-
       const getData = await fetch("/login");
-      const response = await getData;
+      const response =  getData;
       const resJson = await response.json();
-    
-      let favOrgArray = await resJson.user.favOrg ;
-      listIds = favOrgArray.map(data => data.list_id )
-    
-      console.log('listIds ', listIds)
-      //setTest(listIds)
-      const allOrgId = [];
-  
-     
-  
+
+      // get a list of favorite organizations from user's account
+       setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
+
+      // get all organization ids from data
+      const allOrgIds = [];
+
       for (const data in props.categoryData) {
-      
-        allOrgId.push(props.categoryData[data]._id)
+        allOrgIds.push(props.categoryData[data]._id);
+      }
+
     
-       
-      }
-  
-     console.log('likesArray is ' ,  allOrgId)
-     
-     let likesData = []; 
-  
-     allOrgId.forEach((org, index)=>{
-      allOrgId.includes(listIds[index]) ?  likesData.push({'id': allOrgId[index] , 'isLiked' : true }): likesData.push({'id': allOrgId[index] , 'isLiked' : false })
-     })
-  
-    //  console.log('liksData is ' , likesData)
-  
-     setLikes(likesData)
-     console.log('likes is ' , likesData)
-  
-  
-      }
+    }
 
-
-      getData()
-
-
-  },[])
-  
-
- console.log('likes is ' , likes)
+    getData();
+  }, [props.categoryData]);
 
   let userId = null;
-  let user = null;
+  // let user = null;
 
   if (props.userId) {
     userId = props.userId;
-    user = props.user;
+    // user = props.user;
   }
 
+  let orgs = document.querySelectorAll(".likeBtn");
+  console.log(' org is ', orgs )
+
+  orgs.forEach((data, index)=>{
+    if( favOrgIds.includes(data.getAttribute('data-org-id'))){
+
+      console.log(orgs[index].firstChild)
+      orgs[index].firstChild.style.color = 'red';
+    }else{
+      console.log(orgs[index])
+      orgs[index].firstChild.style.color = 'black';
+    }
+
+  })
+
+
+
+
+
+
+  
+
+
   const allData = category.map((item) => {
-
-
     return (
       <div className="item" key={item._id}>
         <div className="itemImage">
-          <img src={item.Image} />
+          <img alt="item" src={item.Image} />
         </div>
         <div className="itemContent">
           <h1 className="itemTitle">{item.Title}</h1>
@@ -87,11 +75,11 @@ const Main = (props) => {
           >
             Website
           </a>
-          {/* <FontAwesomeIcon icon="fa-regular fa-heart" /> */}
-          <button 
+          <button
+            className="likeBtn"
+            data-org-id={item._id}
             onClick={() => {
               isLike(item._id);
-
             }}
           >
             <i className="fa-regular fa-heart"></i>
@@ -100,7 +88,6 @@ const Main = (props) => {
       </div>
     );
   });
-  
 
   function onclickCategory(e) {
     let categoryData = props.categoryData.filter(
@@ -109,29 +96,41 @@ const Main = (props) => {
     setCategory(categoryData);
   }
 
+  console.log('fav org id list ' , favOrgIds)
 
+  async function isLike(favOrg) {
 
- async function isLike(favOrg) {
   
-    
-    setLikes((prevLikes)=>{ 
-        return prevLikes.map((like) => {
-          return like.id === favOrg
-          ?{
-            ...like,
-            isLiked  : !like.isLiked,
-         }: like
 
 
-        })
-        
-       
-    
+    console.log('fav org id list ' , favOrgIds)
+    if (favOrgIds.includes(favOrg)) {
+      setFavOrgIds((prev) => prev.filter((org) => org !== favOrg));
+      console.log('there is a match ', favOrg)
+      console.log("favOrg id is removed", favOrgIds);
+    } else {
+      setFavOrgIds((prev) => [...prev, favOrg]);
+      console.log("not a match");
+      console.log("favOrg id is added", favOrgIds);
+    }
+
+    let orgs = document.querySelectorAll(".likeBtn");
+    console.log(' org is ', orgs )
+
+    orgs.forEach((data, index)=>{
+      if( favOrgIds.includes(data.getAttribute('data-org-id'))){
+
+        console.log(orgs[index].firstChild)
+        orgs[index].firstChild.style.color = 'red';
+      }else{
+        console.log(orgs[index])
+        orgs[index].firstChild.style.color = 'black';
+      }
+  
     })
 
-    console.log('likes array ', likes)
-    let updateFavOrg = {userId, favOrg}
-    console.log('favorg formdata ', updateFavOrg)
+    let updateFavOrg = { userId, favOrg };
+    // console.log("favorg formdata ", updateFavOrg);
 
     const res = await fetch("/favoriteOrg", {
       method: "PUT",
@@ -142,14 +141,13 @@ const Main = (props) => {
     });
 
     const json = await res.json();
-    console.log('json ', json)
 
-
+    console.log("response from favoriteorg api", json);
 
    
   }
 
-  
+
 
   return (
     <>
@@ -168,7 +166,5 @@ const Main = (props) => {
     </>
   );
 };
-
-
 
 export default Main;
