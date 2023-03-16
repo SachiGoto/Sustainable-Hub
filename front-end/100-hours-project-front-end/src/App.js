@@ -7,6 +7,7 @@ import Main from './pages/Main'
 import Navbar from './components/Navbar'
 import Admin from './pages/Admin'
 import SignUp from './pages/SignUp'
+import LogIn from './pages/LogIn'
 
 
 function App() {
@@ -100,7 +101,11 @@ fetchAllData()
                  <Route
                     path="signup"
                     element={<SignUp />}
-              />      
+              />   
+                <Route
+                    path="login"
+                    element={<LogIn />}
+              />         
         </Routes>
        </div>
    

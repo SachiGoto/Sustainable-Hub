@@ -12,6 +12,7 @@ router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, recipesController.getProfile);
 router.get("/feed", recipesController.getFeed);
 router.get("/login", authController.getLogin);
+// router.post("/login", authController.postLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
