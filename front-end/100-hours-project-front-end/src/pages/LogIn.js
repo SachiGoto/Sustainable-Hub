@@ -1,19 +1,23 @@
 import React from 'react'
 import {useState} from 'react' 
+import { useNavigate } from "react-router-dom";
 
 const Login = () =>{
-
-    const [ userName, setUserName] = useState('');
+  const navigate = useNavigate();
+    // const [ userName, setUserName] = useState('');
+    const [ email, setEmail] = useState('');
     const [password , setPassword] = useState('')
+
     //const [message, setMessage] = useState('');
 
     const handleSubmit = async(e) =>{
          e.preventDefault()
 
-         const loginForm = {userName, password}
+        //  const loginForm = {userName, password}
+        const loginForm = {email, password}
+        //  console.log('login form is ' , loginForm)
 
-         const res = await fetch('http://localhost:2121/login',{
-
+         const res = await fetch('/login',{
             method:'POST',
             body:JSON.stringify(loginForm),
             headers:{
@@ -24,16 +28,31 @@ const Login = () =>{
 
          })
 
-         console.log(loginForm)
+  
 
          const json = await res.json()
 
+         console.log('log in ', json)
+
          if(!res.ok){
-            console.log('error', json)
+          console.log("!res.ok " , res.ok)
          }else{
-            //console.log('successs')
-            console.log('error', json)
+          if(json.login){
+               navigate("/profile");
+               console.log('You are logged in.')
+          }else{
+            console.log('login failed')
+          }
+         
          }
+
+        //  if(!res.ok){
+        //     console.log('error', json)
+        //  }else{
+        //   navigate("/profile");
+        //     console.log('successs')
+        //     console.log( json)
+        //  }
 
          
 
@@ -44,7 +63,8 @@ const Login = () =>{
     }
 
 
-
+// console.log('user name: ' , userName, " , password : ", password)
+// console.log('email: ' , email, " , password : ", password)
 
 
 
@@ -64,7 +84,7 @@ const Login = () =>{
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="">
                     <div className="mt-5 mx-auto w-9/12 ">
-                      <label htmlFor="user-name" className="block text-sm font-medium leading-6 text-gray-900">
+                      {/* <label htmlFor="user-name" className="block text-sm font-medium leading-6 text-gray-900">
                         User Name
                       </label>
                       <input
@@ -75,6 +95,19 @@ const Login = () =>{
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         // onChange={handleChange}
                         onChange={e => setUserName(e.target.value)}
+                      /> */}
+
+                      <label htmlFor="user-name" className="block text-sm font-medium leading-6 text-gray-900">
+                        Email
+                      </label>
+                      <input
+                        type="text"
+                        name="email"
+                        id="user-name"
+                        autoComplete="given-name"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        // onChange={handleChange}
+                        onChange={e => setEmail(e.target.value)}
                       />
                     </div>
 

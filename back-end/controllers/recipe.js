@@ -7,8 +7,10 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const recipes = await Recipe.find({ user: req.user.id });
-      res.render("profile.ejs", { recipes: recipes, user: req.user });
+      res.json('user', res.user)
+      //res.render("profile.ejs", { recipes: recipes, user: req.user });
     } catch (err) {
+      
       console.log(err);
     }
   },
@@ -29,7 +31,7 @@ module.exports = {
      
       console.log("post is " , posts)
        res.status(200).json(posts)
-      // res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }

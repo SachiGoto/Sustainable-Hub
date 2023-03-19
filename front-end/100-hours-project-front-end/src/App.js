@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Admin from './pages/Admin'
 import SignUp from './pages/SignUp'
 import LogIn from './pages/LogIn'
+import Profile from './pages/Profile'
 
 
 function App() {
@@ -32,7 +33,7 @@ fetchAllData()
 },[])
     
   
-      console.log('data is  ', allData)
+      // console.log('data is  ', allData)
      
 
       // useEffect(()=>{
@@ -105,7 +106,11 @@ fetchAllData()
                 <Route
                     path="login"
                     element={<LogIn />}
-              />         
+              />
+                   <Route
+                    path="profile"
+                    element={<Profile />}
+              />            
         </Routes>
        </div>
    
