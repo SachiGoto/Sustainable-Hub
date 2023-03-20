@@ -100,6 +100,7 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    favOrg:[]
   });
 
   User.findOne(

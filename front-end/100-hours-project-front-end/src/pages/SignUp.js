@@ -46,44 +46,16 @@ const handleSubmit = async (e) =>{
    }
    if(json === 'success'){
     // setMessage('res.ok')
-    navigate("/path/to/push");
+    navigate("/login");
     console.log(json);
 
    }
 }
-// function handleSubmit(e){
-//   e.preventDefault()
-
-//  fetch('signup', {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({userName: 'test'})
-//     }).then(()=>{
-//       console.log('new data added');
-//     })
-// }
-
-
-
-// function handleChange(event){
-//   setUserName( prevForm =>{
-//     return{
-//      ...prevForm, 
-//                 [event.target.name]: event.target.value
-    
-//     }
-
-//   })
-// }
 
 
 
 
-
-console.log(userName, email, password, confirmPassword)
+// console.log(userName, email, password, confirmPassword)
 
   return(
 
@@ -94,7 +66,7 @@ console.log(userName, email, password, confirmPassword)
         <div className=" flex m-auto flex-col w-85 ">
           <div>
             <div className="px-4 sm:px-0">
-              <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">Login Page</h3>
+              <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">Sign Up</h3>
             </div>
           </div>
           <div className="mt-5">

@@ -1,9 +1,65 @@
-
+const mongoose = require("mongoose");
 const cloudinary = require("../middleware/cloudinary");
 const Lists = require("../models/List");
+const User = require("../models/User");
 
 
 module.exports = {
+
+  favoriteOrg: async (req, res) => {
+    try {
+      // console.log('favoriteOrg request is ' , req.body.updateFavOrg.favOrg)
+      // console.log('favoriteOrg request is ' , req.body.updateFavOrg.isLiked)
+      // console.log('req.use._id os ' , req.body.updateFavOrg.isLiked)
+      const userData = await User.find(req.user._id)
+      const favOrgArray = userData[0].favOrg
+      let findOrg = favOrgArray.find(org=>{
+        console.log('org.list_id ' , org.list_id, 'req.body.updateFavOrg.favOrg ' , req.body.updateFavOrg.favOrg )
+        
+         return org.list_id == req.body.updateFavOrg.favOrg
+      })
+      console.log('matching org is ' , findOrg)
+
+      // console.log('favOrgArray is ',favOrgArray )
+      if(findOrg === undefined ){
+        console.log('works')
+        const updatedFavOrg = await User.updateOne(
+
+        
+          { _id: req.user._id },
+          {
+            "$push":{ favOrg : {list_id : req.body.updateFavOrg.favOrg}}
+          }
+          )
+
+      }else{
+        const updatedFavOrg = await User.updateOne(
+
+        
+          { _id: req.user._id },
+          {
+            "$pull": { favOrg : {list_id : req.body.updateFavOrg.favOrg}}
+          }
+          )
+
+      }
+     
+     
+       
+        
+
+   
+     
+    
+      // const response = res.status(200).json(updatedFavOrg)
+
+      // console.log('response after updating the favorg ', updatedFavOrg);
+      //res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   getIndex: (req, res) => {
     res.render("index.ejs");
   },

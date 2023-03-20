@@ -6,14 +6,11 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
 router.get("/:id", ensureAuth, recipesController.getRecipe);
-
-
-
 router.post("/createRecipe", upload.single("file"), recipesController.createRecipe);
-
 router.post("/favoriteRecipe/:id", recipesController.favoriteRecipe);
 router.put("/favoriteRecipe/:id", recipesController.favoriteRecipe);
-
 router.delete("/deleteRecipe/:id", recipesController.deleteRecipe);
+
+
 
 module.exports = router;

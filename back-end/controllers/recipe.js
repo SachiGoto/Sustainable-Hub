@@ -4,6 +4,8 @@ const Favorite = require("../models/Favorite");
 
 
 module.exports = {
+
+
   getProfile: async (req, res) => {
     try {
       const recipes = await Recipe.find({ user: req.user.id });

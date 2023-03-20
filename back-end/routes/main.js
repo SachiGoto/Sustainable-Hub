@@ -22,4 +22,5 @@ router.get("/list", homeController.list);
 router.post("/addList", upload.single("image"), homeController.createList);
 // router.post("/addList", homeController.createList);
 
+router.put("/favoriteOrg", homeController.favoriteOrg);
 module.exports = router;

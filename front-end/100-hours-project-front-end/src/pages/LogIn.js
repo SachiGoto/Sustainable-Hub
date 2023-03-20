@@ -38,6 +38,7 @@ const Login = () =>{
           console.log("!res.ok " , res.ok)
          }else{
           if(json.login){
+              
                navigate("/profile");
                console.log('You are logged in.')
           }else{
