@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 *{
     margin:0;
     padding:0;
@@ -14,6 +19,7 @@
   
     background-color: #cbe3cb;
     border-radius: 755px 190px;
+    width:100vw;
 }
 
 header{
@@ -183,3 +189,5 @@ header{
        
     }
   }
+
+

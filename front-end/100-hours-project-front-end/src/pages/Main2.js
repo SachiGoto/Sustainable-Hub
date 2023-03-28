@@ -1,14 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 
-const Main2 = (props) => {
-  let user = null;
-  user = localStorage.getItem("user");
-
+const Main2 = ({ user }) => {
   const [allData, setData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState();
   const [category, setCategory] = useState([]);
+  let userId = null;
 
   useEffect(() => {
     fetch("/list")
@@ -19,31 +16,21 @@ const Main2 = (props) => {
       })
 
       .catch((error) => console.error(error));
+
+    fetch("/login")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.user) {
+          userId = data.user._id;
+          setFavOrgIds(data.user.favOrg.map((org) => org.list_id));
+          // get all organization ids from data
+          const allOrgIds = [];
+          for (const data in allData) {
+            allOrgIds.push(data._id);
+          }
+        }
+      });
   }, []);
-
-  useEffect(() => {
-    async function getData() {
-      const getData = await fetch("/login");
-      const response = getData;
-      const resJson = await response.json();
-
-      // get a list of favorite organizations from user's account
-      setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
-      // get all organization ids from data
-      const allOrgIds = [];
-      for (const data in allData) {
-        allOrgIds.push(data._id);
-      }
-    }
-
-    getData();
-  }, []);
-
-  let userId = null;
-
-  if (localStorage.getItem('userItem')) {
-    userId = localStorage.getItem('userItem');
-  }
 
   let orgs = document.querySelectorAll(".likeBtn");
 
@@ -58,7 +45,7 @@ const Main2 = (props) => {
   }
 
   function onclickCategory(e) {
-    let categoryData = allData.filter(
+      let categoryData = allData.filter(
       (item) => item.Category === e.target.dataset.category
     );
 
@@ -97,9 +84,7 @@ const Main2 = (props) => {
 
   return (
     <>
-     <Navbar />
       <div className="categoryContainer">
-        {/* <ul  onClick={props.clickHandler}  className="category-ul"> */}
         <ul onClick={onclickCategory} className="category-ul">
           <li data-category="Households">Households</li>
           <li data-category="Groceries">Grocerries</li>

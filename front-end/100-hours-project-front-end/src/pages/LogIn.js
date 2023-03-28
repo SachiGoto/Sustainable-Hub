@@ -1,47 +1,47 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 
-const Login = (props) => {
+
+const Login = ({user, setUser}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState('');
- 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const loginForm = { email, password };
-    const res = await fetch("/login", {
-      method: "POST",
-      body: JSON.stringify(loginForm),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    const json = await res.json();
-    setMessage(json)
-    if (!res.ok) {
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const loginForm = { email, password };
+  const res = await fetch("/login", {
+    method: "POST",
+    body: JSON.stringify(loginForm),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const json = await res.json();
+  setMessage(json)
+  if (!res.ok) {
+  } else {
+    if (json.login) {
+    setUser(json.user.userName)
+     localStorage.setItem("user", json.user.userName);
+     localStorage.setItem( "userId", json.user._id)
+      navigate("/profile");
+      console.log("You are logged in.");
     } else {
-      if (json.login) {
-      
-       localStorage.setItem("user", json.user.userName);
-       localStorage.setItem( "userId", json.user._id)
-        navigate("/profile");
-        console.log("You are logged in.");
-      } else {
-   
-        console.log('message ',json);
-      }
+ 
+      console.log('message ',json);
     }
-  };
+  }
+};
+
 
   return (
     <>
-    <Navbar />
-      <div className="mt-10 sm:mt-0">
+<div className="mt-10 sm:mt-0">
         <div className=" flex m-auto flex-col w-85 ">
           <div>
             <div className="px-4 sm:px-0">
@@ -106,6 +106,7 @@ const Login = (props) => {
           </form>
         </div>
       </div>
+   
     </>
   );
 };

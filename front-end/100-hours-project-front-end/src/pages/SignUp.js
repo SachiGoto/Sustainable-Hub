@@ -1,68 +1,41 @@
 import React from 'react'
 import {useState} from 'react' 
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+
 
 const SignUp = () =>{
-
-// const [signUpForm, setSignUpForm] = useState([{userName:"", email:",", password:"", confirmPassword:"" }]);
-
-
 const [ userName, setUserName] = useState('');
 const [email , setEmail] = useState('')
 const [password , setPassword] = useState('')
 const [confirmPassword , setConfirmPassword] = useState('')
 const [message, setMessage] = useState('');
-
-
 const navigate = useNavigate();
 
 
 const handleSubmit = async (e) =>{
    e.preventDefault()
-
    const signUp = {userName,email,password,confirmPassword }
-   // console.log('sign up data is ', JSON.stringify(signUp))
-   const res = await fetch('http://localhost:2121/signup',{
+   const res = await fetch('/signup',{
         method:'POST',
         body:JSON.stringify(signUp),
         headers:{
           'Content-Type' : 'application/json'
         }
-
-       
    })
-
-  
-
-  
 
    const json = await res.json()
    setMessage(json)
    if(!res.ok){
-  
      console.log('error', json)
-     
-    
+   }else{
+     navigate("/login");
    }
-   if(json === 'success'){
-    // setMessage('res.ok')
-    navigate("/login");
-    console.log(json);
-
-   }
+  
 }
-
-
-
-
-// console.log(userName, email, password, confirmPassword)
 
   return(
 
-        <>
- 
-    <Navbar/>
+      <>
       <div className="mt-10 sm:mt-0">
         <div className=" flex m-auto flex-col w-85 ">
           <div>
@@ -85,7 +58,6 @@ const handleSubmit = async (e) =>{
                         id="user-name"
                         autoComplete="given-name"
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        // onChange={handleChange}
                         onChange={e => setUserName(e.target.value)}
                       />
                     </div>
@@ -100,7 +72,6 @@ const handleSubmit = async (e) =>{
                         id="email"
                         autoComplete="email"
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        // onChange={handleChange}
                         onChange={e => setEmail(e.target.value)}
                       />
                     </div>
@@ -115,7 +86,6 @@ const handleSubmit = async (e) =>{
                         id="password"
                         autoComplete="password"
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        // onChange={handleChange}
                         onChange={e => setPassword(e.target.value)}
                       />
                     </div>
@@ -130,16 +100,9 @@ const handleSubmit = async (e) =>{
                         id="confirmPassword"
                         autoComplete="confirmPassword"
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        // onChange={handleChange}
                         onChange={e => setConfirmPassword(e.target.value)}
                       />
                     </div>
-
-                   
-
-                   
-
-                   
                   </div>
                 </div>
                 <div className="px-4 py-3 text-center sm:px-6">
@@ -150,8 +113,6 @@ const handleSubmit = async (e) =>{
                     Submit
                   </button>
                   <p>{message}</p>
-
-                
                 </div>
               </div>
             </form>

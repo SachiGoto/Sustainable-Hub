@@ -2,53 +2,45 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { nanoid } from 'nanoid'
 
-const Profile = ({ userInfo, setUser, setUserId }) => {
+
+
+const Profile = ({user, setUser}) => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [briefSummary, setBriefSummary] = useState();
   const [summary, setSummary] = useState();
   const navigate = useNavigate();
-  // const [favList, setFavList] = useState();
   const [allData, setAllData]=useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
-
+  
   useEffect(() => {
-if(!localStorage.user){
-  navigate("/");
-}
-    
-
     async function getData() {
       const allData = await fetch("/list")
       const responseAllData = allData;
       const resJsonData = await responseAllData.json();
       setAllData(resJsonData)
     }
-
     getData();
-
- 
-
   }, []);
 
 
   useEffect(()=>{
-    async function getFavData(){
+      async function getFavData(){
       const getFavOrg = await fetch("/login");
       const response =  getFavOrg;
       const resJson =  await response.json();
-      console.log('resJson is ' , resJson)
+
    // get a list of favorite organizations from user's account
    setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
-   console.log("favOrgIds is ", favOrgIds)
+
   //  // get all organization ids from data
-  //  const allOrgIds = [];
-  //  for (const data in resJson) {
-  //    allOrgIds.push(data._id);
-  //  }
+   const allOrgIds = [];
+   for (const data in resJson) {
+     allOrgIds.push(data._id);
+   }
 
   //  console.log('favorg ', allOrgIds)
     }
@@ -110,36 +102,17 @@ if(!localStorage.user){
     setImage(event.target.files[0]);
   }
 
-  async function logOut() {
-    
-    const response = await fetch("/logout");
-    
-    if (response.ok) {
-      localStorage.removeItem("user")
-      localStorage.removeItem("userId")
-      // setUser({ userName: null });
-      window.location.reload()
-      navigate("/");
-    } 
-  }
 
-  console.log('all data is ', allData)
-  // window.location.reload()
+
   return (
     <>
-     <Navbar />
-      <div className="mt-10 sm:mt-0">
-        <div className="flex">
-          <div className=" basis-1/2 flex flex-col items-center">
-            <div>
-              <p className='my-3'> Hello, {localStorage.getItem('user')} ! </p>
 
-              <button
-                className="className='my-2' h-10 px-6 font-semibold rounded-md bg-black text-white"
-                onClick={logOut}
-              >
-                Log Out
-              </button>
+      <div className="mt-4 md:mt-8">
+        <div className="flex flex-col md:flex-row">
+          <div className="prose basis-1/2 flex flex-col items-center">
+            <div>
+              <p className='my-3'> Hello, {user} ! </p>
+
             </div>
             <div>
               <div className="px-4 sm:px-0">
@@ -183,6 +156,7 @@ if(!localStorage.user){
                     className=" mb-5"
                   />
                 </div>
+              
                 <div className="mb-4">
                   <label
                     htmlFor="briefSummary"
@@ -216,40 +190,44 @@ if(!localStorage.user){
                 </div>
 
                 <button
-                  className="h-10 px-6 font-semibold rounded-md bg-black text-white"
+                  className="h-10 px-6 font-semibold rounded-md btn btn-primary"
                   type="submit"
                 >
                   Submit
                 </button>
               </form>
             </div>
-            <button
-        className="my-3 mt-2 h-10 px-6 font-semibold rounded-md bg-black text-white"
-        type="submit"
-      >
-        <Link to="/main2"> Categories </Link>
-      </button>
+      
+        <Link to="/main2">       
+        <button className="my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
+        type="submit">Categories</button>
+        </Link>
+    
           </div>
-<div className=" basis-1/2 flex flex-col" >
+          <div className="basis-1/2 flex flex-col" >
           {allData.map((org)=>(
       favOrgIds.includes(org._id)&&<div>
-            {/* <div className="item"  key={item._id}> */}
-            <div className="flex flex-col">
-              <div className="">
-                <img
+
+              
+              <label htmlFor={org._id} className=""> <div className="flex flex-col"><img
                   alt="fav company"
                   src={org.Image}
-                />
-              </div>
-              <div className="itemContent">
-                <h1 className="itemTitle">{org.Title}</h1>
-                <p>{org.Summary}</p>
-                <div onClick={()=>deleteItem(org._id)}>
-                <i className="fa-solid fa-trash"></i>
+                /></div></label>
+
+                {/* Put this part before </body> tag */}
+                <input type="checkbox" id={org._id}  className="modal-toggle" />
+                <div className="modal">
+                  <div className="modal-box">
+                    <p className="py-4">{org.Summary}</p>
+                    <div className="modal-action">
+                      <label htmlFor={org._id} className="btn">close!</label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                <h1 className="itemTitle mt-3">{org.Title}</h1>
+                
+</div>
+                   
         
     ))}
     </div>  
