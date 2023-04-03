@@ -6,7 +6,9 @@
     color: rgb(52 50 50);
 }
 
-
+.category-ul li{
+    cursor:pointer;
+}
 
 #root{
   
@@ -16,12 +18,12 @@
 
 header{
  
-  margin:0 auto;
+  margin:0% auto;
+  padding:5% 0%;
     width:90%;
-    height:20vh;
+    height:10vh;
 }
 .navbar{
-    padding-top: 5%;
    margin:0 auto;
    display:flex;
    justify-content:space-between;
@@ -45,6 +47,9 @@ header{
 
 .pages{
     min-height:80vh;
+    margin: 0 auto;
+    width: 90%;
+    height: 20vh;
 }
 
 

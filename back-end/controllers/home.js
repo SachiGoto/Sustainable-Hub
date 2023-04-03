@@ -68,7 +68,7 @@ module.exports = {
     try {
       
       const allLists = await Lists.find().sort({ createdAt: "desc" }).lean();
-      res.status(200).json(allLists)
+      res.json(allLists)
 
     } catch (err) {
       console.log(err);

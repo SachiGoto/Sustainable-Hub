@@ -39,7 +39,7 @@ const handleSubmit = async (e) =>{
    const json = await res.json()
    setMessage(json)
    if(!res.ok){
-    setMessage('res.ok not ok')
+  
      console.log('error', json)
      
     

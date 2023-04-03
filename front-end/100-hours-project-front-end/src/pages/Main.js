@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 const Main = (props) => {
+  console.log('this is props ',props)
+
   const [category, setCategory] = useState(props.categoryData);
   const [favOrgIds, setFavOrgIds] = useState();
 
@@ -76,7 +78,7 @@ const Main = (props) => {
             Website
           </a>
           <button
-            className="likeBtn"
+            className="likeBtn pl-2 "
             data-org-id={item._id}
             onClick={() => {
               isLike(item._id);

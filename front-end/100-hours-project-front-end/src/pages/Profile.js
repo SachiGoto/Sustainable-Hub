@@ -10,20 +10,83 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
   const [briefSummary, setBriefSummary] = useState();
   const [summary, setSummary] = useState();
   const navigate = useNavigate();
+  // const [favList, setFavList] = useState();
+  const [allData, setAllData]=useState([]);
+  const [favOrgIds, setFavOrgIds] = useState([]);
 
   useEffect(() => {
-    async function getData() {
-      const getData = await fetch("/login");
-      const response = await getData;
-      const resJson = await response.json();
 
-      if (!resJson.login) navigate("/");
-      setUser({ userName: resJson.user.userName });
-      setUserId({ userId: resJson.user._id });
+     
+
+    async function getData() {
+      const allData = await fetch("/list")
+      const responseAllData = allData;
+      const resJsonData = await responseAllData.json();
+      setAllData(resJsonData)
     }
 
     getData();
-  }, [setUser, setUserId, setCategory, navigate]);
+
+ 
+
+  }, [ ]);
+
+  useEffect(()=>{
+    async function getFavData(){
+      const getFavOrg = await fetch("/login");
+      const response =  getFavOrg;
+      const resJson =  await response.json();
+      console.log('resJson is ' , resJson)
+   // get a list of favorite organizations from user's account
+   setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
+   console.log("favOrgIds is ", favOrgIds)
+  //  // get all organization ids from data
+  //  const allOrgIds = [];
+  //  for (const data in resJson) {
+  //    allOrgIds.push(data._id);
+  //  }
+
+  //  console.log('favorg ', allOrgIds)
+    }
+    
+
+    getFavData()
+
+
+  },[])
+
+  async function deleteItem(orgId){
+
+    console.log('delete clicked', orgId)
+    
+   const newFavOrgIds = [...favOrgIds]
+   newFavOrgIds.splice(favOrgIds.indexOf(orgId),1)
+   setFavOrgIds(newFavOrgIds)
+
+   try {
+    const res = await fetch("/favoriteOrg", {
+      method: "PUT",
+      body: JSON.stringify({ newFavOrgIds }),
+      headers: { 
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await res.json();
+    // do something with the data
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
+ 
+
+
+  }
+
+
+  console.log('new fav org ids ', favOrgIds)
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,23 +105,25 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
 
   async function logOut() {
     const response = await fetch("/logout");
-
+    localStorage.removeItem("user")
     if (response.ok) {
-      setUser({ userName: null });
+      // setUser({ userName: null });
       navigate("/");
     } 
   }
+
+  console.log('all data is ', allData)
 
   return (
     <>
       <div className="mt-10 sm:mt-0">
         <div className="flex">
-          <div className=" basis-1/2">
+          <div className=" basis-1/2 flex flex-col items-center">
             <div>
-              <p> Hello, {userInfo.userName} ! </p>
+              <p className='my-3'> Hello, {localStorage.getItem('user')} ! </p>
 
               <button
-                className="h-10 px-6 font-semibold rounded-md bg-black text-white"
+                className="className='my-2' h-10 px-6 font-semibold rounded-md bg-black text-white"
                 onClick={logOut}
               >
                 Log Out
@@ -66,8 +131,8 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
             </div>
             <div>
               <div className="px-4 sm:px-0">
-                <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
-                  Add A List
+                <h3 className="my-3 text-base font-semibold leading-6 text-gray-900 text-center">
+                  Add your favorite sustainable place
                 </h3>
               </div>
 
@@ -146,37 +211,42 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
                 </button>
               </form>
             </div>
+            <button
+        className="my-3 mt-2 h-10 px-6 font-semibold rounded-md bg-black text-white"
+        type="submit"
+      >
+        <Link to="/main2"> Categories </Link>
+      </button>
           </div>
-          <div className=" basis-1/2">
+<div className=" basis-1/2 flex flex-col" >
+          {allData.map((org)=>(
+      favOrgIds.includes(org._id)&&<div>
             {/* <div className="item"  key={item._id}> */}
-            <div className="">
-              <div className="w-2/3">
-                <p>Image</p>
-                {/* <img src={item.Image} /> */}
+            <div className="flex flex-col">
+              <div className="">
                 <img
                   alt="fav company"
-                  src="https://res.cloudinary.com/vanarts-webdev/image/upload/v1677619034/qlkecwkpkywumdcgqktq.png"
+                  src={org.Image}
                 />
               </div>
               <div className="itemContent">
-                {/* <h1 className="itemTitle">{item.Title}</h1> */}
-                <h1 className="itemTitle">Title</h1>
-                {/* <p>{item.Summary}</p> */}
-                <p>summary</p>
-                {/* <a href={item.BriefSummary} rel='noreferrer' target="_blank" className="itemBriefSummary">Website</a> */}
+                <h1 className="itemTitle">{org.Title}</h1>
+                <p>{org.Summary}</p>
+                <div onClick={()=>deleteItem(org._id)}>
                 <i className="fa-solid fa-trash"></i>
+                </div>
               </div>
             </div>
           </div>
+        
+    ))}
+    </div>  
         </div>
       </div>
 
-      <button
-        className="h-10 px-6 font-semibold rounded-md bg-black text-white"
-        type="submit"
-      >
-        <Link to="/main"> Categories </Link>
-      </button>
+   
+
+     
     </>
   );
 };

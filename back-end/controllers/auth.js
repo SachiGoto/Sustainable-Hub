@@ -3,26 +3,22 @@ const validator = require("validator");
 const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
-  console.log('req.user is ' , req.user)
+  console.log("req.user is ", req.user);
   if (req.user) {
-    return res.json({login:true, user: req.user});
+    return res.json({ login: true, user: req.user });
   }
-  
-  return res.json({login:false})
-  // res.render("login", {
-  //   title: "Login",
-  // });
+
+  return res.json({ login: false });
 };
 
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+    validationErrors.push("Please enter a valid email address.");
   if (validator.isEmpty(req.body.password))
-    validationErrors.push({ msg: "Password cannot be blank." });
+    validationErrors.push("Password cannot be blank.");
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
     return res.json(validationErrors);
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
@@ -34,27 +30,21 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash("errors", info);
-      return res.json(validationErrors);
-      //return res.redirect("/login");
-
+      return res.json("Your email and/or passowrd is not valid");
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-     // req.flash("success", { msg: "Success! You are logged in." });
-     return res.json({login:true, user:user})
-      //res.redirect(req.session.returnTo || "/profile");
+      return res.json({ login: true, user: user });
     });
   })(req, res, next);
 };
 
-
 exports.logout = (req, res) => {
   req.logout(() => {
-    console.log('User has logged out.')
-  })
+    console.log("User has logged out.");
+  });
   req.session.destroy((err) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
@@ -75,21 +65,14 @@ exports.getSignup = (req, res) => {
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
-    // validationErrors.push({ msg: "Please enter a valid email address." });
     validationErrors.push("Please enter a valid email address.");
   if (!validator.isLength(req.body.password, { min: 8 }))
-    // validationErrors.push({
-    //   msg: "Password must be at least 8 characters long",
-    // });
-    validationErrors.push("Password must be at least 8 characters long",
-    );
+    validationErrors.push("Password must be at least 8 characters long");
   if (req.body.password !== req.body.confirmPassword)
-    // validationErrors.push({ msg: "Passwords do not match" });
     validationErrors.push("Passwords do not match");
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    // return res.redirect("../signup");
     return res.json(validationErrors[0]);
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
@@ -100,7 +83,7 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
-    favOrg:[]
+    favOrg: [],
   });
 
   User.findOne(
@@ -113,10 +96,7 @@ exports.postSignup = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.json('success')
-        // return res.redirect("../signup");
-        // return res.redirect("../main");
-        // return res.json("Account with that email address or username already exists.");
+        return res.json("success");
       }
       user.save((err) => {
         if (err) {
@@ -126,9 +106,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          // res.redirect("/profile");
-          res.json('success')
-          // navigate("/main");
+          res.json("success");
         });
       });
     }

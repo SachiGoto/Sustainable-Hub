@@ -6,15 +6,11 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    //  const loginForm = {userName, password}
     const loginForm = { email, password };
-    //  console.log('login form is ' , loginForm)
-
     const res = await fetch("/login", {
       method: "POST",
       body: JSON.stringify(loginForm),
@@ -24,17 +20,16 @@ const Login = () => {
     });
 
     const json = await res.json();
-
-    console.log("log in ", json);
-
+    setMessage(json)
     if (!res.ok) {
-      console.log("!res.ok ", res.ok);
     } else {
       if (json.login) {
+       localStorage.setItem("user", json.user.userName);
         navigate("/profile");
         console.log("You are logged in.");
       } else {
-        console.log("login failed");
+   
+        console.log('message ',json);
       }
     }
   };
@@ -59,19 +54,6 @@ const Login = () => {
               <div className="bg-white px-4 py-5 sm:p-6">
                 <div className="">
                   <div className="mt-5 mx-auto w-9/12 ">
-                    {/* <label htmlFor="user-name" className="block text-sm font-medium leading-6 text-gray-900">
-                        User Name
-                      </label>
-                      <input
-                        type="text"
-                        name="userName"
-                        id="user-name"
-                        autoComplete="given-name"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        // onChange={handleChange}
-                        onChange={e => setUserName(e.target.value)}
-                      /> */}
-
                     <label
                       htmlFor="user-name"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -84,7 +66,6 @@ const Login = () => {
                       id="user-name"
                       autoComplete="given-name"
                       className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      // onChange={handleChange}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
@@ -102,7 +83,6 @@ const Login = () => {
                       id="password"
                       autoComplete="password"
                       className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      // onChange={handleChange}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
@@ -115,7 +95,7 @@ const Login = () => {
                 >
                   Submit
                 </button>
-                {/* <p>{message}</p> */}
+                <p>{message}</p>
               </div>
             </div>
           </form>
