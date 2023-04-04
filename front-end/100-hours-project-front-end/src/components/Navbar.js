@@ -1,16 +1,11 @@
 import {Link} from 'react-router-dom'
-
-const Navbar = (userName) =>{
-
-  const localStorageUserName = localStorage.getItem("user");
-  console.log(localStorageUserName)
-  let user = userName.user; 
-  let isUser = false;
-  if(user !== null){
-    isUser = true;
-  }
+// import { useEffect } from "react";
+const Navbar = () =>{
+  // let localStorageUserName = localStorage.getItem("user")
 
 
+// console.log('nav bar triggered')
+// console.log('props.user is ',localStorage.getItem('user'))
 
 
     return (
@@ -22,12 +17,12 @@ const Navbar = (userName) =>{
                 <li className="navItem"><Link to ="/main2"> </Link></li>
                 <div className="navItem navItem-login-signup">
                 <li className="navItem">
-                {localStorageUserName? 
-                <Link to ="/profile"> {localStorageUserName}'s profile </Link>
+                {localStorage.getItem('user')? 
+                <Link to ="/profile"> {localStorage.getItem('user')}'s profile </Link>
                 :<Link to ="/login"> Log In </Link>
                }
                 </li>
-               { !localStorageUserName &&<li className="navItem"><Link to ="/signup">  Sign Up </Link></li> }
+               { !localStorage.getItem('user') &&<li className="navItem"><Link to ="/signup">  Sign Up </Link></li> }
                 </div>
                 
                

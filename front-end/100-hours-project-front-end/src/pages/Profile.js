@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Profile = ({ userInfo, setUser, setUserId }) => {
   const [image, setImage] = useState(null);
@@ -15,8 +16,10 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
   const [favOrgIds, setFavOrgIds] = useState([]);
 
   useEffect(() => {
-
-     
+if(!localStorage.user){
+  navigate("/");
+}
+    
 
     async function getData() {
       const allData = await fetch("/list")
@@ -29,7 +32,8 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
 
  
 
-  }, [ ]);
+  }, []);
+
 
   useEffect(()=>{
     async function getFavData(){
@@ -55,6 +59,9 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
 
   },[])
 
+
+  
+
   async function deleteItem(orgId){
 
     console.log('delete clicked', orgId)
@@ -66,7 +73,7 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
    try {
     const res = await fetch("/favoriteOrg", {
       method: "PUT",
-      body: JSON.stringify({ newFavOrgIds }),
+      body: JSON.stringify({newFavOrgIds }),
       headers: { 
         "Content-Type": "application/json",
       },
@@ -104,18 +111,23 @@ const Profile = ({ userInfo, setUser, setUserId }) => {
   }
 
   async function logOut() {
+    
     const response = await fetch("/logout");
-    localStorage.removeItem("user")
+    
     if (response.ok) {
+      localStorage.removeItem("user")
+      localStorage.removeItem("userId")
       // setUser({ userName: null });
+      window.location.reload()
       navigate("/");
     } 
   }
 
   console.log('all data is ', allData)
-
+  // window.location.reload()
   return (
     <>
+     <Navbar />
       <div className="mt-10 sm:mt-0">
         <div className="flex">
           <div className=" basis-1/2 flex flex-col items-center">

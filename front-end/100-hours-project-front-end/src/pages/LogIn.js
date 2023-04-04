@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState('');
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +26,9 @@ const Login = () => {
     if (!res.ok) {
     } else {
       if (json.login) {
+      
        localStorage.setItem("user", json.user.userName);
+       localStorage.setItem( "userId", json.user._id)
         navigate("/profile");
         console.log("You are logged in.");
       } else {
@@ -36,6 +40,7 @@ const Login = () => {
 
   return (
     <>
+    <Navbar />
       <div className="mt-10 sm:mt-0">
         <div className=" flex m-auto flex-col w-85 ">
           <div>

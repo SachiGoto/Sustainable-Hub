@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/person.png";
+import Navbar from "../components/Navbar";
 
-const Home = (props) => {
+
+const Home = () => {
+ 
+ 
   return (
+    <>
+    <Navbar />
+
     <div className="home">
       <div className="heroImage-container">
         <div className="heroContent">
@@ -26,6 +33,7 @@ const Home = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

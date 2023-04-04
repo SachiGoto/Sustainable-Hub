@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
 const Main2 = (props) => {
   let user = null;
   user = localStorage.getItem("user");
+
   const [allData, setData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState();
   const [category, setCategory] = useState([]);
@@ -39,8 +41,8 @@ const Main2 = (props) => {
 
   let userId = null;
 
-  if (props.userId) {
-    userId = props.userId;
+  if (localStorage.getItem('userItem')) {
+    userId = localStorage.getItem('userItem');
   }
 
   let orgs = document.querySelectorAll(".likeBtn");
@@ -95,6 +97,7 @@ const Main2 = (props) => {
 
   return (
     <>
+     <Navbar />
       <div className="categoryContainer">
         {/* <ul  onClick={props.clickHandler}  className="category-ul"> */}
         <ul onClick={onclickCategory} className="category-ul">

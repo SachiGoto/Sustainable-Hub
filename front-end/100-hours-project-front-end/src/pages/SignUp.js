@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react' 
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const SignUp = () =>{
 
@@ -61,7 +62,7 @@ const handleSubmit = async (e) =>{
 
         <>
  
- 
+    <Navbar/>
       <div className="mt-10 sm:mt-0">
         <div className=" flex m-auto flex-col w-85 ">
           <div>
