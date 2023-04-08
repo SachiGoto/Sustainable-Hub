@@ -45,8 +45,23 @@ const Main2 = ({ user }) => {
   }
 
   function onclickCategory(e) {
+
+      console.log(e.target)
+
+      // console.log(document.querySelector(".category-ul").childNodes)
+      let categoryList = document.querySelector(".category-ul").childNodes;
+     for(let i=0; i<categoryList.length; i++){
+            console.log(categoryList[i].dataset.category)
+            if(categoryList[i].dataset.category === e.target.dataset.category){
+                categoryList[i].classList.add('btn-active')
+            }else{
+              categoryList[i].classList.remove('btn-active')
+            }
+     }
+      
       let categoryData = allData.filter(
       (item) => item.Category === e.target.dataset.category
+      
     );
 
     setCategory(categoryData);
@@ -86,11 +101,11 @@ const Main2 = ({ user }) => {
     <>
       <div className="categoryContainer">
         <ul onClick={onclickCategory} className="category-ul">
-          <li data-category="Households">Households</li>
-          <li data-category="Groceries">Grocerries</li>
-          <li data-category="Restaurants">Restaurants</li>
-          <li data-category="Other">Other</li>
-          <li data-category="Resources">Resources</li>
+          <li className="btn btn-focus btn-ghost " data-category="Households">Households</li>
+          <li className="btn btn-ghost " data-category="Groceries">Grocerries</li>
+          <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
+          <li className="btn btn-ghost" data-category="Other">Other</li>
+          <li className="btn btn-ghost"  data-category="Resources">Resources</li>
         </ul>
       </div>
 

@@ -15,12 +15,29 @@
     cursor:pointer;
 }
 
-#root{
+.trashIcon{
+    z-index:100;
+}
+
+/* .App{
   
+    background-image: url('../src/assets/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+ 
+} */
+.App{
+    /* position: fixed; */
     background-color: #cbe3cb;
     border-radius: 755px 190px;
-    width:100vw;
+    width: 100vw;
+    height: 100%;
+    /* overflow-y: scroll; */
+
 }
+
 
 header{
  
@@ -52,10 +69,14 @@ header{
 }
 
 .pages{
+    /* position: relative; */
     min-height:80vh;
     margin: 0 auto;
     width: 90%;
     height: 20vh;
+    /* overflow-y: scroll;
+     z-index:-10 */
+    
 }
 
 

@@ -41,8 +41,8 @@ const Login = ({user, setUser}) => {
 
   return (
     <>
-<div className="mt-10 sm:mt-0">
-        <div className=" flex m-auto flex-col w-85 ">
+<div className="mt-10">
+        <div className="flex m-auto flex-col w-85">
           <div>
             <div className="px-4 sm:px-0">
               <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
@@ -50,7 +50,7 @@ const Login = ({user, setUser}) => {
               </h3>
             </div>
           </div>
-
+          <div className="mt-5">
           <form
             className="form bg-white p-6 rounded-lg shadow-md w-5/6"
             onSubmit={handleSubmit}
@@ -104,6 +104,7 @@ const Login = ({user, setUser}) => {
               </div>
             </div>
           </form>
+          </div>
         </div>
       </div>
    

@@ -14,8 +14,28 @@ const Navbar = ({user, setUser}) =>{
     return (
        
        
+       
         <header>
-            <ul className="navbar">
+         <div className="navbar">
+  <div className="flex-1">
+    <a className="btn btn-ghost normal-case text-xl"><Link to ="/"> Sustainable Hub </Link></a>
+  </div>
+  <div className="flex-none">
+    <ul className="menu menu-horizontal px-1">
+    <li>
+                {user? 
+                <Link className='btn  btn-outline btn-ghost mx-2' to ="/profile"> {user} </Link>
+                :<Link className='btn  btn-outline btn-ghost mx-2' to ="/login"> Log In </Link>}
+                </li>
+
+                {user && <li className="items-center" onClick={logOut}>
+                <button className='btn btn-outline btn-ghost mx-2'>Log Out</button> </li>}
+
+               { !user && <li><Link className='btn  btn-outline btn-ghost mx-2 ' to ="/signup">  Sign Up </Link></li> }
+    </ul>
+  </div>
+</div>
+            {/* <ul className="navbar prose">
                 <li className="navItem"><Link to ="/"> Sustainable Hub </Link></li>
                 <li className="navItem"><Link to ="/main"> </Link></li>
                 <li className="navItem"><Link to ="/main2"> </Link></li>
@@ -31,7 +51,7 @@ const Navbar = ({user, setUser}) =>{
 
                { !user && <li className="navItem"><Link to ="/signup">  Sign Up </Link></li> }
                 
-            </ul>
+            </ul> */}
         </header>
     )
 }

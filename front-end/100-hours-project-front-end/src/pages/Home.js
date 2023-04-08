@@ -23,7 +23,7 @@ const Home = () => {
           </p>
 
           <button
-            className="text-base h-10 px-6 font-semibold rounded-md bg-black text-white"
+            className="btn "
             type="submit"
           >
             <Link to="main2"> Categories </Link>

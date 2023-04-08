@@ -36,7 +36,7 @@ const handleSubmit = async (e) =>{
   return(
 
       <>
-      <div className="mt-10 sm:mt-0">
+      <div className="mt-10">
         <div className=" flex m-auto flex-col w-85 ">
           <div>
             <div className="px-4 sm:px-0">

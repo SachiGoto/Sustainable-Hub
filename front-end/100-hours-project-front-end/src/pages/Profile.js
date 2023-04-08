@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { nanoid } from 'nanoid'
+
 
 
 
@@ -54,7 +54,7 @@ const Profile = ({user, setUser}) => {
 
   
 
-  async function deleteItem(orgId){
+  async function removeItem(orgId){
 
     console.log('delete clicked', orgId)
     
@@ -85,7 +85,6 @@ const Profile = ({user, setUser}) => {
   }
 
 
-  console.log('new fav org ids ', favOrgIds)
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -101,6 +100,7 @@ const Profile = ({user, setUser}) => {
   function imageHundlechange(event) {
     setImage(event.target.files[0]);
   }
+
 
 
 
@@ -204,16 +204,19 @@ const Profile = ({user, setUser}) => {
         </Link>
     
           </div>
-          <div className="basis-1/2 flex flex-col" >
+          <div className="prose basis-1/2 flex flex-col" >
           {allData.map((org)=>(
-      favOrgIds.includes(org._id)&&<div>
+      favOrgIds.includes(org._id)&&<div className="bg-white p-3 m-3 rounded hover:bg-wheat">
 
               
-              <label htmlFor={org._id} className=""> <div className="flex flex-col"><img
+              <label htmlFor={org._id} className=""> <div className="flex flex-col"><img className="border"
                   alt="fav company"
                   src={org.Image}
-                /></div></label>
-
+                /></div>
+  <h2 className="mt-3">{org.Title}</h2>
+  </label>
+  <div onClick={()=>removeItem(org._id)} class="trashIcon"><i className="fa-solid fa-trash-can"></i></div>
+                
                 {/* Put this part before </body> tag */}
                 <input type="checkbox" id={org._id}  className="modal-toggle" />
                 <div className="modal">
@@ -224,8 +227,7 @@ const Profile = ({user, setUser}) => {
                     </div>
                   </div>
                 </div>
-                <h1 className="itemTitle mt-3">{org.Title}</h1>
-                
+              
 </div>
                    
         
