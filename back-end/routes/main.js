@@ -19,8 +19,13 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 // router.post("/signup", homeController.test);
 router.get("/list", homeController.list);
+router.get("/getFavorite", homeController.getFavList);
 router.post("/addList", upload.single("image"), homeController.createList);
+router.post("/addFavorite", upload.single("image"), homeController.createFavList);
 // router.post("/addList", homeController.createList);
 
 router.put("/favoriteOrg", homeController.favoriteOrg);
+router.put("/deleteFavoriteOrg", homeController.deleteFavoriteOrg);
+
+router.delete("/deleteMyFavOrg/:id", homeController.deleteMyFavOrg);
 module.exports = router;

@@ -1,118 +1,157 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-
-
-
-const Profile = ({user, setUser}) => {
+const Profile = ({ user, userId }) => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState();
-  const [category, setCategory] = useState();
+  //const [category, setCategory] = useState();
   const [briefSummary, setBriefSummary] = useState();
   const [summary, setSummary] = useState();
-  const navigate = useNavigate();
-  const [allData, setAllData]=useState([]);
+  // const navigate = useNavigate();
+  const [allData, setAllData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
-  
+  const [myFavList, setMyFavList] = useState([]);
+
   useEffect(() => {
     async function getData() {
-      const allData = await fetch("/list")
+      const allData = await fetch("/list");
       const responseAllData = allData;
       const resJsonData = await responseAllData.json();
-      setAllData(resJsonData)
+      setAllData(resJsonData);
     }
     getData();
-  }, []);
 
-
-  useEffect(()=>{
-      async function getFavData(){
-      const getFavOrg = await fetch("/login");
-      const response =  getFavOrg;
-      const resJson =  await response.json();
-
-   // get a list of favorite organizations from user's account
-   setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
-
-  //  // get all organization ids from data
-   const allOrgIds = [];
-   for (const data in resJson) {
-     allOrgIds.push(data._id);
-   }
-
-  //  console.log('favorg ', allOrgIds)
+    async function getFavData() {
+      const allData = await fetch("/getFavorite");
+      const responseAllData = allData;
+      const resJsonData = await responseAllData.json();
+     
+      setMyFavList(resJsonData);
+      //setAllData(resJsonData)
     }
-    
-
-    getFavData()
-
-
-  },[])
-
+    getFavData();
+  }, []);
 
   
 
-  async function removeItem(orgId){
+  useEffect(() => {
+    async function getFavData() {
+      const getFavOrg = await fetch("/login");
+      const response = getFavOrg;
+      const resJson = await response.json();
 
-    console.log('delete clicked', orgId)
-    
-   const newFavOrgIds = [...favOrgIds]
-   newFavOrgIds.splice(favOrgIds.indexOf(orgId),1)
-   setFavOrgIds(newFavOrgIds)
+      // get a list of favorite organizations from user's account
+      setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
 
-   try {
-    const res = await fetch("/favoriteOrg", {
-      method: "PUT",
-      body: JSON.stringify({newFavOrgIds }),
-      headers: { 
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
+      //  // get all organization ids from data
+      const allOrgIds = [];
+      for (const data in resJson) {
+        allOrgIds.push(data._id);
+      }
     }
-    const data = await res.json();
-    // do something with the data
-  } catch (error) {
-    console.error("Error:", error);
+
+    getFavData();
+  }, []);
+
+  async function removeItem(orgId) {
+    let newFavOrgIds = [...favOrgIds];
+    newFavOrgIds.splice(favOrgIds.indexOf(orgId), 1);
+    setFavOrgIds(newFavOrgIds);
+    let updateFavOrg = { userId, orgId };
+
+    try {
+      const res = await fetch("/deleteFavoriteOrg", {
+        method: "PUT",
+        body: JSON.stringify({ updateFavOrg }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      console.log("data returned is ", data);
+      // do something with the data
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
- 
+  async function removeFavItem(favId) {
+    // let newFavOrgIds = [...favOrgIds];
+    // newFavOrgIds.splice(favOrgIds.indexOf(favId), 1);
+    // setFavOrgIds(newFavOrgIds);
+    // let updateFavOrg = { favId };
 
+    try {
+      const res = await fetch("/deleteMyFavOrg/" + favId, {
+        method: "DELETE",
+      });
 
+      const data = await res.json();
+      console.log("data returned is ", data);
+      // do something with the data
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    async function getFavData() {
+      const allData = await fetch("/getFavorite");
+      const responseAllData = allData;
+      const resJsonData = await responseAllData.json();
+      setMyFavList(resJsonData);
+      //setAllData(resJsonData)
+    }
+    getFavData();
   }
+  
 
-
-
-  function handleSubmit(event) {
+  async function  handleSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData();
+    formData.append("User", userId);
     formData.append("image", image);
     formData.append("Title", title);
-    formData.append("Category", category);
     formData.append("BriefSummary", briefSummary);
     formData.append("Summary", summary);
+
+    try {
+      const addFav = await fetch("/addFavorite", {
+        method: "POST",
+        body: formData,
+      });
+
+     
+        const myFavOrg = await fetch("/getFavorite");
+        const responseAllData = myFavOrg;
+        const resJsonData = await responseAllData.json();
+        setMyFavList(resJsonData);
+        //setAllData(resJsonData)
+  
+
+
+    } catch (error) {
+      console.error(error);
+    }
+
+  
+
+    
+   
+
   }
 
   function imageHundlechange(event) {
     setImage(event.target.files[0]);
   }
 
-
-
-
   return (
     <>
-
       <div className="mt-4 md:mt-8">
         <div className="flex flex-col md:flex-row">
           <div className="prose basis-1/2 flex flex-col items-center">
             <div>
-              <p className='my-3'> Hello, {user} ! </p>
-
+              <p className="my-3"> Hello, {user} ! </p>
             </div>
             <div>
               <div className="px-4 sm:px-0">
@@ -156,7 +195,7 @@ const Profile = ({user, setUser}) => {
                     className=" mb-5"
                   />
                 </div>
-              
+
                 <div className="mb-4">
                   <label
                     htmlFor="briefSummary"
@@ -197,48 +236,97 @@ const Profile = ({user, setUser}) => {
                 </button>
               </form>
             </div>
-      
-        <Link to="/main2">       
-        <button className="my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
-        type="submit">Categories</button>
-        </Link>
-    
-          </div>
-          <div className="prose basis-1/2 flex flex-col" >
-          {allData.map((org)=>(
-      favOrgIds.includes(org._id)&&<div className="bg-white p-3 m-3 rounded hover:bg-wheat">
 
-              
-              <label htmlFor={org._id} className=""> <div className="flex flex-col"><img className="border"
-                  alt="fav company"
-                  src={org.Image}
-                /></div>
-  <h2 className="mt-3">{org.Title}</h2>
-  </label>
-  <div onClick={()=>removeItem(org._id)} class="trashIcon"><i className="fa-solid fa-trash-can"></i></div>
-                
-                {/* Put this part before </body> tag */}
-                <input type="checkbox" id={org._id}  className="modal-toggle" />
-                <div className="modal">
-                  <div className="modal-box">
-                    <p className="py-4">{org.Summary}</p>
-                    <div className="modal-action">
-                      <label htmlFor={org._id} className="btn">close!</label>
+            <Link to="/main2">
+              <button
+                className="my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
+                type="submit"
+              >
+                Categories
+              </button>
+            </Link>
+          </div>
+          <div className="prose basis-1/2 flex flex-col">
+            {allData.map(
+              (org) =>
+                favOrgIds.includes(org._id) && (
+                  <div className="bg-white p-3 m-3 rounded hover:bg-wheat">
+                    <label htmlFor={org._id} className="">
+                      {" "}
+                      <div className="flex flex-col">
+                        <img
+                          className="border"
+                          alt="fav company"
+                          src={org.Image}
+                        />
+                      </div>
+                      <h2 className="mt-3">{org.Title}</h2>
+                    </label>
+                    <div onClick={() => removeItem(org._id)} class="trashIcon">
+                      <i className="fa-solid fa-trash-can"></i>
+                    </div>
+
+                    {/* Put this part before </body> tag */}
+                    <input
+                      type="checkbox"
+                      id={org._id}
+                      className="modal-toggle"
+                    />
+                    <div className="modal">
+                      <div className="modal-box">
+                        <p className="py-4">{org.Summary}</p>
+                        <div className="modal-action">
+                          <label htmlFor={org._id} className="btn">
+                            close!
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              
-</div>
-                   
-        
-    ))}
-    </div>  
+                )
+            )}
+
+            {myFavList.map(
+              (fav) =>
+              (
+                  <div className="bg-white p-3 m-3 rounded hover:bg-wheat">
+                    <label htmlFor={fav._id} className="">
+                      {" "}
+                      <div className="flex flex-col">
+                        <img
+                          className="border"
+                          alt="fav company"
+                          src={fav.Image}
+                        />
+                      </div>
+                      <h2 className="mt-3">{fav.Title}</h2>
+                    </label>
+                    <div onClick={() => removeFavItem(fav._id)} class="trashIcon">
+                      <i className="fa-solid fa-trash-can"></i>
+                    </div>
+
+                    {/* Put this part before </body> tag */}
+                    <input
+                      type="checkbox"
+                      id={fav._id}
+                      className="modal-toggle"
+                    />
+                    <div className="modal">
+                      <div className="modal-box">
+                        <p className="py-4">{fav.Summary}</p>
+                        <div className="modal-action">
+                          <label htmlFor={fav._id} className="btn">
+                            close!
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+            )}
+          </div>
         </div>
       </div>
-
-   
-
-     
     </>
   );
 };

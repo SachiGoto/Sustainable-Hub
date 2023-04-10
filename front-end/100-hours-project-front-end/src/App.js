@@ -12,13 +12,19 @@ import Profile from "./pages/Profile";
 function App() {
   const [allData, setAllData] = useState(null);
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
       const checkLogin = async () => {
       const response = await fetch("/login");
       const json = await response.json();
       setUser(json.user.userName);
+      setUserId(json.user._id)
+
+    
     };
+
+    console.log(userId, user)
 
     const fetchAllData = async () => {
       const response = await fetch("/list");
@@ -43,11 +49,11 @@ function App() {
             <Route path="signup" element={<SignUp user={user} />} />
             <Route
               path="login"
-              element={<LogIn user={user} setUser={setUser} />}
+              element={<LogIn user={user} setUser={setUser} userId={userId} setUserId={setUserId} />}
             />
             <Route
               path="profile"
-              element={<Profile user={user} setUser={setUser} />}
+              element={<Profile user={user} userId={userId} />}
             />
           </Routes>
         </div>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const Login = ({user, setUser}) => {
+const Login = ({user, setUser, userId, setUserId}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +27,7 @@ const Login = ({user, setUser}) => {
   } else {
     if (json.login) {
     setUser(json.user.userName)
+    setUserId(json.user._id)
      localStorage.setItem("user", json.user.userName);
      localStorage.setItem( "userId", json.user._id)
       navigate("/profile");

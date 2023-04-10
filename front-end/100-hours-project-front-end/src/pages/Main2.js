@@ -58,13 +58,21 @@ const Main2 = ({ user }) => {
               categoryList[i].classList.remove('btn-active')
             }
      }
+      if(e.target.dataset.category === 'All'){
+        let categoryData
+        setCategory(categoryData);
+      }else{
+        let categoryData = allData.filter(
+          (item) => item.Category === e.target.dataset.category
+         
+          );
+          setCategory(categoryData);
+      }
+     
       
-      let categoryData = allData.filter(
-      (item) => item.Category === e.target.dataset.category
-      
-    );
+ 
 
-    setCategory(categoryData);
+   
   }
 
   async function isLike(favOrg) {
@@ -106,6 +114,7 @@ const Main2 = ({ user }) => {
           <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
           <li className="btn btn-ghost" data-category="Other">Other</li>
           <li className="btn btn-ghost"  data-category="Resources">Resources</li>
+          <li className="btn btn-ghost"  data-category="All">All</li>
         </ul>
       </div>
 

@@ -15,11 +15,8 @@ const Home = () => {
       <div className="heroImage-container">
         <div className="heroContent">
           <p className="text-base">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English.
+          Sustainable Hub is designed to help people live a more sustainable lifestyle by providing practical suggestions for sustainable activities in their day-to-day. Providing tips on sustainable living accessible to everyone. Click the category button to see a list of local companies in Vanocuver,Canada that offer sustainable products and services! 
+          
           </p>
 
           <button
