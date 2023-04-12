@@ -13,6 +13,7 @@ const Profile = ({ user, userId }) => {
   const [allData, setAllData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
   const [myFavList, setMyFavList] = useState([]);
+  const [btnShow, setBtnShow] = useState(false)
 
   useEffect(() => {
     async function getData() {
@@ -141,6 +142,11 @@ const Profile = ({ user, userId }) => {
 
   }
 
+  function display(){
+    setBtnShow(prev=> prev = !prev)
+    console.log(btnShow)
+  }
+
   function imageHundlechange(event) {
     setImage(event.target.files[0]);
   }
@@ -154,13 +160,24 @@ const Profile = ({ user, userId }) => {
               <p className="my-3"> Hello, {user} ! </p>
             </div>
             <div>
-              <div className="px-4 sm:px-0">
+              <div className="px-4 sm:px-0 flex flex-col items-center">
                 <h3 className="my-3 text-base font-semibold leading-6 text-gray-900 text-center">
                   Add your favorite sustainable place
                 </h3>
-              </div>
+<div className='flex '>
+                <button className="my-2 h-10 px-6 mx-2 font-semibold rounded-md btn-accent"  onClick={display}>Add</button> 
 
-              <form
+                <Link to="/main2">
+              <button
+                className=" mx-2 my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
+                type="submit"
+              >
+                Categories
+              </button>
+            </Link>
+              </div>
+</div>
+              {btnShow &&<form
                 className="form bg-white p-6 rounded-lg shadow-md w-5/6"
                 onSubmit={handleSubmit}
               >
@@ -235,16 +252,10 @@ const Profile = ({ user, userId }) => {
                   Submit
                 </button>
               </form>
+              }
             </div>
 
-            <Link to="/main2">
-              <button
-                className="my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
-                type="submit"
-              >
-                Categories
-              </button>
-            </Link>
+           
           </div>
           <div className="prose basis-1/2 flex flex-col">
             {allData.map(

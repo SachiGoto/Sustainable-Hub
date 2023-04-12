@@ -60,7 +60,7 @@ const Main2 = ({ user }) => {
      }
       if(e.target.dataset.category === 'All'){
         let categoryData
-        setCategory(categoryData);
+        setCategory(allData);
       }else{
         let categoryData = allData.filter(
           (item) => item.Category === e.target.dataset.category
