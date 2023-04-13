@@ -132,7 +132,7 @@ module.exports = {
     try {
       // const user = await FavList.find({ user: req.user.id });
       console.log('req.user is ' , req.user._id)
-      const favorites = await FavList.find({ User: req.user._id }).populate('favlists');
+      const favorites = await FavList.find({ User: req.user._id }).sort({createdAt: "desc"}).populate('favlists');
       console.log(favorites);
       
       res.json(favorites)

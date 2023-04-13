@@ -19,7 +19,7 @@ module.exports = {
   getFavorites: async (req, res) => {
     try {
       const favorites = await Favorites.find({ user: req.user.id });
-      const recipe = await Favorite.find({ user: req.user.id }).populate('recipe');
+      const recipe = await Favorite.find({ user: req.user.id }).sort({createdAt: "desc"}).populate('recipe');
       console.log(Favorite);
       
       res.render("favorites.ejs", { recipes: recipe, user: req.user });

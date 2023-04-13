@@ -10,7 +10,11 @@
     font-family: 'Oxygen', sans-serif;
     color: rgb(52 50 50);
 }
-
+.imageContainer{
+    width:300px;
+    height:250px;
+  
+}
 .category-ul li{
     cursor:pointer;
 }
@@ -22,6 +26,7 @@
 .home-container{
     display:flex;
     width:80%;
+    max-width:900px;
     margin:10% auto 0 auto;
     justify-content:center;
 }
@@ -29,6 +34,15 @@
 @media only screen and (max-width: 600px) {
     .home-container{
         flex-direction:column;
+    
+    }
+
+    .navBtn{
+        font-size:12px;
+        padding:3% 8%;
+      
+     
+     
     }
   }
 
@@ -57,8 +71,14 @@
 
 @media only screen and (min-width: 600px) {
 
+    .imageContainer{
+        width:450px;
+        height:300px;
+      
+    }
+
     .home-container{
-        justify-content:start;
+        justify-content:center;
     }
 
     .home-image{
@@ -74,6 +94,17 @@
     .home-image img{
 width:100%;
     }
+  }
+
+
+  @media only screen and (min-width: 1000px){
+    .imageContainer{
+        width:650px;
+        height:400px;
+      
+    }
+
+
   }
 
 /* .App{
