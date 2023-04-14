@@ -2,93 +2,56 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-// import { useNavigate } from "react-router-dom";
-
 const Profile = ({ user, userId }) => {
   const [image, setImage] = useState();
   const [title, setTitle] = useState();
-  //const [category, setCategory] = useState();
   const [briefSummary, setBriefSummary] = useState();
   const [summary, setSummary] = useState();
-  // const navigate = useNavigate();
   const [allData, setAllData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
   const [myFavList, setMyFavList] = useState([]);
   const [btnShow, setBtnShow] = useState(false);
   const [error, setErrorMessage] = useState(false);
-  const [empty, setEmpty] = useState({allData:false, myFavList:false});
-
+  const [empty, setEmpty] = useState({ allData: false, myFavList: false });
 
   useEffect(() => {
-    async function getData() {
-      const allData = await fetch("/list");
-      const responseAllData = allData;
-      const resJsonData = await responseAllData.json();
-      setAllData(resJsonData);
-    }
-    getData();
+    fetch("/list")
+      .then((responseAllData) => responseAllData.json())
+      .then((allData) => {
+        setAllData(allData);
+      });
 
-    async function getFavData() {
-      const allData = await fetch("/getFavorite");
-      const responseAllData = allData;
-      const resJsonData = await responseAllData.json();
-
-      setMyFavList(resJsonData);
-
-      console.log('getFaveData ' , resJsonData.length)
-
-      setEmpty((prev) => {
-            
-        return resJsonData.length === 0?{
-          ...prev,
-          myFavList: true
-        }: {
-          ...prev,
-          myFavList:false
-
-        }
-     
-
-  })
-      
-      //setAllData(resJsonData)
-    }
-    getFavData();
+    fetch("/getFavorite")
+      .then((allData) => allData.json())
+      .then((resJsonData) => {
+        setMyFavList(resJsonData);
+        setEmpty((prev) => { return {
+            ...prev,
+            myFavList: resJsonData.length === 0 ? true : false,
+          };
+        });
+      });
   }, []);
 
+
   useEffect(() => {
-    async function getFavData() {
-      const getFavOrg = await fetch("/login");
-      const response = getFavOrg;
-      const resJson = await response.json();
 
-      // get a list of favorite organizations from user's account
-      setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
-
-      //  // get all organization ids from data
-      const allOrgIds = [];
-      for (const data in resJson) {
-        allOrgIds.push(data._id);
-      }
-
-  console.log('favOrg ', resJson.user.favOrg.length)
-      setEmpty((prev) => {
-            
-        return resJson.user.favOrg.length === 0?{
-          ...prev,
-          allData: true
-        }: {
-          ...prev,
-          allData:false
-
+      fetch("/login")
+      .then((response)=> response.json())
+      .then((resJson)=> {
+        setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id))
+        const allOrgIds = [];
+        for (const data in resJson) {
+          allOrgIds.push(data._id);
         }
-       
+  
+        setEmpty((prev) => {
+          return {
+                ...prev,
+                allData: resJson.user.favOrg.length === 0 ? true : false
+              }
+        });
       })
-
-      
-    }
-
-    getFavData();
   }, []);
 
   async function removeItem(orgId) {
@@ -97,7 +60,6 @@ const Profile = ({ user, userId }) => {
     setFavOrgIds(newFavOrgIds);
     let updateFavOrg = { userId, orgId };
     try {
-     
       const res = await fetch("/deleteFavoriteOrg", {
         method: "PUT",
         body: JSON.stringify({ updateFavOrg }),
@@ -105,34 +67,30 @@ const Profile = ({ user, userId }) => {
           "Content-Type": "application/json",
         },
       });
-  
+
       const data = await res.json();
 
-      console.log('data is ', data)
-      
-        setEmpty((prev) => {
-            
-              return data.length === 0?{
-                ...prev,
-                allData: true
-              }: {
-                ...prev,
-                allData:false
-      
-              }
-           
+      console.log("data is ", data);
 
-        })
-      
+      setEmpty((prev) => {
+        return data.length === 0
+          ? {
+              ...prev,
+              allData: true,
+            }
+          : {
+              ...prev,
+              allData: false,
+            };
+      });
+
       console.log("data returned is ", data);
-     
+
       // do something with the data
     } catch (error) {
       console.error("Error:", error);
     }
   }
-  
-
 
   async function removeFavItem(favId) {
     // let newFavOrgIds = [...favOrgIds];
@@ -149,18 +107,17 @@ const Profile = ({ user, userId }) => {
       console.log("data returned is ", data);
 
       setEmpty((prev) => {
-            
-        return data.length === 0?{
-          ...prev,
-          myFavList: true
-        }:{
-          ...prev,
-          myFavList:false
-        }
-    
-
-  })
-  console.log(empty.allData , empty.myFavList)
+        return data.length === 0
+          ? {
+              ...prev,
+              myFavList: true,
+            }
+          : {
+              ...prev,
+              myFavList: false,
+            };
+      });
+      console.log(empty.allData, empty.myFavList);
       // do something with the data
     } catch (error) {
       console.error("Error:", error);
@@ -173,19 +130,18 @@ const Profile = ({ user, userId }) => {
       setMyFavList(resJsonData);
 
       setEmpty((prev) => {
-            
-        return resJsonData.length === 0?{
-          ...prev,
-          myFavList: true
-        }:{
-          ...prev,
-          myFavList:false
-        }
-    
+        return resJsonData.length === 0
+          ? {
+              ...prev,
+              myFavList: true,
+            }
+          : {
+              ...prev,
+              myFavList: false,
+            };
+      });
 
-  })
-
-  console.log(empty.allData , empty.myFavList)
+      console.log(empty.allData, empty.myFavList);
       //setAllData(resJsonData)
     }
     getFavData();
@@ -201,39 +157,37 @@ const Profile = ({ user, userId }) => {
     formData.append("BriefSummary", briefSummary);
     formData.append("Summary", summary);
 
-    console.log('form data title ' , summary === undefined)
+    console.log("form data title ", summary === undefined);
 
-  if(title  === undefined || briefSummary=== undefined || summary === undefined|| image === undefined ){
-    setErrorMessage(true)
-    console.log('please fill out all the fields')
-  }else{
-    try {
-      const addFav = await fetch("/addFavorite", {
-        method: "POST",
-        body: formData,
-      });
+    if (
+      title === undefined ||
+      briefSummary === undefined ||
+      summary === undefined ||
+      image === undefined
+    ) {
+      setErrorMessage(true);
+      console.log("please fill out all the fields");
+    } else {
+      try {
+        const addFav = await fetch("/addFavorite", {
+          method: "POST",
+          body: formData,
+        });
 
-      const myFavOrg = await fetch("/getFavorite");
-      const responseAllData = myFavOrg;
-      const resJsonData = await responseAllData.json();
-      setMyFavList(resJsonData);
-      setErrorMessage(false)
+        const myFavOrg = await fetch("/getFavorite");
+        const responseAllData = myFavOrg;
+        const resJsonData = await responseAllData.json();
+        setMyFavList(resJsonData);
+        setErrorMessage(false);
 
-      setBtnShow(false)
-      
-      //setAllData(resJsonData)
-    } catch (error) {
-      setBtnShow(true)
-      console.error('error ' , error);
-    
+        setBtnShow(false);
+
+        //setAllData(resJsonData)
+      } catch (error) {
+        setBtnShow(true);
+        console.error("error ", error);
+      }
     }
-
-
-  }
-   
-   
-
-   
   }
 
   function display() {
@@ -245,16 +199,11 @@ const Profile = ({ user, userId }) => {
     setImage(event.target.files[0]);
   }
 
- 
-
   return (
     <>
       <div className="mt-4 md:mt-8 ">
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center w-4/5">
-            <div>
-              <p className="my-3"> Hello, {user} ! </p>
-            </div>
             <div>
               <div className="px-4 sm:px-0 flex flex-col items-center ">
                 <h3 className="my-3 text-base font-semibold leading-6 text-gray-900 text-center">
@@ -353,21 +302,23 @@ const Profile = ({ user, userId }) => {
                   >
                     Submit
                   </button>
-                  {error && <div className='text-center mt-2 errorMessage text-red-500'> * Fill out all the input fields</div>}
+                  {error && (
+                    <div className="text-center mt-2 errorMessage text-red-500">
+                      {" "}
+                      * Fill out all the input fields
+                    </div>
+                  )}
                 </form>
-
-               
               )}
-           
             </div>
           </div>
-          <div className="flex flex-col">
-            {allData.map(
+          
+              <div className="flex flex-col orgList overflow-scroll">
+                {allData.map(
               (org) =>
                 favOrgIds.includes(org._id) && (
                   <div className="bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 p-4 hover:drop-shadow-xl">
                     <label htmlFor={org._id} className="">
-                      {" "}
                       <div className="imageContainer">
                         <img
                           className="border"
@@ -379,10 +330,8 @@ const Profile = ({ user, userId }) => {
                     </label>
                     <div onClick={() => removeItem(org._id)} class="trashIcon">
                       <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
-
                     </div>
 
-                    {/* Put this part before </body> tag */}
                     <input
                       type="checkbox"
                       id={org._id}
@@ -400,14 +349,18 @@ const Profile = ({ user, userId }) => {
                     </div>
                   </div>
                 )
-            )}
+                )}
 
             {myFavList.map((fav) => (
               <div className="bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 p-4 hover:drop-shadow-xl">
                 <label htmlFor={fav._id} className="flex flex-col">
                   {" "}
                   <div className="imageContainer max-h-700px h-400px">
-                    <img className="border h-full object-cover w-full mt-0 mb-0" alt="fav company" src={fav.Image} />
+                    <img
+                      className="border h-full object-cover w-full mt-0 mb-0"
+                      alt="fav company"
+                      src={fav.Image}
+                    />
                   </div>
                   <h2 className="mt-3">{fav.Title}</h2>
                 </label>
@@ -431,8 +384,11 @@ const Profile = ({ user, userId }) => {
             ))}
           </div>
         </div>
+   
 
-        {empty.allData && empty.myFavList && <div className="text-center mt-10">Your list is empty</div>}
+        {empty.allData && empty.myFavList && (
+          <div className="text-center mt-10">Your list is empty</div>
+        )}
       </div>
     </>
   );

@@ -44,7 +44,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="main" element={<Main categoryData={allData} />} />
-            <Route path="main2" element={<Main2 user={user} />} />
+            <Route path="main2" element={<Main2 user={user} userId={userId} />} />
             <Route path="admin" element={<Admin />} />
             <Route path="signup" element={<SignUp user={user} />} />
             <Route

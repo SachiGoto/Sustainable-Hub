@@ -7,8 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        wheat: '#F5DEB3',
-        'wheat-dark': '#D8B08C',
+       
       },
     },
   },

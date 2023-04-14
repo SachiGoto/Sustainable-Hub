@@ -10,6 +10,8 @@
     font-family: 'Oxygen', sans-serif;
     color: rgb(52 50 50);
 }
+
+
 .imageContainer{
     width:300px;
     height:250px;
@@ -121,7 +123,10 @@ width:100%;
     background-color: #cbe3cb;
     border-radius: 755px 190px;
     width: 100vw;
-    height: 100%;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+  
     /* overflow-y: scroll; */
 
 }
@@ -241,13 +246,11 @@ header{
 
 }
 
-.item p{
-    padding-top:10%;
-}
+
 
 .itemImage{
    width: 70%;
-   height:70%;
+   height:30vh;
 
 }
 
@@ -257,6 +260,10 @@ header{
      object-fit:cover;
      border-radius: 15px;
 
+}
+
+.orgList{
+    height:70vh;
 }
 
 .item .itemContent{
@@ -278,6 +285,12 @@ header{
 .fa-heart{
     padding-left:5%;
 }
+
+.fa-heart:hover {
+    color:red !important;
+
+}
+
 @media only screen and (min-width: 689px) {
     .item {
         flex-direction:row;
