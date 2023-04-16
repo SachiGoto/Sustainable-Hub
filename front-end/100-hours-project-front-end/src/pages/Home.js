@@ -15,10 +15,10 @@ const Home = () => {
     <div>
       <div className="home-container ">
       <div className="home-text">
-          <h3 className="text-base text-l">
+          <p className="text-base text-l sm:leading-normal md:leading-loose font-semibold">
           Sustainable Hub is designed to help people live a more sustainable lifestyle by providing practical suggestions for sustainable activities in their day-to-day. Providing tips on sustainable living accessible to everyone. Click the category button to see a list of local companies in Vanocuver,Canada that offer sustainable products and services! 
           
-          </h3>
+          </p>
 
           <button
             className="btn my-7 "

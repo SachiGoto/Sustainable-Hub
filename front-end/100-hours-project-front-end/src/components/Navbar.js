@@ -18,20 +18,20 @@ const Navbar = ({user, setUser}) =>{
         <header>
          <div className="navbar">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl"><Link to ="/"> Sustainable Hub </Link></a>
+    <a className="btn btn-ghost normal-case text-lg"><Link to ="/"> Sustainable Hub </Link></a>
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
     <li>
                 {user? 
-                <Link className='btn  btn-outline btn-ghost mx-2' to ="/profile"> {user} </Link>
-                :<Link className='btn  btn-outline btn-ghost mx-2' to ="/login"> Log In </Link>}
+                <Link className='navBtn btn  btn-outline btn-ghost mx-2' to ="/profile"> {user} </Link>
+                :<Link className='navBtn btn  btn-outline btn-ghost mx-2' to ="/login"> Log In </Link>}
                 </li>
 
                 {user && <li className="items-center" onClick={logOut}>
-                <button className='btn btn-outline btn-ghost mx-2'>Log Out</button> </li>}
+                <button className='navBtn btn btn-outline btn-ghost mx-2'>Log Out</button> </li>}
 
-               { !user && <li><Link className='btn  btn-outline btn-ghost mx-2 ' to ="/signup">  Sign Up </Link></li> }
+               { !user && <li><Link className='navBtn btn  btn-outline btn-ghost mx-2 ' to ="/signup">  Sign Up </Link></li> }
     </ul>
   </div>
 </div>
