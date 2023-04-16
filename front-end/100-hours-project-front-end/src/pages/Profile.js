@@ -15,67 +15,43 @@ const Profile = ({ user, userId }) => {
   const [empty, setEmpty] = useState({ allData: false, myFavList: false });
 
   useEffect(() => {
-    async function getData() {
-      const allData = await fetch("/list");
-      const responseAllData = allData;
-      const resJsonData = await responseAllData.json();
-      setAllData(resJsonData);
-    }
-    getData();
-
-    async function getFavData() {
-      const allData = await fetch("/getFavorite");
-      const responseAllData = allData;
-      const resJsonData = await responseAllData.json();
-
-      setMyFavList(resJsonData);
-
-      setEmpty((prev) => {
-        return resJsonData.length === 0
-          ? {
-              ...prev,
-              myFavList: true,
-            }
-          : {
-              ...prev,
-              myFavList: false,
-            };
+    fetch("/list")
+      .then((responseAllData) => responseAllData.json())
+      .then((allData) => {
+        setAllData(allData);
       });
 
-    }
-    getFavData();
+    fetch("/getFavorite")
+      .then((allData) => allData.json())
+      .then((resJsonData) => {
+        setMyFavList(resJsonData);
+        setEmpty((prev) => { return {
+            ...prev,
+            myFavList: resJsonData.length === 0 ? true : false,
+          };
+        });
+      });
   }, []);
 
+
   useEffect(() => {
-    async function getFavData() {
-      const getFavOrg = await fetch("/login");
-      const response = getFavOrg;
-      const resJson = await response.json();
 
-      // get a list of favorite organizations from user's account
-      setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
-
-      //  // get all organization ids from data
-      const allOrgIds = [];
-      for (const data in resJson) {
-        allOrgIds.push(data._id);
-      }
-
-
-      setEmpty((prev) => {
-        return resJson.user.favOrg.length === 0
-          ? {
-              ...prev,
-              allData: true,
-            }
-          : {
-              ...prev,
-              allData: false,
-            };
-      });
-    }
-
-    getFavData();
+      fetch("/login")
+      .then((response)=> response.json())
+      .then((resJson)=> {
+        setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id))
+        const allOrgIds = [];
+        for (const data in resJson) {
+          allOrgIds.push(data._id);
+        }
+  
+        setEmpty((prev) => {
+          return {
+                ...prev,
+                allData: resJson.user.favOrg.length === 0 ? true : false
+              }
+        });
+      })
   }, []);
 
   async function removeItem(orgId) {
@@ -159,7 +135,6 @@ const Profile = ({ user, userId }) => {
       });
 
       console.log(empty.allData, empty.myFavList);
-
     }
     getFavData();
   }
@@ -357,7 +332,7 @@ const Profile = ({ user, userId }) => {
                     {/* Put this part before </body> tag */}
                   </div>
                 )
-            )}
+                )}
 
             {allData.map(
               (org) =>
