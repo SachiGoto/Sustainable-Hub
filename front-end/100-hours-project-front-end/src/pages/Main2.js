@@ -86,7 +86,18 @@ const Main2 = ({ user, userId }) => {
 
   return (
     <>
-      <div className="categoryContainer">
+    <div className="dropdown  ml-5 mt-3  sm:block md:hidden">
+  <label tabIndex={0} className="btn btn-base m-1">Categories</label>
+  <ul tabIndex={0} className="dropdown-content  menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
+    <li  className="btn btn-focus btn-ghost " data-category="Households">Households</li>
+    <li className="btn btn-ghost " data-category="Groceries">Grocerries</li>
+    <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
+    <li className="btn btn-ghost" data-category="Other">Other</li>
+    <li className="btn btn-ghost" data-category="Resources">Resources</li>
+    <li className="btn btn-ghost" data-category="All">All</li>
+  </ul>
+</div>
+      <div className="categoryContainer hidden sm:hidden md:block">
         <ul onClick={onclickCategory} className="category-ul">
           <li className="btn btn-focus btn-ghost " data-category="Households">
             Households
