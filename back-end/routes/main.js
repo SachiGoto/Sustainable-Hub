@@ -27,5 +27,6 @@ router.post("/addFavorite", upload.single("image"), homeController.createFavList
 router.put("/favoriteOrg", homeController.favoriteOrg);
 router.put("/deleteFavoriteOrg", homeController.deleteFavoriteOrg);
 
+// private fav list
 router.delete("/deleteMyFavOrg/:id", homeController.deleteMyFavOrg);
 module.exports = router;

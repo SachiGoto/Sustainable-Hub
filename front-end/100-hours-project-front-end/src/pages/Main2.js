@@ -99,22 +99,22 @@ const Main2 = ({ user, userId }) => {
 </div>
       <div className="categoryContainer hidden sm:hidden md:block">
         <ul onClick={onclickCategory} className="category-ul">
-          <li className="btn btn-focus btn-ghost " data-category="Households">
+          <li key={'Households'} className="btn btn-focus btn-ghost " data-category="Households">
             Households
           </li>
-          <li className="btn btn-ghost " data-category="Groceries">
+          <li  key={'Groceries'} className="btn btn-ghost " data-category="Groceries">
             Grocerries
           </li>
-          <li className="btn btn-ghost " data-category="Restaurants">
+          <li key={'Restaurants'} className="btn btn-ghost " data-category="Restaurants">
             Restaurants
           </li>
-          <li className="btn btn-ghost" data-category="Other">
+          <li key={'Other'} className="btn btn-ghost" data-category="Other">
             Other
           </li>
-          <li className="btn btn-ghost" data-category="Resources">
+          <li key={'Resources'} className="btn btn-ghost" data-category="Resources">
             Resources
           </li>
-          <li className="btn btn-ghost" data-category="All">
+          <li key={'All'}  className="btn btn-ghost" data-category="All">
             All
           </li>
         </ul>

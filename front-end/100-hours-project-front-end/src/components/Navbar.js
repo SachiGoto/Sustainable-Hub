@@ -13,9 +13,9 @@ const Navbar = ({ user, setUser }) => {
     <header>
       <div className="navbar">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-lg">
+          <button className="btn btn-ghost normal-case text-lg">
             <Link to="/"> Sustainable Hub </Link>
-          </a>
+          </button>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">

@@ -9,6 +9,7 @@ module.exports = {
 
   deleteMyFavOrg:async(req,res)=>{
     try {
+      console.log('req.params.id is ' , req.params.id)
       // Find post by id
       let myFavOrg = await FavList.findById({ _id: req.params.id });
       // Delete image from cloudinary
@@ -16,10 +17,11 @@ module.exports = {
       // Delete post from db
       await FavList.remove({ _id: req.params.id });
       console.log("Deleted Recipe");
-      res.json('item is removed')
+      res.json('item removed')
       // res.redirect("/profile");
     } catch (err) {
-      res.redirect("/profile");
+      res.json(err)
+      // res.redirect("/profile");
     }
 
 
@@ -41,7 +43,7 @@ module.exports = {
           }
         );
  
-      
+      res.json('item deleted')
     } catch (err) {
       console.log(err);
     }
