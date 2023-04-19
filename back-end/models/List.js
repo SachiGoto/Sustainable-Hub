@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const ListSchema = new mongoose.Schema({
   Title: {
     type: String,
-    // required: true,
+    required: true,
   
   },
  
   Image: {
     type: String,
-    // required: true,
+    required: true,
  
   },
   cloudinaryId:{
@@ -17,16 +17,16 @@ const ListSchema = new mongoose.Schema({
   },
   Category: {
     type: String,
-    // required: true,
+    required: true,
    
   },
-    BriefSummary:{
+    WebsiteLink:{
         type: String,
-        // required: true,
+        required: true,
       
   },Summary: {
         type: String,
-        // required: true,
+        required: true,
       
   }, 
   createdAt: {

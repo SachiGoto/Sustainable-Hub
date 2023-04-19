@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const cloudinary = require("../middleware/cloudinary");
 const Lists = require("../models/List");
-const FavList = require("../models/FavList");
+const FavList = require("../models/MyFavs");
 const User = require("../models/User");
 
 
@@ -98,7 +98,7 @@ module.exports = {
         Image: result.secure_url,
         cloudinaryId: result.public_id,
         Category: req.body.Category,
-        BriefSummary: req.body.BriefSummary,
+        WebsiteLink: req.body.WebsiteLink,
         Summary: req.body.Summary,
       });
 
@@ -117,7 +117,7 @@ module.exports = {
         Title: req.body.Title,
         Image: result.secure_url,
         cloudinaryId: result.public_id,
-        BriefSummary: req.body.BriefSummary,
+        WebsiteLink: req.body.WebsiteLink,
         Summary: req.body.Summary,
         User:req.body.User,
       });

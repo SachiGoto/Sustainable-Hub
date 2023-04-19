@@ -51,4 +51,4 @@ UserSchema.methods.comparePassword = function comparePassword(
 
 
 // MongoDB collection name here  will give lowercase plural of name
-module.exports = mongoose.model("recipeUser", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

@@ -130,10 +130,10 @@ const Main2 = ({ user, userId }) => {
             <h1 className="itemTitle sm:mt-2 md:mt-0">{item.Title}</h1>
             <p className='mt-2'>{item.Summary}</p>
             <a
-              href={item.BriefSummary}
+              href={item.WebsiteLink}
               rel="noreferrer"
               target="_blank"
-              className="itemBriefSummary hover:text-secondary "
+              className="websiteLink hover:text-secondary "
             >
               Website
             </a>

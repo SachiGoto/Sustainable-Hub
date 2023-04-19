@@ -7,25 +7,25 @@ const ListSchema = new mongoose.Schema({
   },
   Title: {
     type: String,
-    // required: true,
+    required: true,
   
   },
  
   Image: {
     type: String,
-    // required: true,
+    required: true,
  
   },
   cloudinaryId:{
     type:String
   },
-    BriefSummary:{
+  WebsiteLink:{
         type: String,
-        // required: true,
+        required: true,
       
   },Summary: {
         type: String,
-        // required: true,
+        required: true,
       
   }, 
   createdAt: {
@@ -37,4 +37,4 @@ const ListSchema = new mongoose.Schema({
 
 
 // MongoDB collection name here  will give lowercase plural of name
-module.exports = mongoose.model("FavList", ListSchema);
+module.exports = mongoose.model("MyFavs", ListSchema);

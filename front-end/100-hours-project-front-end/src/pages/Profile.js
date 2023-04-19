@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const Profile = ({ user, userId }) => {
   const [image, setImage] = useState();
   const [title, setTitle] = useState();
-  const [briefSummary, setBriefSummary] = useState();
+  const [WebsiteLink, setWebsiteLink] = useState();
   const [summary, setSummary] = useState();
   const [allData, setAllData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
@@ -17,46 +17,38 @@ const Profile = ({ user, userId }) => {
   useEffect(() => {
     fetch("/list")
       .then((responseAllData) => responseAllData.json())
-      .then((allData) => {
-        setAllData(allData);
-      });
+      .then((allData) => {setAllData(allData);});
 
     fetch("/getFavorite")
       .then((allData) => allData.json())
       .then((resJsonData) => {
         setMyFavList(resJsonData);
-        setEmpty((prev) => { return {
+        setEmpty((prev) => {
+          return {
             ...prev,
             myFavList: resJsonData.length === 0 ? true : false,
           };
         });
       });
-  }, []);
 
-
-  useEffect(() => {
       fetch("/login")
-      .then((response)=> response.json())
-      .then((resJson)=> {
-        setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id))
+      .then((response) => response.json())
+      .then((resJson) => {
+        setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
         const allOrgIds = [];
         for (const data in resJson) {
           allOrgIds.push(data._id);
         }
 
-        console.log('/login data ', resJson.user.favOrg)
-  
         setEmpty((prev) => {
           return {
-                ...prev,
-                allData: resJson.user.favOrg.length === 0 ? true : false
-              }
+            ...prev,
+            allData: resJson.user.favOrg.length === 0 ? true : false,
+          };
         });
-      })
-   
+      });
   }, []);
 
-  console.log("empty.allData ", empty.allData, "myFavList ", empty.myFavList)
 
   async function removeItem(orgId) {
     let newFavOrgIds = [...favOrgIds];
@@ -64,9 +56,7 @@ const Profile = ({ user, userId }) => {
     setFavOrgIds(newFavOrgIds);
     let updateFavOrg = { userId, orgId };
 
-   
     try {
-      console.log('trying fetch request')
       const res = await fetch("/deleteFavoriteOrg", {
         method: "PUT",
         body: JSON.stringify({ updateFavOrg }),
@@ -77,67 +67,47 @@ const Profile = ({ user, userId }) => {
 
       await res.json();
 
-      console.log('res.json ', res.json)
-
-      
-
-      
     } catch (error) {
       console.error("Error:", error);
     }
 
     fetch("/login")
-    .then((response)=> response.json())
-    .then((resJson)=> {
-      setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id))
-      const allOrgIds = [];
-      for (const data in resJson) {
-        allOrgIds.push(data._id);
-      }
+      .then((response) => response.json())
+      .then((resJson) => {
+        setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
+        const allOrgIds = [];
+        for (const data in resJson) {
+          allOrgIds.push(data._id);
+        }
 
-      console.log('allData:resJson.user.favOrg.length === 0 ' , resJson.user.favOrg.length === 0)
-
-      setEmpty((prev) => {
-        return {
-              ...prev,
-              allData:resJson.user.favOrg.length === 0 ? true : false
-            }
+        setEmpty((prev) => {
+          return {
+            ...prev,
+            allData: resJson.user.favOrg.length === 0 ? true : false,
+          };
+        });
       });
-    })
   }
 
   async function removeFavItem(favId) {
-    console.log('trying fetch request removeFavItem', favId)
-    
     const res = await fetch("/deleteMyFavOrg/" + favId, {
-      method: "DELETE"
+      method: "DELETE",
     });
-      // .then((data) => data.json() )
-      // .then(jsonData => console.log(jsonData))
 
-      const data = await res.json();
-     console.log(data)
-      console.log(empty.allData, empty.myFavList);
-      // do something with the data
-   
+    await res.json();
 
     fetch("/getFavorite")
-    .then((allData) => allData.json())
-    .then((resJsonData) => {
-      console.log('resJsonData ', resJsonData.length)
-      setMyFavList(resJsonData);
-      setEmpty((prev) => { return {
-          ...prev,
-          myFavList: resJsonData.length === 0 ? true : false,
-        };
+      .then((allData) => allData.json())
+      .then((resJsonData) => {
+        setMyFavList(resJsonData);
+        setEmpty((prev) => {
+          return {
+            ...prev,
+            myFavList: resJsonData.length === 0 ? true : false,
+          };
+        });
       });
-    });
-
-  
-
-    
   }
-
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -146,49 +116,35 @@ const Profile = ({ user, userId }) => {
     formData.append("User", userId);
     formData.append("image", image);
     formData.append("Title", title);
-    formData.append("BriefSummary", briefSummary);
+    formData.append("WebsiteLink", WebsiteLink);
     formData.append("Summary", summary);
-
-  
 
     if (
       title === undefined ||
-      briefSummary === undefined ||
+      WebsiteLink === undefined ||
       summary === undefined ||
       image === undefined
     ) {
       setErrorMessage(true);
-      console.log("please fill out all the fields");
     } else {
       try {
-        const addFav = await fetch("/addFavorite", {
+       await fetch("/addFavorite", {
           method: "POST",
           body: formData,
         });
-
-        console.log('addFav ', addFav)
 
         const myFavOrg = await fetch("/getFavorite");
         const responseAllData = myFavOrg;
         const resJsonData = await responseAllData.json();
         setMyFavList(resJsonData);
         setErrorMessage(false);
-
         setBtnShow(false);
-
-        // const [empty, setEmpty] = useState({ allData: false, myFavList: false });
-
-        setEmpty((prev)=>{return{
-          ...prev,
-          myFavList : false
-
-        }
-           
-
-        })
-
-
-
+        setEmpty((prev) => {
+          return {
+            ...prev,
+            myFavList: false,
+          };
+        });
       } catch (error) {
         setBtnShow(true);
         console.error("error ", error);
@@ -205,7 +161,12 @@ const Profile = ({ user, userId }) => {
     setImage(event.target.files[0]);
   }
 
+  function modalToggle(id){
+     document.querySelectorAll(".modalContainer").forEach(modal=>{
+          modal.dataset.id === id?modal.style.display = "block":modal.style.display = "none"
+     })
 
+  }
 
   return (
     <>
@@ -277,18 +238,17 @@ const Profile = ({ user, userId }) => {
 
                   <div className="mb-4">
                     <label
-                      htmlFor="briefSummary"
+                      htmlFor="WebsiteLink"
                       className="block text-gray-700 font-medium mb-2"
                     >
-                      Brief Summary:
+                       WebsiteLink:
                     </label>
                     <input
                       type="text"
-                      id="briefSummary"
-                      name="BriefSummary"
+                      id="websiteLink"
+                      name="WebsiteLink"
                       className="border border-gray-400 p-2 w-full"
-                      // onChange={hundleChange}
-                      onChange={(e) => setBriefSummary(e.target.value)}
+                      onChange={(e) => setWebsiteLink(e.target.value)}
                     />
                   </div>
                   <div>
@@ -302,7 +262,6 @@ const Profile = ({ user, userId }) => {
                       id="summary"
                       name="Summary"
                       className="border border-gray-400 p-2 w-full"
-                      // onChange={hundleChange}
                       onChange={(e) => setSummary(e.target.value)}
                     />
                   </div>
@@ -327,11 +286,11 @@ const Profile = ({ user, userId }) => {
             {allData.map(
               (org) =>
                 favOrgIds.includes(org._id) && (
-                  <div key={org._id} className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl">
-                    <label
-                      htmlFor={org._id}
-                      className="w-full"
-                    >
+                  <div
+                    key={org._id}
+                    className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl"
+                  >
+                    <label htmlFor={org._id} className="w-full">
                       <div className="imageContainer h-[70%]">
                         <img
                           className="border"
@@ -341,45 +300,53 @@ const Profile = ({ user, userId }) => {
                       </div>
                       <h2 className="mt-3 text-lg">{org.Title}</h2>
                     </label>
-                    <div onClick={() => removeItem(org._id)} className="trashIcon">
+                    <div
+                      onClick={() => removeItem(org._id)}
+                      className="trashIcon"
+                    >
                       <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
                     </div>
-
-                    {/* Put this part before </body> tag */}
                   </div>
                 )
-                )}
+            )}
 
-            {allData.map(
-              (org) =>
-              <div key={org._id}>
-                <input type="checkbox" id={org._id} className="modal-toggle" />
-                <div className="modal">
-                    <div className="modal-box">
+            {allData.map((org) => (
+              <div key={org._id} data-id={org._id} className='modalContainer hidden'>
+                <input type="checkbox" id={org._id} className="modal-toggle" onClick={()=>modalToggle(org._id)}/>
+                <div className="modal ">
+                  <div className="modal-box">
                     <p className="py-4">{org.Summary}</p>
-                    <a className="py-4 font-semibold  underline hover:text-green-800" href={org.Summary}>Website</a>
+                    <a
+                      className="py-4 font-semibold  underline hover:text-green-800"
+                      href={org.Summary}
+                    >
+                      Website
+                    </a>
                     <div className="modal-action">
                       <label htmlFor={org._id} className="btn">
                         close!
                       </label>
                     </div>
                   </div>
-                 </div>
-             </div>
-               
-                   
-               
-            )}
+                </div>
+              </div>
+            ))}
 
             {myFavList.map((fav) => (
-              <div key={fav._id} className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl">
+              <div
+                key={fav._id}
+                className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl"
+              >
                 <label htmlFor={fav._id} className="flex flex-col">
                   <div className="imageContainer h-[70%]">
                     <img className="border" alt="fav company" src={fav.Image} />
                   </div>
                   <h2 className="mt-3 text-lg">{fav.Title}</h2>
                 </label>
-                <div onClick={() => removeFavItem(fav._id)} className="trashIcon">
+                <div
+                  onClick={() => removeFavItem(fav._id)}
+                  className="trashIcon"
+                >
                   <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
                 </div>
               </div>
@@ -389,7 +356,7 @@ const Profile = ({ user, userId }) => {
               <div key={fav._id}>
                 <input type="checkbox" id={fav._id} className="modal-toggle" />
                 <div className="modal">
-                    <div className="modal-box">
+                  <div className="modal-box">
                     <p className="py-4">{fav.Summary}</p>
                     <div className="modal-action">
                       <label htmlFor={fav._id} className="btn">
@@ -397,11 +364,9 @@ const Profile = ({ user, userId }) => {
                       </label>
                     </div>
                   </div>
-                 </div>
-             </div>
-
-            )
-            )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

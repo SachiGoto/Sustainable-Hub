@@ -4,7 +4,7 @@ const Admin = () => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
-  const [briefSummary, setBriefSummary] = useState();
+  const [websiteLink, setWebsiteLink] = useState();
   const [summary, setSummary] = useState();
 
   const handleSubmit = async (event) => {
@@ -13,7 +13,7 @@ const Admin = () => {
     formData.append("image", image);
     formData.append("Title", title);
     formData.append("Category", category);
-    formData.append("BriefSummary", briefSummary);
+    formData.append("WebsiteLink", websiteLink);
     formData.append("Summary", summary);
 
     try {
@@ -85,17 +85,17 @@ const Admin = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="briefSummary"
+            htmlFor="websiteLink"
             className="block text-gray-700 font-medium mb-2"
           >
-            Brief Summary:
+            Website Link:
           </label>
           <input
             type="text"
-            id="briefSummary"
-            name="BriefSummary"
+            id="websiteLink"
+            name="websiteLink"
             className="border border-gray-400 p-2 w-full"
-            onChange={(e) => setBriefSummary(e.target.value)}
+            onChange={(e) => setWebsiteLink(e.target.value)}
           />
         </div>
         <div>
