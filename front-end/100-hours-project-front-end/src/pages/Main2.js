@@ -88,7 +88,7 @@ const Main2 = ({ user, userId }) => {
     <>
     <div className="dropdown  ml-5 mt-3  sm:block md:hidden">
   <label tabIndex={0} className="btn btn-base m-1">Categories</label>
-  <ul tabIndex={0} className="dropdown-content  menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
+  <ul tabIndex={0} className=" dropdown-content  menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
     <li  className="btn btn-focus btn-ghost " data-category="Households">Households</li>
     <li className="btn btn-ghost " data-category="Groceries">Grocerries</li>
     <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
@@ -97,8 +97,8 @@ const Main2 = ({ user, userId }) => {
     <li className="btn btn-ghost" data-category="All">All</li>
   </ul>
 </div>
-      <div className="categoryContainer hidden sm:hidden md:block">
-        <ul onClick={onclickCategory} className="category-ul">
+      <div className="categoryContainer md:mt-7 md:mb-5 hidden sm:hidden md:block">
+        <ul onClick={onclickCategory} className="category-ul ">
           <li key={'Households'} className="btn btn-focus btn-ghost " data-category="Households">
             Households
           </li>
@@ -122,18 +122,19 @@ const Main2 = ({ user, userId }) => {
       
       <div className='orgList overflow-scroll text-sm  '>
       {category.map((item) => (
-        <div className="item" key={item._id}>
+        <div className="item my-8 md:my-8" key={item._id}>
           <div className="itemImage">
-            <img alt="item" src={item.Image} />
+            <img alt="item mt-5 md:mt-0" src={item.Image} />
           </div>
-          <div className="itemContent">
-            <h1 className="itemTitle sm:mt-2 md:mt-0">{item.Title}</h1>
-            <p className='mt-2'>{item.Summary}</p>
+          <div className="itemContent ">
+            <h1 className="itemTitle mt-3 md:mt-0">{item.Title}</h1>
+            <p className='my-3'>{item.Summary}</p>
+            <div>
             <a
               href={item.WebsiteLink}
               rel="noreferrer"
               target="_blank"
-              className="websiteLink hover:text-secondary "
+              className="websiteLink hover:text-secondary font-bold"
             >
               Website
             </a>
@@ -146,6 +147,7 @@ const Main2 = ({ user, userId }) => {
             >
               <i className="fa-regular fa-heart "></i>
             </button>
+            </div>
           </div>
         </div>
       ))}
