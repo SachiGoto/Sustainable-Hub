@@ -17,7 +17,7 @@ const Home = () => {
             </p>
 
             <button className="btn my-7 " type="submit">
-              <Link to="main2"> Categories </Link>
+              <Link to="main2"> Discover </Link>
             </button>
           </div>
           <div className="home-image">

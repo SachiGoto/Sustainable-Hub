@@ -12,6 +12,7 @@ const Profile = ({ user, userId }) => {
   const [myFavList, setMyFavList] = useState([]);
   const [btnShow, setBtnShow] = useState(false);
   const [error, setErrorMessage] = useState(false);
+  const [formatError, setFormatError] = useState(false);
   const [empty, setEmpty] = useState({ allData: false, myFavList: false });
 
   useEffect(() => {
@@ -109,6 +110,8 @@ const Profile = ({ user, userId }) => {
       });
   }
 
+ 
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -118,6 +121,8 @@ const Profile = ({ user, userId }) => {
     formData.append("Title", title);
     formData.append("WebsiteLink", WebsiteLink);
     formData.append("Summary", summary);
+    let extension = image.name.split(".")[1]
+    let fileExtension = ['jpeg','jpg', 'png']
 
     if (
       title === undefined ||
@@ -126,6 +131,9 @@ const Profile = ({ user, userId }) => {
       image === undefined
     ) {
       setErrorMessage(true);
+      
+    }else if(!fileExtension.includes(extension)){
+      setFormatError(true)
     } else {
       try {
        await fetch("/addFavorite", {
@@ -138,6 +146,7 @@ const Profile = ({ user, userId }) => {
         const resJsonData = await responseAllData.json();
         setMyFavList(resJsonData);
         setErrorMessage(false);
+        setFormatError(false)
         setBtnShow(false);
         setEmpty((prev) => {
           return {
@@ -206,7 +215,7 @@ const Profile = ({ user, userId }) => {
                 >
                   <div>
                     <label
-                      className="block text-gray-700 font-medium mb-2"
+                      className="block text-gray-700 font-medium mb-2 font-semibold"
                       htmlFor="title"
                     >
                       Title:
@@ -220,9 +229,9 @@ const Profile = ({ user, userId }) => {
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
-                  <div>
+                  <div  className=" mb-1">
                     <label
-                      className="block text-gray-700 font-medium mt-2 mb-2"
+                      className="block text-gray-700 font-medium mt-2 mb-2 font-semibold"
                       htmlFor="image"
                     >
                       Image:
@@ -232,14 +241,18 @@ const Profile = ({ user, userId }) => {
                       id="image"
                       name="Image"
                       onChange={imageHundlechange}
-                      className=" mb-5"
+                 
+
                     />
                   </div>
-
+                  <div  className=" mb-5">
+                     <p className='text-xs text-gray-500'>* Image should be jpg, jpeg or png</p>
+                     <p className='text-xs text-gray-500'>* Prefered image size is 1194px by 834px</p>
+                  </div>
                   <div className="mb-4">
                     <label
                       htmlFor="WebsiteLink"
-                      className="block text-gray-700 font-medium mb-2"
+                      className="block text-gray-700 font-medium mb-2 font-semibold"
                     >
                        WebsiteLink:
                     </label>
@@ -247,13 +260,13 @@ const Profile = ({ user, userId }) => {
                       type="text"
                       id="websiteLink"
                       name="WebsiteLink"
-                      className="border border-gray-400 p-2 w-full"
+                      className="border border-gray-400 p-2 w-full font-semibold"
                       onChange={(e) => setWebsiteLink(e.target.value)}
                     />
                   </div>
                   <div>
                     <label
-                      className="block text-gray-700 font-medium mb-2 mt-2"
+                      className="block text-gray-700 font-medium mb-2 mt-2 font-semibold"
                       htmlFor="summary"
                     >
                       Summary:
@@ -274,10 +287,14 @@ const Profile = ({ user, userId }) => {
                   </button>
                   {error && (
                     <div className="text-center mt-2 errorMessage text-red-500">
-                      {" "}
                       * Fill out all the input fields
                     </div>
                   )}
+                  {formatError && (
+                    <div className="text-center mt-2 errorMessage text-red-500">
+                      * Image has to be jpeg, jpg or png
+                    </div>
+                  ) }
                 </form>
               )}
             </div>
@@ -288,12 +305,13 @@ const Profile = ({ user, userId }) => {
                 favOrgIds.includes(org._id) && (
                   <div
                     key={org._id}
-                    className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl"
+                    className="w-full h-full max-w-[900px] bg-white p-3 m-3 border-2 border-green-200 border-4 hover:drop-shadow-xl"
                   >
                     <label htmlFor={org._id} className="w-full">
-                      <div className="imageContainer h-[70%]">
+
+                      <div className="h-[320px] md:h-[220px] lg:h-[180px]">
                         <img
-                          className="border"
+                          className="rounded-md object-cover w-full h-full"
                           alt="fav-company"
                           src={org.Image}
                         />
@@ -318,7 +336,7 @@ const Profile = ({ user, userId }) => {
                     <p className="py-4">{org.Summary}</p>
                     <a
                       className="py-4 font-semibold  underline hover:text-green-800"
-                      href={org.Summary}
+                      href={org.WebsiteLink}
                     >
                       Website
                     </a>
@@ -335,11 +353,11 @@ const Profile = ({ user, userId }) => {
             {myFavList.map((fav) => (
               <div
                 key={fav._id}
-                className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-black-100 border-4 hover:drop-shadow-xl"
+                className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-blue-200 border-4 hover:drop-shadow-xl"
               >
-                <label htmlFor={fav._id} className="flex flex-col">
-                  <div className="imageContainer h-[70%]">
-                    <img className="border" alt="fav company" src={fav.Image} />
+                <label htmlFor={fav._id} className="w-fulll">
+                  <div className="h-[320px] md:h-[220px] lg:h-[180px]">
+                    <img className="rounded-md object-cover w-full h-full" alt="fav company" src={fav.Image} />
                   </div>
                   <h2 className="mt-3 text-lg">{fav.Title}</h2>
                 </label>
@@ -358,6 +376,7 @@ const Profile = ({ user, userId }) => {
                 <div className="modal">
                   <div className="modal-box">
                     <p className="py-4">{fav.Summary}</p>
+                    <p className="py-4 font-semibold  underline hover:text-green-800"><a href={fav.WebsiteLink}>Website</a></p>
                     <div className="modal-action">
                       <label htmlFor={fav._id} className="btn">
                         close!

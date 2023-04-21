@@ -8,6 +8,9 @@ const Main2 = ({ user, userId }) => {
   let likeBtns = document.querySelectorAll(".likeBtn");
 
   useEffect(() => {
+    let all = document.querySelectorAll('[data-category = All]');
+    all[1].classList.add('btn-active')
+
     fetch("/list")
       .then((response) => response.json())
       .then((data) => {
@@ -89,18 +92,21 @@ const Main2 = ({ user, userId }) => {
     <div className="dropdown  ml-5 mt-3  sm:block md:hidden">
   <label tabIndex={0} className="btn btn-base m-1">Categories</label>
   <ul tabIndex={0} className=" dropdown-content  menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
-    <li  className="btn btn-focus btn-ghost " data-category="Households">Households</li>
+  <li className="btn btn-ghost" data-category="All">All</li>
+    <li  className="btn btn-focus btn-ghost " data-category="Households">Household</li>
     <li className="btn btn-ghost " data-category="Groceries">Grocerries</li>
     <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
     <li className="btn btn-ghost" data-category="Other">Other</li>
     <li className="btn btn-ghost" data-category="Resources">Resources</li>
-    <li className="btn btn-ghost" data-category="All">All</li>
   </ul>
 </div>
       <div className="categoryContainer md:mt-7 md:mb-5 hidden sm:hidden md:block">
         <ul onClick={onclickCategory} className="category-ul ">
+        <li key={'All'}  className="btn btn-ghost" data-category="All">
+            All
+          </li>
           <li key={'Households'} className="btn btn-focus btn-ghost " data-category="Households">
-            Households
+            Household
           </li>
           <li  key={'Groceries'} className="btn btn-ghost " data-category="Groceries">
             Grocerries
@@ -114,21 +120,23 @@ const Main2 = ({ user, userId }) => {
           <li key={'Resources'} className="btn btn-ghost" data-category="Resources">
             Resources
           </li>
-          <li key={'All'}  className="btn btn-ghost" data-category="All">
-            All
-          </li>
+         
         </ul>
       </div>
       
-      <div className='orgList overflow-scroll text-sm  '>
+      <div className='orgList overflow-scroll text-sm max-w-[1200px] mx-auto  '>
       {category.map((item) => (
         <div className="item my-8 md:my-8" key={item._id}>
-          <div className="itemImage">
-            <img alt="item mt-5 md:mt-0" src={item.Image} />
+        <div className='mx-auto my-0 max-w-[450px] w-10/12 md:w-2/5 h-40vh'>
+          <div className="w-full h-full ">
+            <img className='object-contain rounded-md' alt={item.title} src={item.Image} />
           </div>
-          <div className="itemContent ">
-            <h1 className="itemTitle mt-3 md:mt-0">{item.Title}</h1>
-            <p className='my-3'>{item.Summary}</p>
+          </div>
+          <div className="itemContent md:w-5/12 w-10/12 ">
+           <div className='mt-3 md:mt-0 my-3 w-10/12'>
+            <h1 className="itemTitle mb-2">{item.Title}</h1>
+            <p className=''>{item.Summary}</p>
+            </div>
             <div>
             <a
               href={item.WebsiteLink}
@@ -138,7 +146,7 @@ const Main2 = ({ user, userId }) => {
             >
               Website
             </a>
-            <button
+            {user && <button
               className="likeBtn pl-2  "
               data-org-id={item._id}
               onClick={() => {
@@ -146,7 +154,7 @@ const Main2 = ({ user, userId }) => {
               }}
             >
               <i className="fa-regular fa-heart "></i>
-            </button>
+            </button>}
             </div>
           </div>
         </div>

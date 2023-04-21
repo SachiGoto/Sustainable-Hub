@@ -36,8 +36,9 @@ function App() {
   }, []);
 
   return (
- 
+ <>
     <div className="App">
+    <div className='subApp'>
       <BrowserRouter>
         <Navbar user={user} setUser={setUser}/>
         <div className="pages">
@@ -59,6 +60,10 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+
+    </div>
+
+    </>
   );
 }
 

@@ -24,9 +24,11 @@ const handleSubmit = async (e) =>{
    })
 
    const json = await res.json()
-   setMessage(json)
-   if(!res.ok){
-     console.log('error', json)
+   console.log(json)
+   setMessage(json.message)
+
+   if(json.error){
+     console.log('error', json.message)
    }else{
      navigate("/login");
    }
@@ -88,6 +90,7 @@ const handleSubmit = async (e) =>{
                         className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         onChange={e => setPassword(e.target.value)}
                       />
+                      <p className='text-xs text-gray-500'>*Password must be at least 8 characters long</p>
                     </div>
 
                     <div className="mt-5 mx-auto w-9/12">
