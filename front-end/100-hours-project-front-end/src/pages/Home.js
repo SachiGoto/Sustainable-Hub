@@ -3,20 +3,17 @@ import logo from "../assets/person.png";
 
 const Home = () => {
   return (
-    <>
-      <div>
-        <div className="home-container ">
-          <div className="home-text">
-            <p className="text-base text-l sm:leading-normal md:leading-loose font-semibold">
-              Sustainable Hub is designed to help people live a more sustainable
-              lifestyle by providing practical suggestions for sustainable
-              activities in their day-to-day. Providing tips on sustainable
-              living accessible to everyone. Click the category button to see a
-              list of local companies in Vanocuver,Canada that offer sustainable
-              products and services!
+  
+  
+        <div className="home-container flex flex-col justify-start sm:justify-start items-center md:justify-start h-[65vh] ">
+          <div className="home-text bg-zinc-50 p-[10%] rounded-tl-[30px] rounded-br-[30px] ">
+           <h3 className="text-lg font-semibold pb-5" >Welcom to Sustainable Hub!</h3>
+            <p className="pb-5 text-sm md:text-base">
+              Sustainable Hub provides a list of eco-friendly local businesses in Vancouver and designed to help people live their lives in more sustainable way!
             </p>
-
-            <button className="btn my-7 " type="submit">
+           <p className="text-base">Let's see eco-friendly businesses located in Vancouver!</p>
+            <button className="btn btn-secondary mt-7 " type="submit">
+              
               <Link to="main2"> Discover </Link>
             </button>
           </div>
@@ -24,8 +21,8 @@ const Home = () => {
             <img src={logo} alt="hero" />
           </div>
         </div>
-      </div>
-    </>
+
+
   );
 };
 

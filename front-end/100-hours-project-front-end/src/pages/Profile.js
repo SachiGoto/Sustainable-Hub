@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
+
 
 const Profile = ({ user, userId }) => {
   const [image, setImage] = useState();
@@ -14,6 +16,7 @@ const Profile = ({ user, userId }) => {
   const [error, setErrorMessage] = useState(false);
   const [formatError, setFormatError] = useState(false);
   const [empty, setEmpty] = useState({ allData: false, myFavList: false });
+  // const [display, setDisplay] = useState('block');
 
   useEffect(() => {
     fetch("/list")
@@ -172,6 +175,7 @@ const Profile = ({ user, userId }) => {
 
   function modalToggle(id){
      document.querySelectorAll(".modalContainer").forEach(modal=>{
+      console.log('modal clicked', modal.dataset.id === id)
           modal.dataset.id === id?modal.style.display = "block":modal.style.display = "none"
      })
 
@@ -179,6 +183,7 @@ const Profile = ({ user, userId }) => {
 
   return (
     <>
+
       <div className="mt-4 md:mt-8 ">
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center w-4/5">
@@ -305,11 +310,11 @@ const Profile = ({ user, userId }) => {
                 favOrgIds.includes(org._id) && (
                   <div
                     key={org._id}
-                    className="w-full h-full max-w-[900px] bg-white p-3 m-3 border-2 border-green-200 border-4 hover:drop-shadow-xl"
+                    className="w-full h-full max-w-[900px] bg-white border-2 border-primary border-opacity-50 outline-none px-8 py-6 shadow transition-all duration-5 cursor-pointer rounded-5 border-3 border hover:shadow-lg hover:scale-108 active:shadow-md active:scale-95"
                   >
                     <label htmlFor={org._id} className="w-full">
 
-                      <div className="h-[320px] md:h-[220px] lg:h-[180px]">
+                      <div onClick={()=>modalToggle(org._id)} className="hover:opacity-70 h-[320px] md:h-[220px] lg:h-[180px]">
                         <img
                           className="rounded-md object-cover w-full h-full"
                           alt="fav-company"
@@ -320,7 +325,7 @@ const Profile = ({ user, userId }) => {
                     </label>
                     <div
                       onClick={() => removeItem(org._id)}
-                      className="trashIcon"
+                      className="trashIcon w-fit"
                     >
                       <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
                     </div>
@@ -330,20 +335,23 @@ const Profile = ({ user, userId }) => {
 
             {allData.map((org) => (
               <div key={org._id} data-id={org._id} className='modalContainer hidden'>
-                <input type="checkbox" id={org._id} className="modal-toggle" onClick={()=>modalToggle(org._id)}/>
+                <input type="checkbox" id={org._id} className="modal-toggle" />
                 <div className="modal ">
                   <div className="modal-box">
                     <p className="py-4">{org.Summary}</p>
                     <a
                       className="py-4 font-semibold  underline hover:text-green-800"
                       href={org.WebsiteLink}
+                      target="_blank" rel="noreferrer"
                     >
                       Website
                     </a>
-                    <div className="modal-action">
-                      <label htmlFor={org._id} className="btn">
-                        close!
+                    <div className="modal-action" >
+                      <label htmlFor={org._id} className=""  >
+                      <AiFillCloseCircle className="text-sm" onClick={()=>modalToggle(org._id)}/>
                       </label>
+                  
+                      
                     </div>
                   </div>
                 </div>
@@ -353,32 +361,32 @@ const Profile = ({ user, userId }) => {
             {myFavList.map((fav) => (
               <div
                 key={fav._id}
-                className="w-full h-full max-w-[900px] bg-white p-3 m-3 rounded-lg border-2 border-blue-200 border-4 hover:drop-shadow-xl"
+                className="w-full h-full max-w-[900px]w-full h-full max-w-[900px] bg-white border-2 border-secondary border-opacity-50 outline-none px-8 py-6 shadow transition-all duration-5 cursor-pointer rounded-5 border-3 border hover:shadow-lg hover:scale-108 active:shadow-md active:scale-95"
               >
                 <label htmlFor={fav._id} className="w-fulll">
-                  <div className="h-[320px] md:h-[220px] lg:h-[180px]">
+                  <div className="hover:opacity-70 h-[320px] md:h-[220px] lg:h-[180px]"  onClick={()=>modalToggle(fav._id)} >
                     <img className="rounded-md object-cover w-full h-full" alt="fav company" src={fav.Image} />
                   </div>
                   <h2 className="mt-3 text-lg">{fav.Title}</h2>
                 </label>
                 <div
                   onClick={() => removeFavItem(fav._id)}
-                  className="trashIcon"
+                  className="trashIcon w-fit "
                 >
-                  <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
+                  <i className=" hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
                 </div>
               </div>
             ))}
 
             {myFavList.map((fav) => (
               <div key={fav._id}>
-                <input type="checkbox" id={fav._id} className="modal-toggle" />
+                <input type="checkbox" id={fav._id} className="modal-toggle " />
                 <div className="modal">
                   <div className="modal-box">
                     <p className="py-4">{fav.Summary}</p>
                     <p className="py-4 font-semibold  underline hover:text-green-800"><a href={fav.WebsiteLink}>Website</a></p>
-                    <div className="modal-action">
-                      <label htmlFor={fav._id} className="btn">
+                    <div className="modal-action" onClick={()=>modalToggle(fav._id)}>
+                      <label htmlFor={fav._id} className="btn btn-primary">
                         close!
                       </label>
                     </div>

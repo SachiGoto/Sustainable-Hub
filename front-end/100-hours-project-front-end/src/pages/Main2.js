@@ -89,35 +89,36 @@ const Main2 = ({ user, userId }) => {
 
   return (
     <>
-    <div className="dropdown  ml-5 mt-3  sm:block md:hidden">
-  <label tabIndex={0} className="btn btn-base m-1">Categories</label>
-  <ul tabIndex={0} className=" dropdown-content  menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
-  <li className="btn btn-ghost" data-category="All">All</li>
-    <li  className="btn btn-focus btn-ghost " data-category="Households">Household</li>
-    <li className="btn btn-ghost " data-category="Groceries">Grocerries</li>
-    <li className="btn btn-ghost " data-category="Restaurants">Restaurants</li>
-    <li className="btn btn-ghost" data-category="Other">Other</li>
-    <li className="btn btn-ghost" data-category="Resources">Resources</li>
+    <h3 className='font-bold text-natural w-full md:w-[70%] m-auto text-md md:text-lg text-center pt-[3%] my-[10%] sm:my-[2%]'>Here is a list of eco-friendly companies in Vancouver.<br/> You can add them in your favourite list! </h3>
+    <div className="dropdown  ml-5 mt-[5%]  sm:block md:hidden">
+  <label tabIndex={0} className="mb-[10%] sm:mb-[5%] btn hover:bg-transparent btn-primary">Categories</label>
+  <ul tabIndex={0} className=" dropdown-content  mb-[3%] menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
+  <li className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="All">All</li>
+    <li  className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent " data-category="Households">Household</li>
+    <li className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Groceries">Grocerries</li>
+    <li className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Restaurants">Restaurants</li>
+    <li className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Other">Other</li>
+    <li className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Resources">Resources</li>
   </ul>
 </div>
-      <div className="categoryContainer md:mt-7 md:mb-5 hidden sm:hidden md:block">
-        <ul onClick={onclickCategory} className="category-ul ">
-        <li key={'All'}  className="btn btn-ghost" data-category="All">
+      <div className="categoryContainer md:mt-[4rem] lg:mt-[2rem] hidden md:block">
+        <ul onClick={onclickCategory} className="category-ul mb-[3%] ">
+        <li key={'All'}  className="btn text-black bg-transparent border-0 hover:underline hover:bg-transparent" data-category="All">
             All
           </li>
-          <li key={'Households'} className="btn btn-focus btn-ghost " data-category="Households">
+          <li key={'Households'} className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Households">
             Household
           </li>
-          <li  key={'Groceries'} className="btn btn-ghost " data-category="Groceries">
+          <li  key={'Groceries'} className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Groceries">
             Grocerries
           </li>
-          <li key={'Restaurants'} className="btn btn-ghost " data-category="Restaurants">
+          <li key={'Restaurants'} className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Restaurants">
             Restaurants
           </li>
-          <li key={'Other'} className="btn btn-ghost" data-category="Other">
+          <li key={'Other'} className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Other">
             Other
           </li>
-          <li key={'Resources'} className="btn btn-ghost" data-category="Resources">
+          <li key={'Resources'} className="btn border-0 bg-transparent text-black hover:underline hover:bg-transparent" data-category="Resources">
             Resources
           </li>
          
@@ -126,23 +127,24 @@ const Main2 = ({ user, userId }) => {
       
       <div className='orgList overflow-scroll text-sm max-w-[1200px] mx-auto  '>
       {category.map((item) => (
-        <div className="item my-8 md:my-8" key={item._id}>
+        <div className="dropShadow item my-8 md:my-8 md:mx-auto rounded-md md:w-[90%] py-[7%] md:py-[2%]  " key={item._id}>
         <div className='mx-auto my-0 max-w-[450px] w-10/12 md:w-2/5 h-40vh'>
           <div className="w-full h-full ">
             <img className='object-contain rounded-md' alt={item.title} src={item.Image} />
           </div>
           </div>
-          <div className="itemContent md:w-5/12 w-10/12 ">
+          <div className="itemContent md:w-[45%] w-10/12 ">
            <div className='mt-3 md:mt-0 my-3 w-10/12'>
-            <h1 className="itemTitle mb-2">{item.Title}</h1>
+            <h3 className="font-bold text-[2rem] my-[5%]">{item.Title}</h3>
             <p className=''>{item.Summary}</p>
             </div>
             <div>
+            {/* <div className="badge badge-primary">primary</div> */}
             <a
               href={item.WebsiteLink}
               rel="noreferrer"
               target="_blank"
-              className="websiteLink hover:text-secondary font-bold"
+              className="websiteLink hover:underline font-bold text-base"
             >
               Website
             </a>

@@ -49,7 +49,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
           </div>
           <div className="mt-5">
             <form
-              className="form bg-white p-6 rounded-lg shadow-md w-5/6"
+              className="form bg-white p-6 rounded-lg shadow-md w-5/6 max-w-[600px]"
               onSubmit={handleSubmit}
             >
               <div className="overflow-hidden shadow sm:rounded-md">
@@ -67,7 +67,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
                         name="email"
                         id="user-name"
                         autoComplete="given-name"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-1 py-1.5 ring-gray-300 text-gray-900 shadow-sm ring-1 sm:text-sm sm:leading-6"
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
@@ -84,7 +84,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
                         name="password"
                         id="password"
                         autoComplete="password"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 sm:text-sm sm:leading-6"
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
@@ -93,7 +93,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
                 <div className="px-4 py-3 text-center sm:px-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    className="btn btn-secondary py-2 px-3"
                   >
                     Submit
                   </button>

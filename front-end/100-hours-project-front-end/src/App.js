@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
 
+
 function App() {
   const [allData, setAllData] = useState(null);
   const [user, setUser] = useState(null);

@@ -46,7 +46,7 @@ const handleSubmit = async (e) =>{
             </div>
           </div>
           <div className="mt-5">
-          <form className='form bg-white p-6 rounded-lg shadow-md w-5/6' onSubmit={handleSubmit}>
+          <form className='form bg-white p-6 rounded-lg shadow-md w-5/6 max-w-[600px]' onSubmit={handleSubmit}>
               <div className="overflow-hidden shadow sm:rounded-md">
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="">
@@ -59,7 +59,7 @@ const handleSubmit = async (e) =>{
                         name="userName"
                         id="user-name"
                         autoComplete="given-name"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         onChange={e => setUserName(e.target.value)}
                       />
                     </div>
@@ -73,7 +73,7 @@ const handleSubmit = async (e) =>{
                         name="email"
                         id="email"
                         autoComplete="email"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         onChange={e => setEmail(e.target.value)}
                       />
                     </div>
@@ -87,7 +87,7 @@ const handleSubmit = async (e) =>{
                         name="password"
                         id="password"
                         autoComplete="password"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         onChange={e => setPassword(e.target.value)}
                       />
                       <p className='text-xs text-gray-500'>*Password must be at least 8 characters long</p>
@@ -102,7 +102,7 @@ const handleSubmit = async (e) =>{
                         name="confirmPassword"
                         id="confirmPassword"
                         autoComplete="confirmPassword"
-                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="pl-2 mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         onChange={e => setConfirmPassword(e.target.value)}
                       />
                     </div>
@@ -111,7 +111,7 @@ const handleSubmit = async (e) =>{
                 <div className="px-4 py-3 text-center sm:px-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    className="btn btn-accent"
                   >
                     Submit
                   </button>
