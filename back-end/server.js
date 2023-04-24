@@ -13,7 +13,14 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 
-app.use(cors());
+// app.use(cors());
+// app.use(cors({
+//   origin: 'https://sustainable-hub-sachigoto.vercel.app'
+// },
+// methods: "GET,POST,PUT,DELETE", credentials: true, }) )
+// ));
+
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -26,6 +33,14 @@ connectDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
+
+
+// app.use( cors({ origin: "https://sustainable-hub-sachigoto.vercel.app", methods: "GET,POST,PUT,DELETE", credentials: true, }) );
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ next();
+});
 
 
 //Body Parsing
