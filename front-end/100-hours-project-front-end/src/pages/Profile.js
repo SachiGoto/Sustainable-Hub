@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+// import { Spinner } from 'react-spinner';
 
 
 const Profile = ({ user, userId }) => {
@@ -12,11 +13,11 @@ const Profile = ({ user, userId }) => {
   const [allData, setAllData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
   const [myFavList, setMyFavList] = useState([]);
-  const [btnShow, setBtnShow] = useState(false);
+  // const [btnShow, setBtnShow] = useState(false);
   const [error, setErrorMessage] = useState(false);
   const [formatError, setFormatError] = useState(false);
   const [empty, setEmpty] = useState({ allData: false, myFavList: false });
-  // const [display, setDisplay] = useState('block');
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     fetch("/list")
@@ -55,6 +56,8 @@ const Profile = ({ user, userId }) => {
 
 
   async function removeItem(orgId) {
+
+    console.log('delete btn clicked')
     let newFavOrgIds = [...favOrgIds];
     newFavOrgIds.splice(favOrgIds.indexOf(orgId), 1);
     setFavOrgIds(newFavOrgIds);
@@ -127,6 +130,8 @@ const Profile = ({ user, userId }) => {
     let extension = image.name.split(".")[1]
     let fileExtension = ['jpeg','jpg', 'png']
 
+    setShowSpinner(true)
+
     if (
       title === undefined ||
       WebsiteLink === undefined ||
@@ -147,10 +152,12 @@ const Profile = ({ user, userId }) => {
         const myFavOrg = await fetch("/getFavorite");
         const responseAllData = myFavOrg;
         const resJsonData = await responseAllData.json();
+        document.querySelector(".modal").style.visibility='hidden';
         setMyFavList(resJsonData);
         setErrorMessage(false);
         setFormatError(false)
-        setBtnShow(false);
+        setShowSpinner(false)
+        // setBtnShow(false);
         setEmpty((prev) => {
           return {
             ...prev,
@@ -158,128 +165,122 @@ const Profile = ({ user, userId }) => {
           };
         });
       } catch (error) {
-        setBtnShow(true);
+        // setBtnShow(true);
         console.error("error ", error);
       }
     }
   }
 
-  function display() {
-    setBtnShow((prev) => (prev = !prev));
-    console.log(btnShow);
-  }
+  // function display() {
+  //   setBtnShow((prev) => (prev = !prev));
+  // }
 
   function imageHundlechange(event) {
     setImage(event.target.files[0]);
   }
 
-  function modalToggle(id){
-     document.querySelectorAll(".modalContainer").forEach(modal=>{
-      console.log('modal clicked', modal.dataset.id === id)
-          modal.dataset.id === id?modal.style.display = "block":modal.style.display = "none"
-     })
-
+  function displayModal(){
+    document.querySelector(".modal").style.visibility='visible';
   }
 
   return (
     <>
 
-      <div className="mt-4 md:mt-8 ">
+      <div className="md:mt-8 ">
+
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center w-4/5">
-            <div>
+            {/* <div>
               <p className="my-3"> Hello, {user} ! </p>
-            </div>
+            </div> */}
             <div>
-              <div className="px-4 sm:px-0 flex flex-col items-center ">
-                <h3 className="my-3 text-base font-semibold leading-6 text-gray-900 text-center">
-                  Add your favorite sustainable place!
+              <div className="px-4 sm:px-0 flex flex-col items-center w-full text-center mx-auto ">
+                <h3 className="my-3 text-[1.8rem] font-semibold text-gray-900 text-center">
+                  Add your favorites! 
                 </h3>
-                <div className="flex ">
-                  <button
-                    className="my-2 h-10 px-6 mx-2 font-semibold rounded-md btn-accent"
-                    onClick={display}
-                  >
-                    Add
-                  </button>
-
-                  <Link to="/main2">
-                    <button
-                      className=" mx-2 my-2 h-10 px-6 font-semibold rounded-md btn-secondary"
-                      type="submit"
-                    >
-                      Categories
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              {btnShow && (
-                <form
-                  className="form bg-white p-6 rounded-lg shadow-md"
+                <div className="flex my-[5%] ">
+                <label htmlFor="my-modal" className="btn btn-primary w-[100px]  mx-5" onClick={displayModal} >Add</label>
+                  <input type="checkbox" id="my-modal" className="modal-toggle" />
+<div className="modal">
+  <div className="modal-box">
+  <div className="modal-action">
+      <label htmlFor="my-modal" className=""><AiFillCloseCircle/></label>
+    </div>
+  
+  <form
+                  className="form bg-white p-6 rounded-lg shadow-md relative "
                   onSubmit={handleSubmit}
                 >
+               {showSpinner && <div className='p-[20%] drop-shadow border-2 flex flex-col justify-center items-center bg-white  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                      <div className=" inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+</div>
+<span className='pt-[10%]'>Adding</span> </div>}
+
                   <div>
                     <label
-                      className="block text-gray-700 font-medium mb-2 font-semibold"
+                      className="text-left block text-gray-700 font-medium mb-2 font-semibold"
                       htmlFor="title"
                     >
-                      Title:
+                      Title *
                     </label>
                     <input
                       type="text"
                       id="title"
                       name="Title"
                       value={title}
-                      className="border border-gray-400 p-2 w-full mt-2"
+                      className="border border-gray-400 p-2 w-full mt-2 mb-5"
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
                   <div  className=" mb-1">
                     <label
-                      className="block text-gray-700 font-medium mt-2 mb-2 font-semibold"
+                      className="text-left block text-gray-700 font-medium mt-2 mb-2 font-semibold"
                       htmlFor="image"
                     >
-                      Image:
+                      Image *
                     </label>
                     <input
                       type="file"
                       id="image"
                       name="Image"
                       onChange={imageHundlechange}
+                      className='w-full'
                  
 
                     />
                   </div>
-                  <div  className=" mb-5">
-                     <p className='text-xs text-gray-500'>* Image should be jpg, jpeg or png</p>
-                     <p className='text-xs text-gray-500'>* Prefered image size is 1194px by 834px</p>
+                  <div  className=" mt-2 mb-5 text-left">
+                  <ul className='ml-[5%] list-disc'>
+                     <li className='text-xs text-gray-500 '>Image should be jpg, jpeg or png</li>
+                     <li className='text-xs text-gray-500'> Prefered image size is 1194px by 834px</li>
+                     </ul>
                   </div>
                   <div className="mb-4">
                     <label
                       htmlFor="WebsiteLink"
-                      className="block text-gray-700 font-medium mb-2 font-semibold"
+                      className="text-left block text-gray-700 font-medium mb-2 font-semibold"
                     >
-                       WebsiteLink:
+                       Website *
                     </label>
                     <input
                       type="text"
                       id="websiteLink"
                       name="WebsiteLink"
-                      className="border border-gray-400 p-2 w-full font-semibold"
+                      className="border border-gray-400 p-2 w-full font-semibold mb-5"
                       onChange={(e) => setWebsiteLink(e.target.value)}
                     />
                   </div>
                   <div>
                     <label
-                      className="block text-gray-700 font-medium mb-2 mt-2 font-semibold"
+                      className="text-left block text-gray-700 font-medium mb-2 mt-2 font-semibold"
                       htmlFor="summary"
                     >
-                      Summary:
+                      Summary *
                     </label>
                     <textarea
                       id="summary"
                       name="Summary"
-                      className="border border-gray-400 p-2 w-full"
+                      className="border border-gray-400 p-2 w-full mb-7"
                       onChange={(e) => setSummary(e.target.value)}
                     />
                   </div>
@@ -292,7 +293,7 @@ const Profile = ({ user, userId }) => {
                   </button>
                   {error && (
                     <div className="text-center mt-2 errorMessage text-red-500">
-                      * Fill out all the input fields
+                      Fill out all the input fields
                     </div>
                   )}
                   {formatError && (
@@ -301,10 +302,24 @@ const Profile = ({ user, userId }) => {
                     </div>
                   ) }
                 </form>
-              )}
+
+  </div>
+</div>
+
+                  <Link to="/main2">
+                    <button
+                      className="font-semibold btn w-[100px] mx-5 btn-secondary"
+                      type="submit"
+                    >
+                      Explore
+                    </button>
+                  </Link>
+                </div>
+              </div>
+    
             </div>
           </div>
-          <div className="grid max-w-[1000px] justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mb-[20%]">
+          {((!empty.allData) || (!empty.myFavList))&&(<div className="grid mt-[5%] mb-[20%] max-w-[1000px] justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {allData.map(
               (org) =>
                 favOrgIds.includes(org._id) && (
@@ -314,31 +329,39 @@ const Profile = ({ user, userId }) => {
                   >
                     <label htmlFor={org._id} className="w-full">
 
-                      <div onClick={()=>modalToggle(org._id)} className="hover:opacity-70 h-[320px] md:h-[220px] lg:h-[180px]">
+                      <div  className="cursor-pointer hover:opacity-70 h-[200px] md:h-[220px] lg:h-[180px]">
                         <img
                           className="rounded-md object-cover w-full h-full"
                           alt="fav-company"
                           src={org.Image}
                         />
                       </div>
-                      <h2 className="mt-3 text-lg">{org.Title}</h2>
+                      <h2 className="mt-3 text-[1.5rem] font-bold">{org.Title}</h2>
                     </label>
                     <div
                       onClick={() => removeItem(org._id)}
-                      className="trashIcon w-fit"
+                      className="trashIcon  relative ml-[90%] hover:text-blue-900 hover:text-lg"
                     >
-                      <i className="hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
+                      <i className=" fa-solid fa-trash-can"></i>
                     </div>
                   </div>
                 )
             )}
 
             {allData.map((org) => (
-              <div key={org._id} data-id={org._id} className='modalContainer hidden'>
+              favOrgIds.includes(org._id) && (
+              <div key={org._id} data-id={org._id} className=''>
+         
                 <input type="checkbox" id={org._id} className="modal-toggle" />
                 <div className="modal ">
                   <div className="modal-box">
+                  <div className="modal-action mt-0" >
+                      <label htmlFor={org._id} >
+                      <AiFillCloseCircle className="text-[1.5rem]" />
+                      </label>
+                    </div>
                     <p className="py-4">{org.Summary}</p>
+                    <p>
                     <a
                       className="py-4 font-semibold  underline hover:text-green-800"
                       href={org.WebsiteLink}
@@ -346,16 +369,13 @@ const Profile = ({ user, userId }) => {
                     >
                       Website
                     </a>
-                    <div className="modal-action" >
-                      <label htmlFor={org._id} className=""  >
-                      <AiFillCloseCircle className="text-sm" onClick={()=>modalToggle(org._id)}/>
-                      </label>
-                  
-                      
-                    </div>
+                    </p>
+                    
+            
                   </div>
                 </div>
               </div>
+              )
             ))}
 
             {myFavList.map((fav) => (
@@ -364,14 +384,14 @@ const Profile = ({ user, userId }) => {
                 className="w-full h-full max-w-[900px]w-full h-full max-w-[900px] bg-white border-2 border-secondary border-opacity-50 outline-none px-8 py-6 shadow transition-all duration-5 cursor-pointer rounded-5 border-3 border hover:shadow-lg hover:scale-108 active:shadow-md active:scale-95"
               >
                 <label htmlFor={fav._id} className="w-fulll">
-                  <div className="hover:opacity-70 h-[320px] md:h-[220px] lg:h-[180px]"  onClick={()=>modalToggle(fav._id)} >
+                  <div className="cursor-pointer hover:opacity-70 h-[200px] md:h-[220px] lg:h-[180px]">
                     <img className="rounded-md object-cover w-full h-full" alt="fav company" src={fav.Image} />
                   </div>
-                  <h2 className="mt-3 text-lg">{fav.Title}</h2>
+                  <h2 className="mt-3 text-[1.5rem] font-bold">{fav.Title}</h2>
                 </label>
                 <div
                   onClick={() => removeFavItem(fav._id)}
-                  className="trashIcon w-fit "
+                  className="trashIcon relative ml-[90%]"
                 >
                   <i className=" hover:text-blue-900 hover:text-lg fa-solid fa-trash-can"></i>
                 </div>
@@ -383,22 +403,23 @@ const Profile = ({ user, userId }) => {
                 <input type="checkbox" id={fav._id} className="modal-toggle " />
                 <div className="modal">
                   <div className="modal-box">
-                    <p className="py-4">{fav.Summary}</p>
-                    <p className="py-4 font-semibold  underline hover:text-green-800"><a href={fav.WebsiteLink}>Website</a></p>
-                    <div className="modal-action" onClick={()=>modalToggle(fav._id)}>
-                      <label htmlFor={fav._id} className="btn btn-primary">
-                        close!
+                  <div className="modal-action mt-0" >
+                      <label htmlFor={fav._id}>
+                      <AiFillCloseCircle className="text-[1.5rem]" />
                       </label>
                     </div>
+                    <p className="py-4">{fav.Summary}</p>
+                    <p className="py-4 font-semibold  underline hover:text-green-800"><a href={fav.WebsiteLink}>Website</a></p>
+                 
                   </div>
                 </div>
               </div>
             ))}
-          </div>
+          </div>)}
         </div>
 
         {empty.allData && empty.myFavList && (
-          <div className="text-center mt-10">Your list is empty</div>
+          <div className="bg-white rounded-md px-[7%] py-[10%] drop-shadow border-2 text-center w-[80%] mx-auto font-semibold text-[1rem] md:text-[1.2rem] max-w-[700px] mt-[20%] md:mt-[5%]">  <p>Build your sustainable list by adding companies you discover on Sustainable Hub or other places of your choice. Simply click the 'add' button to include them</p></div>
         )}
       </div>
     </>

@@ -41,8 +41,8 @@ function App() {
     <div className="App">
     <div className='subApp'>
       <BrowserRouter>
-        <Navbar user={user} setUser={setUser}/>
-        <div className="pages">
+        <Navbar className="h-[10vh]" user={user} setUser={setUser}/>
+        <div className="pages h-[75vh]">
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="main" element={<Main categoryData={allData} />} />

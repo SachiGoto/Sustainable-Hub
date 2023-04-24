@@ -42,7 +42,7 @@ const handleSubmit = async (e) =>{
         <div className=" flex m-auto flex-col w-85 ">
           <div>
             <div className="px-4 sm:px-0">
-              <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">Sign Up</h3>
+              <h3 className="text-[1.3rem] font-semibold text-gray-900 text-center">Sign Up</h3>
             </div>
           </div>
           <div className="mt-5">
@@ -111,7 +111,7 @@ const handleSubmit = async (e) =>{
                 <div className="px-4 py-3 text-center sm:px-6">
                   <button
                     type="submit"
-                    className="btn btn-accent"
+                    className="btn btn-accent mb-[5%]"
                   >
                     Submit
                   </button>

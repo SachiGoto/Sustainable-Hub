@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Main2 = ({ user, userId }) => {
   const [allData, setData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState();
   const [category, setCategory] = useState([]);
+  const [display, setDisplay] = useState(true);
   let likeBtns = document.querySelectorAll(".likeBtn");
 
   useEffect(() => {
@@ -86,10 +88,18 @@ const Main2 = ({ user, userId }) => {
     const json = await res.json();
     console.log(json)
   }
+  function showMessage(){
+      setDisplay(false)
+  }
 
   return (
     <>
-    <h3 className='font-bold text-natural w-full md:w-[70%] m-auto text-md md:text-lg text-center pt-[3%] my-[10%] sm:my-[2%]'>Here is a list of eco-friendly companies in Vancouver.<br/> You can add them in your favourite list! </h3>
+    <div className='h-[85vh] overflow-hidden'>
+    {display && <div className="indicator mt-[5%]  mx-auto block ">
+  <span className="indicator-item" ><AiFillCloseCircle onClick={showMessage} /></span> 
+  <div className="font-semibold text-[1rem] md:text-[1.1rem] w-full bg-white rounded-md  place-items-center drop-shadow px-[10%] py-[5%]">Here is a list of eco-friendly companies in Vancouver.<br/>  You can add them to your favorite list!</div>
+</div>}
+    {/* <h3 className='font-bold text-natural w-full md:w-[70%] m-auto text-md md:text-lg text-center pt-[3%] my-[10%] sm:my-[2%]'>Here is a list of eco-friendly companies in Vancouver.<br/>  You can add them to your favorite list!</h3> */}
     <div className="dropdown  ml-5 mt-[5%]  sm:block md:hidden">
   <label tabIndex={0} className="mb-[10%] sm:mb-[5%] btn hover:bg-transparent btn-primary">Categories</label>
   <ul tabIndex={0} className=" dropdown-content  mb-[3%] menu p-2 shadow bg-base-100 rounded-box w-52" onClick={onclickCategory}>
@@ -125,17 +135,19 @@ const Main2 = ({ user, userId }) => {
         </ul>
       </div>
       
-      <div className='orgList overflow-scroll text-sm max-w-[1200px] mx-auto  '>
+      <div className='h-[80vh] overflow-scroll max-w-[1200px] mx-auto md:grid md:grid-cols-2  '>
       {category.map((item) => (
-        <div className="dropShadow item my-8 md:my-8 md:mx-auto rounded-md md:w-[90%] py-[7%] md:py-[2%]  " key={item._id}>
-        <div className='mx-auto my-0 max-w-[450px] w-10/12 md:w-2/5 h-40vh'>
-          <div className="w-full h-full ">
-            <img className='object-contain rounded-md' alt={item.title} src={item.Image} />
+        <div className="dropShadow flex flex-col justify-center items-center my-8  md:mx-auto rounded-md md:w-[80%] md:justify-between py-[5%]" key={item._id}>
+        
+        <div className='flex flex-col justify-center items-center w-[95%] h-40vh'>
+        <h3 className="font-bold w-[80%] text-[2rem] mb-[2%] mx-auto text-center">{item.Title}</h3>
+          <div className="w-full h-full md:w-[80%] mx-auto  ">
+            <img className='object-contain rounded-md mx-auto  max-w-[450px] w-full' alt={item.title} src={item.Image} />
           </div>
-          </div>
-          <div className="itemContent md:w-[45%] w-10/12 ">
-           <div className='mt-3 md:mt-0 my-3 w-10/12'>
-            <h3 className="font-bold text-[2rem] my-[5%]">{item.Title}</h3>
+
+          <div className="w-[90%]  md:w-[80%] ">
+           <div className='mt-3 md:max-w-[450px]  md:mt-3 my-3 px-3%'>
+       
             <p className=''>{item.Summary}</p>
             </div>
             <div>
@@ -159,8 +171,12 @@ const Main2 = ({ user, userId }) => {
             </button>}
             </div>
           </div>
+
+          </div>
+         
         </div>
       ))}
+      </div>
       </div>
     </>
   );

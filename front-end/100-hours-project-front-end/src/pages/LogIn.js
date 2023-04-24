@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = ({ user, setUser, userId, setUserId }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -42,8 +43,8 @@ const Login = ({ user, setUser, userId, setUserId }) => {
         <div className="flex m-auto flex-col w-85">
           <div>
             <div className="px-4 sm:px-0">
-              <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
-                Login Page
+              <h3 className="text-[1.3rem] font-semibold leading-6 text-gray-900 text-center">
+                Login
               </h3>
             </div>
           </div>
@@ -93,7 +94,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
                 <div className="px-4 py-3 text-center sm:px-6">
                   <button
                     type="submit"
-                    className="btn btn-secondary py-2 px-3"
+                    className="btn btn-secondary py-2 px-3 mb-[2%]"
                   >
                     Submit
                   </button>
