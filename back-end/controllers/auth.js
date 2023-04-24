@@ -36,6 +36,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log('logged in ', user)
       return res.json({ login: true, user: user });
     });
   })(req, res, next);

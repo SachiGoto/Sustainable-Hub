@@ -20,11 +20,11 @@ const Profile = ({ user, userId }) => {
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
-    fetch("/list")
+    fetch("https://sustainable-hub-backend.herokuapp.com/list")
       .then((responseAllData) => responseAllData.json())
       .then((allData) => {setAllData(allData);});
 
-    fetch("/getFavorite")
+    fetch("https://sustainable-hub-backend.herokuapp.com/getFavorite")
       .then((allData) => allData.json())
       .then((resJsonData) => {
         setMyFavList(resJsonData);
@@ -36,7 +36,7 @@ const Profile = ({ user, userId }) => {
         });
       });
 
-      fetch("/login")
+      fetch("https://sustainable-hub-backend.herokuapp.com/login")
       .then((response) => response.json())
       .then((resJson) => {
         setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
@@ -64,7 +64,7 @@ const Profile = ({ user, userId }) => {
     let updateFavOrg = { userId, orgId };
 
     try {
-      const res = await fetch("/deleteFavoriteOrg", {
+      const res = await fetch("https://sustainable-hub-backend.herokuapp.com/deleteFavoriteOrg", {
         method: "PUT",
         body: JSON.stringify({ updateFavOrg }),
         headers: {
@@ -78,7 +78,7 @@ const Profile = ({ user, userId }) => {
       console.error("Error:", error);
     }
 
-    fetch("/login")
+    fetch("https://sustainable-hub-backend.herokuapp.com/login")
       .then((response) => response.json())
       .then((resJson) => {
         setFavOrgIds(resJson.user.favOrg.map((org) => org.list_id));
@@ -97,13 +97,13 @@ const Profile = ({ user, userId }) => {
   }
 
   async function removeFavItem(favId) {
-    const res = await fetch("/deleteMyFavOrg/" + favId, {
+    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/deleteMyFavOrg/" + favId, {
       method: "DELETE",
     });
 
     await res.json();
 
-    fetch("/getFavorite")
+    fetch("https://sustainable-hub-backend.herokuapp.com/getFavorite")
       .then((allData) => allData.json())
       .then((resJsonData) => {
         setMyFavList(resJsonData);
@@ -144,12 +144,12 @@ const Profile = ({ user, userId }) => {
       setFormatError(true)
     } else {
       try {
-       await fetch("/addFavorite", {
+       await fetch("https://sustainable-hub-backend.herokuapp.com/addFavorite", {
           method: "POST",
           body: formData,
         });
 
-        const myFavOrg = await fetch("/getFavorite");
+        const myFavOrg = await fetch("https://sustainable-hub-backend.herokuapp.com/getFavorite");
         const responseAllData = myFavOrg;
         const resJsonData = await responseAllData.json();
         document.querySelector(".modal").style.visibility='hidden';

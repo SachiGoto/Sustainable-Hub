@@ -12,7 +12,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loginForm = { email, password };
-    const res = await fetch("/login", {
+    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/login", {
       method: "POST",
       body: JSON.stringify(loginForm),
       headers: {
@@ -24,12 +24,13 @@ const Login = ({ user, setUser, userId, setUserId }) => {
     setMessage(json);
     if (!res.ok) {
     } else {
+      console.log('what is in json?', json)
       if (json.login) {
         setUser(json.user.userName);
         setUserId(json.user._id);
         // localStorage.setItem("user", json.user.userName);
         // localStorage.setItem("userId", json.user._id);
-        navigate("/profile");
+        navigate("/main2");
         console.log("You are logged in.");
       } else {
         console.log("message ", json);

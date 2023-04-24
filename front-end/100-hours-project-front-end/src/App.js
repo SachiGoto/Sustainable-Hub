@@ -8,6 +8,7 @@ import Admin from "./pages/Admin";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
+import Footer from "./pages/Footer";
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
         <div className="pages h-[75vh]">
           <Routes>
             <Route path="/" element={<Home user={user} />} />
-            <Route path="main" element={<Main categoryData={allData} />} />
+            {/* <Route path="main" element={<Main categoryData={allData} />} /> */}
             <Route path="main2" element={<Main2 user={user} userId={userId} />} />
             <Route path="admin" element={<Admin />} />
             <Route path="signup" element={<SignUp user={user} />} />
@@ -59,6 +60,7 @@ function App() {
             />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </div>
 

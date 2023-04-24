@@ -13,7 +13,7 @@ const Main2 = ({ user, userId }) => {
     let all = document.querySelectorAll('[data-category = All]');
     all[1].classList.add('btn-active')
 
-    fetch("/list")
+    fetch("https://sustainable-hub-backend.herokuapp.com/list")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -22,9 +22,10 @@ const Main2 = ({ user, userId }) => {
 
       .catch((error) => console.error(error));
 
-    fetch("/login")
+    fetch("https://sustainable-hub-backend.herokuapp.com/login")
       .then((response) => response.json())
       .then((data) => {
+        console.log('checking if you are longed in ', data)
         if (data.user) {
           // get favorite organization ids
           setFavOrgIds(data.user.favOrg.map((org) => org.list_id));
@@ -34,11 +35,7 @@ const Main2 = ({ user, userId }) => {
 
   if (user) {
     likeBtns.forEach((data, index) => {
-      likeBtns[index].firstChild.style.color = favOrgIds.includes(
-        data.getAttribute("data-org-id")
-      )
-        ? "red"
-        : "black";
+      likeBtns[index].firstChild.style.color = favOrgIds.includes(data.getAttribute("data-org-id"))?"red": "black";
     });
   }
 
@@ -77,7 +74,7 @@ const Main2 = ({ user, userId }) => {
     });
 
     let updateFavOrg = { userId, favOrg };
-    const res = await fetch("/favoriteOrg", {
+    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/favoriteOrg", {
       method: "PUT",
       body: JSON.stringify({ updateFavOrg }),
       headers: {
