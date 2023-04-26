@@ -4,16 +4,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 const Main2 = ({ user, userId }) => {
   const [allData, setData] = useState([]);
-  const [favOrgIds, setFavOrgIds] = useState();
+  const [favOrgIds, setFavOrgIds] = useState([]);
   const [category, setCategory] = useState([]);
   const [display, setDisplay] = useState(true);
   let likeBtns = document.querySelectorAll(".likeBtn");
 
+
+
   useEffect(() => {
     let all = document.querySelectorAll('[data-category = All]');
     all[1].classList.add('btn-active')
-
-    fetch("https://sustainable-hub-backend.herokuapp.com/list")
+   
+    fetch("/list")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -22,19 +24,24 @@ const Main2 = ({ user, userId }) => {
 
       .catch((error) => console.error(error));
 
-    fetch("https://sustainable-hub-backend.herokuapp.com/login")
+    fetch('/login')
       .then((response) => response.json())
       .then((data) => {
-        console.log('checking if you are longed in ', data)
+        console.log('checking if you are longed in ')
         if (data.user) {
           // get favorite organization ids
+         
           setFavOrgIds(data.user.favOrg.map((org) => org.list_id));
         }
       });
   }, []);
 
+  console.log('favordIds ' , favOrgIds)
+
   if (user) {
+   
     likeBtns.forEach((data, index) => {
+    
       likeBtns[index].firstChild.style.color = favOrgIds.includes(data.getAttribute("data-org-id"))?"red": "black";
     });
   }
@@ -65,6 +72,7 @@ const Main2 = ({ user, userId }) => {
     }
 
     likeBtns.forEach((data, index) => {
+      console.log('like button is clicked')
       // if a user has liked the org, make the like btn in red otherwise, stay in black.
       if (favOrgIds.includes(data.getAttribute("data-org-id"))) {
         likeBtns[index].firstChild.style.color = "red";
@@ -74,7 +82,7 @@ const Main2 = ({ user, userId }) => {
     });
 
     let updateFavOrg = { userId, favOrg };
-    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/favoriteOrg", {
+    const res = await fetch("/favoriteOrg", {
       method: "PUT",
       body: JSON.stringify({ updateFavOrg }),
       headers: {
@@ -82,12 +90,16 @@ const Main2 = ({ user, userId }) => {
       },
     });
 
+ 
     const json = await res.json();
     console.log(json)
   }
   function showMessage(){
       setDisplay(false)
   }
+
+ console.log('user is ' ,user)
+
 
   return (
     <>

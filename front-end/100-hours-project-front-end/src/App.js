@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
       const checkLogin = async () => {
-      const response = await fetch("/login");
+      const response = await fetch(process.env.REACT_APP_API_URL + "/login");
       const json = await response.json();
       setUser(json.user.userName);
       setUserId(json.user._id)
@@ -29,7 +29,7 @@ function App() {
     console.log(userId, user)
 
     const fetchAllData = async () => {
-      const response = await fetch("/list");
+      const response = await fetch(process.env.REACT_APP_API_URL + "/list");
       const json = await response.json();
       if (response.ok) setAllData(json);
     };

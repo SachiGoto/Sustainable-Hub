@@ -6,7 +6,7 @@ import bcFlag from '../assets/bcFlag.png';
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
   async function logOut() {
-    await fetch("/logout");
+    await fetch(process.env.REACT_APP_API_URL + "/logout");
     await setUser(null);
     navigate("/");
   }

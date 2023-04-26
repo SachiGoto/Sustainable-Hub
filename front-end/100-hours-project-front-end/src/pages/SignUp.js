@@ -15,7 +15,7 @@ const navigate = useNavigate();
 const handleSubmit = async (e) =>{
    e.preventDefault()
    const signUp = {userName,email,password,confirmPassword }
-   const res = await fetch('https://sustainable-hub-backend.herokuapp.com/signup',{
+   const res = await fetch('/signup',{
         method:'POST',
         body:JSON.stringify(signUp),
         headers:{

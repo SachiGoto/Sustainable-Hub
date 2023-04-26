@@ -17,7 +17,7 @@ const Admin = () => {
     formData.append("Summary", summary);
 
     try {
-      fetch("https://sustainable-hub-backend.herokuapp.com/addList", {
+      fetch("/addList", {
         method: "POST",
         body: formData,
       });
