@@ -100,6 +100,7 @@ module.exports = {
         Category: req.body.Category,
         WebsiteLink: req.body.WebsiteLink,
         Summary: req.body.Summary,
+        Tags:req.body.Tags,
       });
 
       res.status(200).json(list);

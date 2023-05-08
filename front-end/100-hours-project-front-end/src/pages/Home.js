@@ -18,7 +18,7 @@ const Home = () => {
               <Link to="main2"> Discover </Link>
             </button>
           </div>
-          <div className="home-image z-30">
+          <div className="home-image w-[60%] md:w-[50%] z-30">
             <img src={logo} alt="hero" />
           </div>
         </div>

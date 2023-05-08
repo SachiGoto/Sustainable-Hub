@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import canadianFlag from '../assets/canadianFlag.png';
+// import canadianFlag from '../assets/canadianFlag.png';
 import bcFlag from '../assets/bcFlag.png';
 
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
   async function logOut() {
+    
     await fetch("/logout");
     await setUser(null);
     navigate("/");

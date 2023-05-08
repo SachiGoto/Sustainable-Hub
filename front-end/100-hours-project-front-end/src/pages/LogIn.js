@@ -12,7 +12,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loginForm = { email, password };
-    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/login", {
+    const res = await fetch("/login", {
       method: "POST",
       body: JSON.stringify(loginForm),
       headers: {

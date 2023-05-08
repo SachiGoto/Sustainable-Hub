@@ -39,8 +39,10 @@ app.set("view engine", "ejs");
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
  next();
 });
+
 
 
 //Body Parsing
@@ -71,8 +73,13 @@ app.use(passport.session());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 
+// Serve frontend files
+app.use(express.static('./build'))
+// app.use("/main2", express.static('./build'))
 
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });
+
+

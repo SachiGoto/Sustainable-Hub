@@ -4,7 +4,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 const Main2 = ({ user, userId }) => {
   const [allData, setData] = useState([]);
-  const [favOrgIds, setFavOrgIds] = useState();
+  const [favOrgIds, setFavOrgIds] = useState([]);
   const [category, setCategory] = useState([]);
   const [display, setDisplay] = useState(true);
   let likeBtns = document.querySelectorAll(".likeBtn");
@@ -13,7 +13,7 @@ const Main2 = ({ user, userId }) => {
     let all = document.querySelectorAll('[data-category = All]');
     all[1].classList.add('btn-active')
 
-    fetch("https://sustainable-hub-backend.herokuapp.com/list")
+    fetch("/list")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -22,7 +22,7 @@ const Main2 = ({ user, userId }) => {
 
       .catch((error) => console.error(error));
 
-    fetch("https://sustainable-hub-backend.herokuapp.com/login")
+    fetch( process.env.REACT_APP_API_URL  + "/login")
       .then((response) => response.json())
       .then((data) => {
         console.log('checking if you are longed in ', data)
@@ -74,7 +74,7 @@ const Main2 = ({ user, userId }) => {
     });
 
     let updateFavOrg = { userId, favOrg };
-    const res = await fetch("https://sustainable-hub-backend.herokuapp.com/favoriteOrg", {
+    const res = await fetch("/favoriteOrg", {
       method: "PUT",
       body: JSON.stringify({ updateFavOrg }),
       headers: {
@@ -91,10 +91,10 @@ const Main2 = ({ user, userId }) => {
 
   return (
     <>
-    <div className='h-[85vh] overflow-hidden'>
-    {display && <div className="indicator mt-[5%]  mx-auto block ">
-  <span className="indicator-item" ><AiFillCloseCircle onClick={showMessage} /></span> 
-  <div className="font-semibold text-[1rem] md:text-[1.1rem] w-full bg-white rounded-md  place-items-center drop-shadow px-[10%] py-[5%]">Here is a list of eco-friendly companies in Vancouver.<br/>  You can add them to your favorite list!</div>
+    <div className='h-[85vh] w-[80%] md:w-[100%]   md:-w-full  mx-auto overflow-hidden'>
+    {display && <div className="w-[70%] max-w-[500px;] md:w-[90%] px-[2%] indicator mt-[5%]  mx-auto block ">
+  <span className="indicator-item " ><AiFillCloseCircle onClick={showMessage} /></span> 
+  <div className="font-semibold text-[1rem] md:text-[1.1rem]  w-full bg-white rounded-md  place-items-center drop-shadow px-[8%] md:px-[10%] py-[5%]"><p>Here is a list of eco-friendly companies in Vancouver.<br/>  You can add them to your favorite list!</p></div>
 </div>}
     {/* <h3 className='font-bold text-natural w-full md:w-[70%] m-auto text-md md:text-lg text-center pt-[3%] my-[10%] sm:my-[2%]'>Here is a list of eco-friendly companies in Vancouver.<br/>  You can add them to your favorite list!</h3> */}
     <div className="dropdown  ml-5 mt-[5%]  sm:block md:hidden">
@@ -132,7 +132,7 @@ const Main2 = ({ user, userId }) => {
         </ul>
       </div>
       
-      <div className='h-[80vh] overflow-scroll max-w-[1200px] mx-auto md:grid md:grid-cols-2  '>
+      <div className='pb-[50%] md:pb-[30%] h-[80vh] overflow-scroll max-w-[1200px] mx-auto md:grid md:grid-cols-2 '>
       {category.map((item) => (
         <div className="dropShadow flex flex-col justify-center items-center my-8  md:mx-auto rounded-md md:w-[80%] md:justify-between py-[5%]" key={item._id}>
         
@@ -147,7 +147,7 @@ const Main2 = ({ user, userId }) => {
        
             <p className=''>{item.Summary}</p>
             </div>
-            <div>
+            <div className="mb-3">
             {/* <div className="badge badge-primary">primary</div> */}
             <a
               href={item.WebsiteLink}
@@ -166,6 +166,12 @@ const Main2 = ({ user, userId }) => {
             >
               <i className="fa-regular fa-heart "></i>
             </button>}
+            </div>
+            <div>
+
+
+            {item.Tags && item.Tags[0].includes(",")&&item.Tags[0].split(",").map((tag)=>(<div className="badge badge-outline mr-2">{tag}</div>))}{item.Tags && !item.Tags[0].includes(",")&&<div className="badge badge-outline mr-2">{item.Tags}</div>}
+
             </div>
           </div>
 

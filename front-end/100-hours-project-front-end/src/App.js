@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
-import Main from "./pages/Main";
+// import Main from "./pages/Main";
 import Main2 from "./pages/Main2";
 import Navbar from "./components/Navbar";
 import Admin from "./pages/Admin";
@@ -12,38 +12,42 @@ import Footer from "./pages/Footer";
 
 
 function App() {
-  const [allData, setAllData] = useState(null);
+  // const [allData, setAllData] = useState(null);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-      const checkLogin = async () => {
-      const response = await fetch("/login");
-      const json = await response.json();
+    fetch("/login")
+    .then(response => response.json()) 
+    .then(json =>{
       setUser(json.user.userName);
       setUserId(json.user._id)
+      console.log(userId, user)
+    }, [])
+     
+    
+
 
     
-    };
 
-    console.log(userId, user)
+    // const fetchAllData = async () => {
+    //   const response = await fetch("/list");
+    //   const json = await response.json();
+    //   if (response.ok) setAllData(json);
+    // };
+    // checkLogin();
+    // fetchAllData();
+  }, [user, userId]);
 
-    const fetchAllData = async () => {
-      const response = await fetch("/list");
-      const json = await response.json();
-      if (response.ok) setAllData(json);
-    };
-    checkLogin();
-    fetchAllData();
-  }, []);
+  console.log('user', user)
 
   return (
  <>
     <div className="App">
     <div className='subApp'>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar className="h-[10vh]" user={user} setUser={setUser}/>
-        <div className="pages h-[75vh]">
+        <div className="pages">
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             {/* <Route path="main" element={<Main categoryData={allData} />} /> */}
@@ -60,8 +64,8 @@ function App() {
             />
           </Routes>
         </div>
-        <Footer />
-      </BrowserRouter>
+   
+      </HashRouter>
     </div>
 
     </div>

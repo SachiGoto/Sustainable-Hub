@@ -17,6 +17,10 @@
    
 }
 
+.subApp{
+  min-height:100vh;
+}
+
 
 .home-text{
   animation:display 4s ease;
@@ -96,7 +100,6 @@
 .home-image {
   position: absolute;
   right: 0;
-  width: 100%;
   bottom: 0;
   /* z-index: 1; */
 }
@@ -249,17 +252,17 @@ header {
       justify-content: center;
     } */
   
-    .home-image {
+    /* .home-image {
       position: absolute;
       right: 0;
       width: 70%;
       max-width: 685px;
       bottom: 0;
-    }
+    } */
   
-    .home-image img {
+    /* .home-image img {
       width: 100%;
-    }
+    } */
   }
 
 @media only screen and (min-width: 768px) {

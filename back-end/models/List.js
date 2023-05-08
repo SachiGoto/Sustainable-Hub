@@ -29,6 +29,10 @@ const ListSchema = new mongoose.Schema({
         required: true,
       
   }, 
+  Tags: [{
+    type: String
+  }],
+
   createdAt: {
     type: Date,
     default: Date.now,

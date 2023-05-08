@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
+    "build-frontend": "rm -rf build && cd ../front-end/100-hours-project-front-end && npm run build && cp -a ./build ../../back-end/build/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
