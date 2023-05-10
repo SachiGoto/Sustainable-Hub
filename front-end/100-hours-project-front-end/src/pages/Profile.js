@@ -18,6 +18,7 @@ const Profile = ({ user, userId }) => {
   const [formatError, setFormatError] = useState(false);
   const [empty, setEmpty] = useState({ allData: false, myFavList: false });
   const [showSpinner, setShowSpinner] = useState(false);
+  
 
   useEffect(() => {
     fetch("/list")
@@ -183,10 +184,12 @@ const Profile = ({ user, userId }) => {
     document.querySelector(".modal").style.visibility='visible';
   }
 
+
+
   return (
     <>
-
-      <div className="md:mt-8 ">
+     
+     <div className="md:mt-8 ">
 
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center w-4/5">
@@ -422,6 +425,7 @@ const Profile = ({ user, userId }) => {
           <div className="bg-white rounded-md px-[7%] py-[10%] drop-shadow border-2 text-center w-[80%] mx-auto font-semibold text-[1rem] md:text-[1.2rem] max-w-[700px] mt-[20%] md:mt-[5%]">  <p>Build your sustainable list by adding companies you discover on Sustainable Hub or other places of your choice. Simply click the 'add' button to include them</p></div>
         )}
       </div>
+      
     </>
   );
 };
