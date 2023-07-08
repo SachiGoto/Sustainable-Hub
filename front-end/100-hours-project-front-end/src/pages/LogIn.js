@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Login = ({ user, setUser, userId, setUserId }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -24,12 +23,10 @@ const Login = ({ user, setUser, userId, setUserId }) => {
     setMessage(json);
     if (!res.ok) {
     } else {
-      console.log('what is in json?', json)
+      console.log("what is in json?", json);
       if (json.login) {
         setUser(json.user.userName);
         setUserId(json.user._id);
-        // localStorage.setItem("user", json.user.userName);
-        // localStorage.setItem("userId", json.user._id);
         navigate("/main2");
         console.log("You are logged in.");
       } else {

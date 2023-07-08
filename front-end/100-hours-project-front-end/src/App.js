@@ -24,19 +24,7 @@ function App() {
       setUserId(json.user._id)
       console.log(userId, user)
     }, [])
-     
-    
 
-
-    
-
-    // const fetchAllData = async () => {
-    //   const response = await fetch("/list");
-    //   const json = await response.json();
-    //   if (response.ok) setAllData(json);
-    // };
-    // checkLogin();
-    // fetchAllData();
   }, [user, userId]);
 
   console.log('user', user)

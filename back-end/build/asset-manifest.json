@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.04567fcc.css",
-    "main.js": "/static/js/main.6b141de6.js",
+    "main.css": "/static/css/main.fb7ef742.css",
+    "main.js": "/static/js/main.ac849420.js",
     "static/media/vancouver.jpg": "/static/media/vancouver.26a355c12488dfd55049.jpg",
     "static/media/person.png": "/static/media/person.684da95a58b8e17ac0a5.png",
     "static/media/bcFlag.png": "/static/media/bcFlag.cc6d153a2f315ee1dd2d.png",
     "index.html": "/index.html",
-    "main.04567fcc.css.map": "/static/css/main.04567fcc.css.map",
-    "main.6b141de6.js.map": "/static/js/main.6b141de6.js.map"
+    "main.fb7ef742.css.map": "/static/css/main.fb7ef742.css.map",
+    "main.ac849420.js.map": "/static/js/main.ac849420.js.map"
   },
   "entrypoints": [
-    "static/css/main.04567fcc.css",
-    "static/js/main.6b141de6.js"
+    "static/css/main.fb7ef742.css",
+    "static/js/main.ac849420.js"
   ]
 }
