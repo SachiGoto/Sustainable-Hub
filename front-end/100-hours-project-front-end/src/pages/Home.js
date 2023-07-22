@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
+import Timeline from "../components/Timeline";
 import logo from "../assets/person.png";
 
 const Home = () => {
   return (
-    <div className="mt-[10%] md:mt-0 home-container mx-auto flex flex-col justify-start sm:justify-start items-center md:justify-center h-[75vh] ">
-      <h2 className="home-title text-center font-bold text-[#3b4b3b] text-[1.3rem] sm:text-[1.8rem] md:text-[2.2rem] lg:text-[2.5rem] pb-[2%]">
+    <>    <div className="mt-[10%] md:mt-0 home-container mx-auto flex flex-col justify-start sm:justify-start items-center md:justify-center h-[75vh] ">
+      <h1 className="home-title text-center font-bold text-[#3b4b3b] text-[1.3rem] sm:text-[1.8rem] md:text-[2.2rem] lg:text-[2.5rem] pb-[2%]">
         Small changes, big impact <br /> Go green in your daily routine
-      </h2>
+      </h1>
       <div className="home-text bg-zinc-50 px-[10%] py-[5%] rounded-tl-[30px] rounded-br-[30px] ">
-        <h3 className="text-lg font-semibold pb-5">
+        <p className="text-lg font-semibold pb-5">
           Welcom to Sustainable Hub!
-        </h3>
+        </p>
         <p className="pb-5 text-sm md:text-base ">
           Sustainable Hub provides a list of eco-friendly local businesses in
           Vancouver and designed to help people live their lives in more
@@ -26,7 +27,12 @@ const Home = () => {
       <div className="home-image w-[60%] md:w-[50%] z-30">
         <img src={logo} alt="hero" />
       </div>
+
+
     </div>
+    <Timeline />
+    </>
+
   );
 };
 
