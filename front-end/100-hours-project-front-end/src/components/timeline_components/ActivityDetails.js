@@ -1,4 +1,3 @@
-import {useState, useEffect} from "react"
 
 const ActivityDetails = ({details}) => {
   
@@ -7,14 +6,15 @@ const ActivityDetails = ({details}) => {
 
   
   return (
-      <>
-       <div className={"relative"}>
-             <span className="text-white text-xl"><a href="#">{details?.name}</a></span>
-             <p className="text-white relative z-10">{details?.description}</p>   
-             <img src={details?.img} className="w-[100%] h-[100%] absolute z-0 top-0"/>
+    <>
+      <div className="flex w-[300px] md:w-[500px] h-[400px] flex-col md:flex-row justify-center items-center">
+        <p className="w-[100%] md:w-[50%]">{details?.description}</p>
+        <div className="w-[100%] md:w-[50%] flex md:h-[100%]">
+          <img src={details?.img} className="w-full h-full object-cover" />
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
   };
   
   export default ActivityDetails;
