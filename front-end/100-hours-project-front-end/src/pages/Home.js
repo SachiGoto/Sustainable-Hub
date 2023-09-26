@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Timeline from "../components/Timeline";
 import logo from "../assets/person.png";
 
 const Home = () => {
@@ -30,7 +29,7 @@ const Home = () => {
 
 
     </div>
-    <Timeline />
+    
     </>
 
   );
