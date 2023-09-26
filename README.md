@@ -1,6 +1,6 @@
 # Sustainable-Hub
 
-<img src="https://media.giphy.com/media/NoV0M0idoTUfv1AGYW/giphy.gif" width="100%" alt=" Sustainable Hub" >
+<img src="https://media.giphy.com/media/NoV0M0idoTUfv1AGYW/giphy.gif" width="500px" alt=" Sustainable Hub" >
 
 
  <a href="https://sustainable-hub-backend.herokuapp.com/">Visit</a>
@@ -39,17 +39,10 @@ This app, Sustainable Hub is designed to help people live a more sustainable lif
 
 ## Technologies
 <div style="display:inline-flex;>
-<img src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/192158956-48192682-23d5-4bfc-9dfb-6511ade346bc.png" width="50" />
-<img src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png" width="50" />
-<img src="https://cloudinary-res.cloudinary.com/image/upload/website/cloudinary_web_favicon.png" width="50" />
-<img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" width="50" />
-<img src="https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg" width="50" />
+ 
+<img src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" width="50" />
+
+ 
 </div>
 
 <p>Images are stored in the cloud using Cloudinary. It provides an URL for each image so we only store the URLs in the database instead of image themselves. This significantly reduces the amount of data stored. 
