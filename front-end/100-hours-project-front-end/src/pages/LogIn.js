@@ -7,7 +7,6 @@ const Login = ({ user, setUser, userId, setUserId }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loginForm = { email, password };
@@ -27,7 +26,7 @@ const Login = ({ user, setUser, userId, setUserId }) => {
       if (json.login) {
         setUser(json.user.userName);
         setUserId(json.user._id);
-        navigate("/main2");
+        navigate("/main");
         console.log("You are logged in.");
       } else {
         console.log("message ", json);

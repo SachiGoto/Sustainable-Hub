@@ -5,14 +5,12 @@ import "react-tagsinput/react-tagsinput.css";
 const Admin = () => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState();
-  const [updateTitle, setUpdateTitle] = useState();
   const [category, setCategory] = useState();
   const [websiteLink, setWebsiteLink] = useState();
   const [summary, setSummary] = useState();
   const [showSpinner, setShowSpinner] = useState(false);
   const [tags, setTags] = useState([]);
   const [display, setDisplay] = useState(false);
-
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
@@ -83,8 +81,6 @@ const Admin = () => {
 
   const handleChange = (tags) => {
     setTags(tags);
-
-    console.log(tags);
   };
 
   function displayForm() {
@@ -114,8 +110,6 @@ const Admin = () => {
       })
     );
   }
-
-  console.log("updated all data is ", allData);
 
   return (
     <>
@@ -287,13 +281,6 @@ const Admin = () => {
             </td>
             <td className="col-span-3 md:col-span-2">
               <img src={data.Image} alt={data.title} className="" />
-              {/* <input
-            type="file"
-            id="image"
-            name="Image"
-            onChange={imageHundlechange}
-            className=" my-5"
-          /> */}
             </td>
             <td className="col-span-3">
               <TagsInput

@@ -20,16 +20,13 @@ const Home = () => {
           Let's see eco-friendly businesses located in Vancouver!
         </p>
         <button className="btn btn-secondary mt-7 " type="submit">
-          <Link to="main2"> Discover </Link>
+          <Link to="main"> Discover </Link>
         </button>
       </div>
       <div className="home-image w-[60%] md:w-[50%] z-30">
         <img src={logo} alt="hero" />
       </div>
-
-
     </div>
-    
     </>
 
   );

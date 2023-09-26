@@ -4,28 +4,20 @@ const Lists = require("../models/List");
 const FavList = require("../models/MyFavs");
 const User = require("../models/User");
 
-
 module.exports = {
-
-  deleteMyFavOrg:async(req,res)=>{
+  deleteMyFavOrg: async (req, res) => {
     try {
-      console.log('req.params.id is ' , req.params.id)
+      console.log("req.params.id is ", req.params.id);
       // Find post by id
       let myFavOrg = await FavList.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(myFavOrg.cloudinaryId);
       // Delete post from db
       await FavList.remove({ _id: req.params.id });
-      console.log("Deleted Recipe");
-      res.json('item removed')
-      // res.redirect("/profile");
+      res.json("item removed");
     } catch (err) {
-      res.json(err)
-      // res.redirect("/profile");
+      res.json(err);
     }
-
-
-
   },
 
   deleteFavoriteOrg: async (req, res) => {
@@ -35,15 +27,15 @@ module.exports = {
       let findOrg = favOrgArray.find((org) => {
         return org.list_id == req.body.updateFavOrg.orgId;
       });
-      
-        const updatedFavOrg = await User.updateOne(
-          { _id: req.user._id },
-          {
-            $pull: { favOrg: { list_id: req.body.updateFavOrg.orgId } },
-          }
-        );
- 
-      res.json('item deleted')
+
+      const updatedFavOrg = await User.updateOne(
+        { _id: req.user._id },
+        {
+          $pull: { favOrg: { list_id: req.body.updateFavOrg.orgId } },
+        }
+      );
+
+      res.json("item deleted");
     } catch (err) {
       console.log(err);
     }
@@ -100,7 +92,7 @@ module.exports = {
         Category: req.body.Category,
         WebsiteLink: req.body.WebsiteLink,
         Summary: req.body.Summary,
-        Tags:req.body.Tags,
+        Tags: req.body.Tags,
       });
 
       res.status(200).json(list);
@@ -120,7 +112,7 @@ module.exports = {
         cloudinaryId: result.public_id,
         WebsiteLink: req.body.WebsiteLink,
         Summary: req.body.Summary,
-        User:req.body.User,
+        User: req.body.User,
       });
 
       res.status(200).json(list);
@@ -133,16 +125,12 @@ module.exports = {
 
   getFavList: async (req, res) => {
     try {
-      // const user = await FavList.find({ user: req.user.id });
-      console.log('req.user is ' , req.user._id)
-      const favorites = await FavList.find({ User: req.user._id }).sort({createdAt: "desc"}).populate('favlists');
-      console.log(favorites);
-      
-      res.json(favorites)
+      const favorites = await FavList.find({ User: req.user._id })
+        .sort({ createdAt: "desc" })
+        .populate("favlists");
+      res.json(favorites);
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 };
-
-
