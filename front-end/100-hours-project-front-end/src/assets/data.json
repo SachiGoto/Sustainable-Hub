@@ -1,0 +1,135 @@
+  
+   [
+  
+     [
+      {
+"periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+"period":"Morning"
+      },
+      {
+        "name": "Personal Care",
+        "icon": "faShower",
+        "business": {
+          "activity": "Brushing Teeth - Natures Bodega ",
+          "logo": "https://tracksbistro.ca/images/logo.png",
+          "img": "https://images.unsplash.com/photo-1592372554345-22ced975691d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1876&q=80",
+          "description": "Do you still use plastic toothbrush that will take 400 years to decompose? Switch to bamboo toothbrushes that are biodegradable and compostable. They are also naturally antimicrobial and anti-fungal, making them more hygienic than plastic toothbrushes. Bamboo toothbrushes are also a great way to reduce your plastic waste. You can get bambootooth brush from 'Natures Bodega', 'London Drugs', 'Whole Foods, 'Shoppers'" 
+        }
+      },
+      {
+        "name": "Coffee",
+        "icon": "faCoffee",
+        "business": {
+          "activity": "Get a coffee - Reusables",
+          "logo": "https://tracksbistro.ca/images/logo.png",
+          "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1694844244/coffee_hkthlm.jpg",
+          "description": "Do you get coffee from coffee shop? Bring your own reusable cup or go to coffee shops that are partnered with Reusables and get your coffee in Reusables's cup! Reusables is partnered with JJ beans, Bean Around The World, Matchstick coffee, Honolulu coffee and so much more!'"
+        }
+      },
+
+      {
+        "name": "Commute",
+        "icon": "faBicycle",
+        "business": {
+          "activity": "Commute to work - Mobi",
+          "logo": "https://tracksbistro.ca/images/logo.png",
+          "img": "https://www.mobibikes.ca/sites/default/files/davidniddrie-mobi-sep2020-kitsilano-web-4721.jpg",
+          "description": "Do you commute to work every day? Why don't you consider using bike or walking to work? Mobi is great for commute! You can get Mobi from Mobi stations around the city. You can also get Mobi from Mobi app. Also, it's good for the environment!"
+        }
+      }
+    ],
+     [
+       {
+         "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+         "period": "Afternoon"
+       },
+       {
+         "name": "Lunch",
+         "icon": "faShower",
+         "business": {
+           "activity": "Get Lunch - Reusables",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://elevatehub.ca/wp-content/uploads/2021/02/IMG_5898flip_300x.png",
+           "description": "Looking to grab quick lunch? Order lunch from a restaurant that is partnered with Reusables! They will pack your oder in Reusables containers! No Waste!"
+         }
+       },
+       {
+         "name": "Groceries",
+         "icon": "faCoffee",
+         "business": {
+           "activity": "Package Free Groceries",
+           "logo": "https://media-cdn.tripadvisor.com/media/photo-s/09/8e/5d/f8/off-the-tracks-espresso.jpg",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681694341/aji7xycnqrzqawzyrsqn.png",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       },
+       {
+         "name": "Shopping",
+         "icon": "faCoffee",
+         "business": {
+           "activity": "Buy clothes - 10 Tree",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1685302403/tentree_iydfkz.png",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       },
+       {
+         "name": "Cleaning",
+         "icon": "faBreadSlice",
+         "business": {
+           "activity": "Refill Cleaning Supplies - Soap",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1688954233/oel7yprfms82upldxvl7.jpg",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       }
+     ],
+     [
+       {
+         "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+         "period": "Evening"
+       },
+       {
+         "name": "Groceries",
+         "icon": "faShower",
+         "business": {
+           "activity": "Groceries - To Good To Go",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681699266/kz2zssergdafvqyixvuh.png",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       },
+       {
+         "name": "Cooking",
+         "icon": "faCoffee",
+         "business": {
+           "activity": "Compose Organic Waste - Lomi",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681700011/osewgpzkuuizyt3pqiot.png",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       },
+       {
+         "name": "Volunteer",
+         "icon": "faBicycle",
+         "business": {
+           "activity": "Volunteering",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1697619203/awar-prix-2023-nfp-surfrider-foundation-canada-scaled_nvh4dk.jpg",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       },
+
+       {
+         "name": "Laundry",
+         "icon": "faBreadSlice",
+         "business": {
+           "activity": "Laundry - True Earth",
+           "logo": "https://tracksbistro.ca/images/logo.png",
+           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681693857/me4ejrrhupmcbjng92yx.png",
+           "description": "Off the Tracks is situated on Granville Island, with a focus on providing high-quality and fresh products. They source only the best locally roasted beans and use organic and sustainable ingredients to create their dishes. Additionally, Off the Tracks has partnered with ShareWares, allowing customers to enjoy their coffee using a reusable cup."
+         }
+       }
+     ]
+    ]
+

@@ -1,6 +1,7 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
+// import Main from "./pages/Main";
 import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
 import Admin from "./pages/Admin";
