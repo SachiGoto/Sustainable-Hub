@@ -2,7 +2,7 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 // import Main from "./pages/Main";
-import Main2 from "./pages/Main2";
+import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
 import Admin from "./pages/Admin";
 import SignUp from "./pages/SignUp";
@@ -39,7 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             {/* <Route path="main" element={<Main categoryData={allData} />} /> */}
-            <Route path="main2" element={<Main2 user={user} userId={userId} />} />
+            <Route path="main" element={<Main user={user} userId={userId} />} />
             <Route path="admin" element={<Admin />} />
             <Route path="signup" element={<SignUp user={user} />} />
             <Route

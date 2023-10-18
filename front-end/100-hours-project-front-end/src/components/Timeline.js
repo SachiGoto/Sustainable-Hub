@@ -59,17 +59,19 @@ const Timeline = () => {
       </div>
       <div className="text-3xl font-extrabold mb-[3%] ">
         {data.map((eachTimeline, index) => (
-          <SubTimeline
-            key={index}
-            subtimeline={eachTimeline}
-            animateElement= {
-                index===0
-                   ? AnimateElement0 
-                   :index === 1
-                   ? AnimateElement1
-                   :AnimateElement2
-                }
-          />
+          <>
+            <SubTimeline
+              key={index}
+              subtimeline={eachTimeline}
+              animateElement={
+                index === 0
+                  ? AnimateElement0
+                  : index === 1
+                  ? AnimateElement1
+                  : AnimateElement2
+              }
+            />
+          </>
         ))}
       </div>
     </section>
