@@ -116,7 +116,6 @@ const Profile = ({ user, userId }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("User", userId);
     formData.append("image", image);
@@ -159,15 +158,10 @@ const Profile = ({ user, userId }) => {
           };
         });
       } catch (error) {
-        // setBtnShow(true);
         console.error("error ", error);
       }
     }
   }
-
-  // function display() {
-  //   setBtnShow((prev) => (prev = !prev));
-  // }
 
   function imageHundlechange(event) {
     setImage(event.target.files[0]);
@@ -205,9 +199,6 @@ const Profile = ({ user, userId }) => {
       <div className="md:mt-8 ">
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center w-4/5">
-            {/* <div>
-              <p className="my-3"> Hello, {user} ! </p>
-            </div> */}
             <div>
               <div className="px-4 sm:px-0 flex flex-col items-center w-full text-center mx-auto ">
                 <h3 className="my-3 text-[1.8rem] font-semibold text-gray-900 text-center">
@@ -343,7 +334,7 @@ const Profile = ({ user, userId }) => {
                     </div>
                   </div>
 
-                  <Link to="/main2">
+                  <Link to="/main">
                     <button
                       className="font-semibold btn w-[100px] mx-5 btn-secondary"
                       type="submit"
@@ -474,7 +465,6 @@ const Profile = ({ user, userId }) => {
 
         {empty.allData && empty.myFavList && (
           <div className="bg-white rounded-md px-[7%] py-[10%] drop-shadow border-2 text-center w-[80%] mx-auto font-semibold text-[1rem] md:text-[1.2rem] max-w-[700px] mt-[20%] md:mt-[5%]">
-            {" "}
             <p>
               Build your sustainable list by adding companies you discover on
               Sustainable Hub or other places of your choice. Simply click the

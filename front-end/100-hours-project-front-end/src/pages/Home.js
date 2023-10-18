@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Timeline from "../components/Timeline";
 import logo from "../assets/person.png";
 
 const Home = () => {
@@ -27,10 +26,7 @@ const Home = () => {
       <div className="home-image w-[60%] md:w-[50%] z-30">
         <img src={logo} alt="hero" />
       </div>
-
-
     </div>
-    <Timeline />
     </>
 
   );

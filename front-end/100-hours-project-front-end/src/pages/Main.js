@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-const Main2 = ({ user, userId }) => {
+const Main = ({ user, userId }) => {
   const [allData, setData] = useState([]);
   const [favOrgIds, setFavOrgIds] = useState([]);
   const [category, setCategory] = useState([]);
@@ -275,4 +275,4 @@ const Main2 = ({ user, userId }) => {
   );
 };
 
-export default Main2;
+export default Main;

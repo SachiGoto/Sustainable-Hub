@@ -36,7 +36,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('logged in ', user)
+      console.log("logged in ", user);
       return res.json({ login: true, user: user });
     });
   })(req, res, next);
@@ -73,8 +73,7 @@ exports.postSignup = (req, res, next) => {
     validationErrors.push("Passwords do not match");
 
   if (validationErrors.length) {
-    // req.flash("errors", validationErrors);
-    return res.json({error:true, message: validationErrors[0]});
+    return res.json({ error: true, message: validationErrors[0] });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -94,11 +93,12 @@ exports.postSignup = (req, res, next) => {
         return next(err);
       }
       if (existingUser) {
-        res.json({error:true, message: "Account with that email address or username already exists."})
-        // req.flash("errors", {
-        //   msg: "Account with that email address or username already exists.",
-        // }
-        // );
+        res.json({
+          error: true,
+          message:
+            "Account with that email address or username already exists.",
+        });
+ 
         return res.json("success");
       }
       user.save((err) => {
