@@ -2,7 +2,7 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 // import Main from "./pages/Main";
-import Main2 from "./pages/Main2";
+import Main from "./pages/Main";
 import Navbar from "./components/Navbar";
 import Admin from "./pages/Admin";
 import SignUp from "./pages/SignUp";
