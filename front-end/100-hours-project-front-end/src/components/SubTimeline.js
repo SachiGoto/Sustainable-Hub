@@ -13,7 +13,7 @@ const SubTimeline = ({ subtimeline, animateElement }) => {
     )),
   );
 
-  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [selectedActivity, setSelectedActivity] = useState(1);
 
  
   useEffect(() => {
