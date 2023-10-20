@@ -31,6 +31,10 @@ const Home = () => {
         </div>
       </div>
       <Timeline />
+      <div className="home-image w-[60%] md:w-[50%] z-30">
+        <img src={logo} alt="hero" />
+      </div>
+    
     </>
   );
 };
