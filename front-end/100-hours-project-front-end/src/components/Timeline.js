@@ -4,26 +4,41 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SubTimeline from "./SubTimeline";
 import data from "../assets/data.json";
 
-gsap.registerPlugin(ScrollTrigger);
 
-const Timeline = () => {
-  const AnimateElement0 = (ref, options) => {
-  
+    gsap.registerPlugin(ScrollTrigger);
+
+
+  const Timeline = () => {
+    const AnimateElement0 = (ref, options) => {
       const el = ref.current;
-      gsap.fromTo(
-        el,
-        { opacity: 0, translateX: options.initialTranslateX || "-50%" },
-        {
-          opacity: 1,
-          translateX: "0%",
-          duration: 2,
-          delay: options.delay || 0,
-          scrollTrigger: { trigger: el },
-        }
-      );
-  };
+      if (window.innerWidth > 768) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, translateX: options.initialTranslateX || "-50%" },
+          {
+            opacity: 1,
+            translateX: "0%",
+            duration: 2,
+            delay: options.delay || 0,
+            scrollTrigger: { trigger: el },
+          }
+        );
+      }else{
+           gsap.fromTo(
+             el,
+             { opacity: 0},
+             {
+               opacity: 1,
+               duration: 2.5,
+               delay: options.delay || 0,
+               scrollTrigger: { trigger: el },
+             }
+           );
+      }
+      };
     const AnimateElement1 = (ref, options) => {
       const el = ref.current;
+        if (window.innerWidth > 768) {
       gsap.fromTo(
         el,
         { opacity: 0, translateX: options.initialTranslateX || "-50%" },
@@ -35,22 +50,48 @@ const Timeline = () => {
           scrollTrigger: { trigger: el },
         }
       );
+    }else{
+           gsap.fromTo(
+             el,
+             { opacity: 0},
+             {
+               opacity: 1,
+               duration: 2.5,
+               delay: options.delay || 0,
+               scrollTrigger: { trigger: el },
+             }
+           );
+    }
     };
 
-       const AnimateElement2 = (ref, options) => {
-         const el = ref.current;
-         gsap.fromTo(
-           el,
-           { opacity: 0, translateX: options.initialTranslateX || "-50%" },
-           {
-             opacity: 1,
-             translateX: "30%",
-             duration: 3,
-             delay: options.delay || 0,
-             scrollTrigger: { trigger: el },
-           }
-         );
-       };
+    const AnimateElement2 = (ref, options) => {
+      const el = ref.current;
+        if (window.innerWidth > 768) {
+            gsap.fromTo(
+        el,
+        { opacity: 0, translateX: options.initialTranslateX || "-50%" },
+        {
+          opacity: 1,
+          translateX: "30%",
+          duration: 3,
+          delay: options.delay || 0,
+          scrollTrigger: { trigger: el },
+        }
+      );
+    }else{
+           gsap.fromTo(
+             el,
+             { opacity: 0},
+             {
+               opacity: 1,
+               duration: 2.5,
+               delay: options.delay || 0,
+               scrollTrigger: { trigger: el },
+             }
+           );
+    }
+    };
+  
 
   return (
     <section className="mt-[30%]">
