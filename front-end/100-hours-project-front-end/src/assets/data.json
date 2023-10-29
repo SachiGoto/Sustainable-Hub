@@ -1,186 +1,187 @@
-  
-   [
-  
-     [
-      {
-"periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
-"period":"Morning"
-      },
-      {
-        "name": "Personal Care",
-        "icon": "faShower",
-        "business": {
-          "activity": "Morning Persoal Care",
-          "logo": "https://tracksbistro.ca/images/logo.png",
-          "img": "https://images.unsplash.com/photo-1592372554345-22ced975691d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1876&q=80",
-          "description": "Are you still using plastic toothbrushes that take up to 400 years to decompose? Make the sustainable choice by switching to bamboo toothbrushes, which are biodegradable and compostable. You can find bamboo toothbrushes at retailers like 'Natures Bodega,' 'London Drugs,' 'Whole Foods,' and 'Shoppers.' Additionally, Soap Dispensary offers refillable self-care products, including toothpaste, lotion, and sunscreen, for an eco-friendly alternative. Let's start our day in an eco-friendly way!"
-          
-          ,
-          "businessName": [
-            {"name": "Natures Bodga",
-             "url":"https://www.reusables.ca/"
-          },{
-            "name":"Soap Dispensary",
-            "url":"https://www.reusables.ca/"
+[
+  [
+    {
+      "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+      "period": "Morning"
+    },
+    {
+      "name": "Personal Care",
+      "icon": "faShower",
+      "business": {
+        "activity": "Morning Persoal Care",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://images.unsplash.com/photo-1592372554345-22ced975691d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1876&q=80",
+        "description": "Are you still using plastic toothbrushes that take up to 400 years to decompose? Make the sustainable choice by switching to bamboo toothbrushes, which are biodegradable and compostable. You can find bamboo toothbrushes at retailers like 'Natures Bodega,' 'London Drugs,' 'Whole Foods,' and 'Shoppers.' Additionally, Soap Dispensary offers refillable self-care products, including toothpaste, lotion, and sunscreen, for an eco-friendly alternative. Let's start our day in an eco-friendly way!",
+
+        "businessName": [
+          { "name": "Natures Bodga", "url": "https://www.naturesbodega.com" },
+          {
+            "name": "Soap Dispensary",
+            "url": "https://www.thesoapdispensary.com"
           }
-          ]
-        }
-      },
-      {
-        "name": "Coffee",
-        "icon": "faCoffee",
-        "business": {
-          "activity": "Get your morning coffee with a reusable cup",
-          "logo": "https://tracksbistro.ca/images/logo.png",
-          "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1694844244/coffee_hkthlm.jpg",
-          "description": "Bring your own reusable cup or visit coffee shops that have partnered with Reusables and Sharewares! Reusables collaborates with JJ Beans, Bean Around The World, Matchstick Coffee, Honolulu Coffee, and many others. Sharewares partners with Tim Hortons, Nelson The Seagull, Off the Tracks, and more. Join us in enjoying your morning coffee with a reusable cup!",
-          "businessName": [
-            { "name": "Reusables", "url": "https://reusables.com" },
-            {
-              "name": "Sharewares",
-              "url": "https://www.sharewares.ca"
-            }
-          ]
-        }
-      },
-
-      {
-        "name": "Commute",
-        "icon": "faBicycle",
-        "business": {
-          "activity": "Commute to work with Mobi or Evo",
-          "logo": "https://tracksbistro.ca/images/logo.png",
-          "img": "https://www.mobibikes.ca/sites/default/files/davidniddrie-mobi-sep2020-kitsilano-web-4721.jpg",
-          "description": "Are you a daily commuter? Why not explore eco-friendly alternatives like cycling or utilizing the car-sharing service Evo? It's a win-win for you and the environment!",
-          "businessName": [
-            { "name": "Mobi", "url": "https://www.reusables.ca/" },
-            {
-              "name": "Evo",
-              "url": "https://www.reusables.ca/"
-            }
-          ]
-        }
+        ]
       }
-    ],
-     [
-       {
-         "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
-         "period": "Afternoon"
-       },
-       {
-         "name": "Lunch",
-         "icon": "faShower",
-         "business": {
-           "activity": "Get Lunch with reusable containers!",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://elevatehub.ca/wp-content/uploads/2021/02/IMG_5898flip_300x.png",
-           "description": "Looking to grab quick lunch? Order lunch from a restaurant that is partnered with Reusables! They will pack your oder in Reusables containers! No Waste!",
-           "businessName": [
-             { "name": "Reusables", "url": "https://www.reusables.ca/" }
-           ]
-         }
-       },
-       {
-         "name": "Groceries",
-         "icon": "faCoffee",
-         "business": {
-           "activity": "Package Free Groceries",
-           "logo": "https://media-cdn.tripadvisor.com/media/photo-s/09/8e/5d/f8/off-the-tracks-espresso.jpg",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1697783750/Local-Produce-Box_qhxfjm.jpg",
-           "description": "There is a way to shop grocerries in sustainble way! SPUD is online grocery delivery service that is commited to sustainability. They offer package free groceries and deliver them to your door!",
-           "businessName": [
-             { "name": "SPUD", "url": "https://www.spud.ca/index.cfm?lid=1" }
-           ]
-         }
-       },
-       {
-         "name": "Shopping",
-         "icon": "faCoffee",
-         "business": {
-           "activity": "Sustainable Clothes",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1685302403/tentree_iydfkz.png",
-           "description": "Ten tree is committed to sustainability. They plant trees for every item purchased! They also use sustainable materials to make their clothes. Check out their website to learn more! Big change starts small! ",
-           "businessName": [
-             { "name": "Ten Tree", "url": "https://www.tentree.ca" }
-           ]
-         }
-       },
-       {
-         "name": "Cleaning",
-         "icon": "faBreadSlice",
-         "business": {
-           "activity": "Refill Cleaning Supplies",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1688954233/oel7yprfms82upldxvl7.jpg",
-           "description": "Soap Dispensary is the best place to get all the refillable cleaning supplies! Bring your container and refill all the supplies! They also sell bottoles and containers if you don't have one!",
-           "businessName": [
-             {
-               "name": "Soap Dispensaries",
-               "url": "https://www.thesoapdispensary.com"
-             }
-           ]
-         }
-       }
-     ],
-     [
-       {
-         "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
-         "period": "Evening"
-       },
-       {
-         "name": "Groceries",
-         "icon": "faShower",
-         "business": {
-           "activity": "Sustainable Groceries",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681699266/kz2zssergdafvqyixvuh.png",
-           "description": "There is a way to save food waste and save money! To Good To Go is an app that allows you to buy food that would have been wasted at a discounted price! Check out their website to learn more!",
-           "businessName": [
-             { "name": "To Good To Go", "url": "https://www.toogoodtogo.com/en-ca" }
-           ]
-         }
-       },
-       {
-         "name": "Cooking",
-         "icon": "faCoffee",
-         "business": {
-           "activity": "Compose Organic Waste",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681700011/osewgpzkuuizyt3pqiot.png",
-           "description": "Are you disposing of your organic waste in an eco-friendly manner? Consider using biodegradable bags for your organic waste and take a step towards sustainable waste management. Lomi is dedicated to minimizing waste and generating nutrient-rich fertilizer for our planet. By processing organic food waste, Lomi produces high-quality fertilizer that can nourish your plants and contribute to a healthier environment. Join the movement for a greener future with Lomi!",
-           "businessName": [
-             { "name": "Lomi", "url": "https://lomi.com/pages/discover" }
-           ]
-         }
-       },
-       {
-         "name": "Volunteer",
-         "icon": "faBicycle",
-         "business": {
-           "activity": "Volunteering",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1697619203/awar-prix-2023-nfp-surfrider-foundation-canada-scaled_nvh4dk.jpg",
-           "description": "Beach cleaning is a great way to give back to the community and the environment. Surfrider Foundation is a non-profit organization that organizes beach cleanups and other events to protect the ocean and beaches. Join Surfrider Foundation and help keep our beaches clean!",
-           "businessName": [
-             { "name": "Surfrider Foundation", "url": "https://cleanups.surfrider.org/about/beach-cleanups" }
-           ]
-         }
-       },
+    },
+    {
+      "name": "Coffee",
+      "icon": "faCoffee",
+      "business": {
+        "activity": "Get your morning coffee with a reusable cup",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1694844244/coffee_hkthlm.jpg",
+        "description": "Bring your own reusable cup or visit coffee shops that have partnered with Reusables and Sharewares! Reusables collaborates with JJ Beans, Bean Around The World, Matchstick Coffee, Honolulu Coffee, and many others. Sharewares partners with Tim Hortons, Nelson The Seagull, Off the Tracks, and more. Join us in enjoying your morning coffee with a reusable cup!",
+        "businessName": [
+          { "name": "Reusables", "url": "https://reusables.com" },
+          {
+            "name": "Sharewares",
+            "url": "https://www.sharewares.ca"
+          }
+        ]
+      }
+    },
 
-       {
-         "name": "Laundry",
-         "icon": "faBreadSlice",
-         "business": {
-           "activity": "Eco-Friendly Laundry Detergent",
-           "logo": "https://tracksbistro.ca/images/logo.png",
-           "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681693857/me4ejrrhupmcbjng92yx.png",
-           "description": "True Earth is Canadian company that sells eco-friendly laundry detergent. Their products are packaged in compostable packaging and they are shipped in compostable mailers. Check out their website to learn more!",
-           "businessName": [
-             { "name": "True Earth", "url": "https://www.tru.earth" }
-           ]
-         }
-       }
-     ]
-    ]
+    {
+      "name": "Commute",
+      "icon": "faBicycle",
+      "business": {
+        "activity": "Commute to work with Mobi or Evo",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://www.mobibikes.ca/sites/default/files/davidniddrie-mobi-sep2020-kitsilano-web-4721.jpg",
+        "description": "Are you a daily commuter? Why not explore eco-friendly alternatives like cycling or utilizing the car-sharing service Evo? It's a win-win for you and the environment!",
+        "businessName": [
+          { "name": "Mobi", "url": "https://www.mobibikes.ca" },
+          {
+            "name": "Evo",
+            "url": "https://evo.ca"
+          }
+        ]
+      }
+    }
+  ],
+  [
+    {
+      "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+      "period": "Afternoon"
+    },
+    {
+      "name": "Lunch",
+      "icon": "faShower",
+      "business": {
+        "activity": "Get Lunch with reusable containers!",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://elevatehub.ca/wp-content/uploads/2021/02/IMG_5898flip_300x.png",
+        "description": "Looking to grab quick lunch? Order lunch from a restaurant that is partnered with Reusables! They will pack your oder in Reusables containers! No Waste!",
+        "businessName": [
+          { "name": "Reusables", "url": "https://reusables.com" }
+        ]
+      }
+    },
+    {
+      "name": "Groceries",
+      "icon": "faCoffee",
+      "business": {
+        "activity": "Package Free Groceries",
+        "logo": "https://media-cdn.tripadvisor.com/media/photo-s/09/8e/5d/f8/off-the-tracks-espresso.jpg",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1697783750/Local-Produce-Box_qhxfjm.jpg",
+        "description": "There is a way to shop grocerries in sustainble way! SPUD is online grocery delivery service that is commited to sustainability. They offer package free groceries and deliver them to your door!",
+        "businessName": [
+          { "name": "SPUD", "url": "https://www.spud.ca/index.cfm?lid=1" }
+        ]
+      }
+    },
+    {
+      "name": "Shopping",
+      "icon": "faCoffee",
+      "business": {
+        "activity": "Sustainable Clothes",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1685302403/tentree_iydfkz.png",
+        "description": "Ten tree is committed to sustainability. They plant trees for every item purchased! They also use sustainable materials to make their clothes. Check out their website to learn more! Big change starts small! ",
+        "businessName": [
+          { "name": "Ten Tree", "url": "https://www.tentree.ca" }
+        ]
+      }
+    },
+    {
+      "name": "Cleaning",
+      "icon": "faBreadSlice",
+      "business": {
+        "activity": "Refill Cleaning Supplies",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1688954233/oel7yprfms82upldxvl7.jpg",
+        "description": "Soap Dispensary is the best place to get all the refillable cleaning supplies! Bring your container and refill all the supplies! They also sell bottoles and containers if you don't have one!",
+        "businessName": [
+          {
+            "name": "Soap Dispensaries",
+            "url": "https://www.thesoapdispensary.com"
+          }
+        ]
+      }
+    }
+  ],
+  [
+    {
+      "periodIconUrl": "https://static.vecteezy.com/system/resources/previews/009/304/897/original/sun-icon-set-clipart-design-illustration-free-png.png",
+      "period": "Evening"
+    },
+    {
+      "name": "Groceries",
+      "icon": "faShower",
+      "business": {
+        "activity": "Sustainable Groceries",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681699266/kz2zssergdafvqyixvuh.png",
+        "description": "There is a way to save food waste and save money! To Good To Go is an app that allows you to buy food that would have been wasted at a discounted price! Check out their website to learn more!",
+        "businessName": [
+          {
+            "name": "To Good To Go",
+            "url": "https://www.toogoodtogo.com/en-ca"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cooking",
+      "icon": "faCoffee",
+      "business": {
+        "activity": "Compose Organic Waste",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681700011/osewgpzkuuizyt3pqiot.png",
+        "description": "Are you disposing of your organic waste in an eco-friendly manner? Consider using biodegradable bags for your organic waste and take a step towards sustainable waste management. Lomi is dedicated to minimizing waste and generating nutrient-rich fertilizer for our planet. By processing organic food waste, Lomi produces high-quality fertilizer that can nourish your plants and contribute to a healthier environment. Join the movement for a greener future with Lomi!",
+        "businessName": [
+          { "name": "Lomi", "url": "https://lomi.com/pages/discover" }
+        ]
+      }
+    },
+    {
+      "name": "Volunteer",
+      "icon": "faBicycle",
+      "business": {
+        "activity": "Volunteering",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1697619203/awar-prix-2023-nfp-surfrider-foundation-canada-scaled_nvh4dk.jpg",
+        "description": "Beach cleaning is a great way to give back to the community and the environment. Surfrider Foundation is a non-profit organization that organizes beach cleanups and other events to protect the ocean and beaches. Join Surfrider Foundation and help keep our beaches clean!",
+        "businessName": [
+          {
+            "name": "Surfrider Foundation",
+            "url": "https://cleanups.surfrider.org/about/beach-cleanups"
+          }
+        ]
+      }
+    },
 
+    {
+      "name": "Laundry",
+      "icon": "faBreadSlice",
+      "business": {
+        "activity": "Eco-Friendly Laundry Detergent",
+        "logo": "https://tracksbistro.ca/images/logo.png",
+        "img": "https://res.cloudinary.com/vanarts-webdev/image/upload/v1681693857/me4ejrrhupmcbjng92yx.png",
+        "description": "True Earth is Canadian company that sells eco-friendly laundry detergent. Their products are packaged in compostable packaging and they are shipped in compostable mailers. Check out their website to learn more!",
+        "businessName": [
+          { "name": "True Earth", "url": "https://www.tru.earth" }
+        ]
+      }
+    }
+  ]
+]
