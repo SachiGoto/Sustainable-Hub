@@ -12,7 +12,7 @@ const Home = () => {
         </h1>
         <div className="home-text bg-zinc-50 px-[10%] py-[5%] rounded-tl-[30px] rounded-br-[30px] ">
           <p className="text-lg font-semibold pb-5">
-            Welcom to Sustainable Hub!
+            Welcome to Sustainable Hub!
           </p>
           <p className="pb-5 text-sm md:text-base ">
             Sustainable Hub provides a list of eco-friendly local businesses in
